@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlanningProcurementBebanBahansTable extends Migration
+class CreatePlanningProcurementBebanSubkonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreatePlanningProcurementBebanBahansTable extends Migration
      */
     public function up()
     {
-        Schema::create('planning_procurement_beban_bahans', function (Blueprint $table) {
+        Schema::create('planning_procurement_beban_subkons', function (Blueprint $table) {
             $table->id();
             $table->string('name_project');
-            $table->string('procurement');
-            $table->string('vendor');
-            $table->string('description_service');
-            $table->integer('volume');
-            $table->string('units');
-            $table->string('total');
-            $table->date('start_toOrder');
-            $table->date('finish_toOrder');
+            $table->string('procurement_subkon');
+            $table->string('vendor_subkon');
+            $table->string('description_service_subkon');
+            $table->integer('volume_subkon');
+            $table->string('units_subkon');
+            $table->string('total_subkon');
+            $table->date('start_toOrder_subkon');
+            $table->date('finish_toOrder_subkon');
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ class CreatePlanningProcurementBebanBahansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('planning_procurement_beban_bahans');
+        Schema::dropIfExists('planning_procurement_beban_subkons');
     }
 }
