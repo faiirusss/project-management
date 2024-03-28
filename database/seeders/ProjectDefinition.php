@@ -14,11 +14,11 @@ class ProjectDefinition extends Seeder
      */
     public function run()
     {
-        $projectDefinition = Initiating_ProjectDefinition::factory()->create([
+        $projectDefinition = Initiating_ProjectDefinition::create([
             'name_project' => 'RADAR GCI',
             'code_project' => 'RDR-567',
             'contract_value' => 2,
-            'business_line' => 'Goverment',
+            'bussines_line' => 'Goverment',
             'date' => '2024-03-28',
             'status' => 'open',
             'source_ofFunds' => 'PT Berkah Umat',
