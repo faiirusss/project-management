@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlanningCommunicationPresentationsTable extends Migration
+class CreatePlanningCommunicationProjectAnnouncementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePlanningCommunicationPresentationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('planning_communication_presentations', function (Blueprint $table) {
+        Schema::create('planning_communication_project_announcements', function (Blueprint $table) {
             $table->id();
             $table->string('deliverable');
             $table->string('description');
@@ -32,6 +32,6 @@ class CreatePlanningCommunicationPresentationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('planning_communication_presentations');
+        Schema::dropIfExists('planning_communication_project_announcements');
     }
 }
