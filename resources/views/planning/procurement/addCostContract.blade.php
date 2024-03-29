@@ -58,7 +58,7 @@
         <div class="col-sm-12 col-xl-10">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Cost Contract to Value</h2>
-                <form action="/procurement/save" method="post">
+                <form action="/costContractValue/save" method="post">
                     @csrf
                     <div class="row mb-2">
                         <div class="col-md-6">

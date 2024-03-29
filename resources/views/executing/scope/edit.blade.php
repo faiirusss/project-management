@@ -63,7 +63,7 @@
                     <div class="row mb-2">                        
                         <div class="col-md-6">
                             <label for="name_project" class="form-label text-white">Name Project</label>
-                            <input type="text" name="name_project" id="" value="{{$scope->name_project}}" class="form-control bg-dark text-white mb-3">
+                            <input type="text" name="name_project" id="" value="{{$scope->name_project}}" class="form-control bg-dark text-white mb-3" required>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Technical Requirements</label>

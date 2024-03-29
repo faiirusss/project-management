@@ -53,27 +53,29 @@
         </div>
     </center>
 </nav>
+
+{{-- project income statement --}}
 <div class="container-fluid pt-4 px-4 mb-5">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
-                <h4 class="mb-4"><i class="fa fa-book"></i>Project Income Statement</h4>
+                <h4 class="mb-4">Project Income Statement</h4>
                 <a href="/projectIncomeStatement/create" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br> 
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-condensed">
                         <thead>
                             <tr class="text-white">
-                                <th><small>Name Project</small></th>
-                                <th><small>Cost Category</small></th>
-                                <th><small>Description</small></th>
-                                <th><small>Total</small></th>
-                                <th><small>Action</small></th>
+                                <th valign="top"><small>Name Project</small></th>
+                                <th valign="top"><small>Cost Category</small></th>
+                                <th valign="top"><small>Description</small></th>
+                                <th valign="top"><small>Total</small></th>
+                                <th valign="top"><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>                            
                             @foreach ($projectIncomeStatement as $data)
-                                <tr>
+                                <tr class="text-white">
                                     <td><small>{{$data->name_project}}</small></td>
                                     <td><small>{{$data->cost_category}}</small></td>
                                     <td><small>{{$data->description}}</small></td>
@@ -91,11 +93,13 @@
         </div>
     </div>
 </div>
+
+{{-- case flow --}}
 <div class="container-fluid pt-4 px-4 mb-5">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
-                <h4 class="mb-4"><i class="fa fa-book"></i>Case Flow</h4>
+                <h4 class="mb-4">Case Flow</h4>
                 <a href="/caseflow/create" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br> 
                 <div class="table-responsive">
@@ -110,7 +114,7 @@
                         </thead>
                         <tbody>                            
                             @foreach ($caseflow as $u)
-                                <tr>
+                                <tr class="text-white">
                                     <td><small>{{$u->name_project}}</small></td>
                                     <td><small>{{$u->waktu}}</small></td>
                                     <td><small>{{$u->nilai_rupiah}}</small></td>
@@ -127,11 +131,13 @@
         </div>
     </div>
 </div>
+
+{{-- list assumsition --}}
 <div class="container-fluid pt-4 px-4 mb-5">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
-                <h4 class="mb-4"><i class="fa fa-book"></i>List Assumsition</h4>
+                <h4 class="mb-4">List Assumsition</h4>
                 <a href="/listAssumsition/create" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br> 
                 <div class="table-responsive">
@@ -145,12 +151,12 @@
                         </thead>
                         <tbody>                            
                             @foreach ($listAssumsition as $u)
-                                <tr>
+                                <tr class="text-white">
                                     <td><small>{{$u->name_project}}</small></td>
                                     <td><small>{{$u->deskripsi}}</small></td>
                                     <td>
-                                        <a href="/caseflow/{{ $u->id }}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>                                        
-                                        <a href="/caseflow/{{ $u->id }}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>
+                                        <a href="/listAssumsition/{{ $u->id }}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>                                        
+                                        <a href="/listAssumsition/{{ $u->id }}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

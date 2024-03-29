@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Contract Value</label>
-                <input type="text" name="contract_value" id="" class="form-control mb-3 text-white" required>
+                <input type="number" name="contract_value" id="" class="form-control mb-3 text-white" required>
             </div>
         </div>
         <div class="row mb-3">

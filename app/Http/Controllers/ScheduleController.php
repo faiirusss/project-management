@@ -29,6 +29,7 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         planning_schedule::create([
+            'name_project' => $request->name_project,
             'task' => $request->task,
             'start_date' => $request->start_date,
             'finish_date' => $request->finish_date,
@@ -36,7 +37,7 @@ class ScheduleController extends Controller
             'assign_to' => $request->assign_to,
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/schedule')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -44,18 +45,21 @@ class ScheduleController extends Controller
     {
         $schedule = planning_schedule::find($id);
         $schedule->delete();
-        return redirect('/planning');
+        return redirect('/schedule');
     }
 
     public function show($id)
     {
-        return view('planning.schedule.edit');
-    }
+        $schedule = planning_schedule::find($id);
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.schedule.edit', compact('schedule', 'projectDefinition'));
+    }   
 
     public function update(Request $request, $id)
     {
         $schedule = planning_schedule::find($id);
         $schedule->update([
+            'name_project' => $request->name_project,
             'task' => $request->task,
             'start_date' => $request->start_date,
             'finish_date' => $request->finish_date,
@@ -63,6 +67,6 @@ class ScheduleController extends Controller
             'assign_to' => $request->assign_to,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/schedule');
     }
 }

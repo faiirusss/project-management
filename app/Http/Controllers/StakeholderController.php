@@ -42,7 +42,7 @@ class StakeholderController extends Controller
             'engagement_level' => $request->engagement_level,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/stakeholder');
     }
 
 
@@ -50,7 +50,7 @@ class StakeholderController extends Controller
     {
         $stakeholder = planning_stakeholder::find($id);
         $stakeholder->delete();
-        return redirect('/planning');
+        return redirect('/stakeholder');
     }
 
     public function show($id)
@@ -77,6 +77,6 @@ class StakeholderController extends Controller
             'engagement_level' => $request->engagement_level,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/stakeholder');
     }
 }

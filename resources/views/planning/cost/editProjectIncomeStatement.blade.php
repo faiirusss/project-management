@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-4">
                 <label for="cost_category" class="form-label text-white">Cost Category</label>
-                <select name="cost_category" id="cost_category" class="form-control mb-3 text- bg-dark">
+                <select name="cost_category" id="cost_category" class="form-control mb-3 text- bg-dark" readonly>
                     <option selected="true" disabled="disabled" hidden>Choose One</option>  
                     <option value="direct cost" {{ $projectIncomeStatement->cost_category == 'direct cost' ? 'selected' : '' }}>Direct Cost</option>
                     <option value="indirect cost" {{ $projectIncomeStatement->cost_category == 'indirect cost' ? 'selected' : '' }}>Indirect Cost</option>

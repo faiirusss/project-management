@@ -98,11 +98,11 @@
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Start to Order</label>
-                            <input type="date" name="start_toOrder" id="" value="{{$bebanbahanExecuting->start_toOrder}}" class="form-control mb-3 text-white"  required>
+                            <input type="date" name="start_toOrder" id="" value="{{$bebanbarang->start_toOrder}}" class="form-control mb-3 text-white"  required>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Finish to Order</label>
-                            <input type="date" name="finish_toOrder" id="" value="{{$bebanbahanExecuting->finish_toOrder}}" class="form-control mb-3 text-white"  required>
+                            <input type="date" name="finish_toOrder" id="" value="{{$bebanbarang->finish_toOrder}}" class="form-control mb-3 text-white"  required>
                         </div>
                     </div>
                         <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>

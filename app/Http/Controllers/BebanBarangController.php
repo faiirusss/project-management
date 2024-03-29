@@ -54,7 +54,7 @@ class BebanBarangController extends Controller
             'finish_toOrder' => $request->finish_toOrder,
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/procurement')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -62,7 +62,7 @@ class BebanBarangController extends Controller
     {
         $bebanbarang = planning_procurement_bebanBahan::find($id);
         $bebanbarang->delete();
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 
     public function show($id)
@@ -87,6 +87,6 @@ class BebanBarangController extends Controller
             'finish_toOrder' => $request->finish_toOrder,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 }

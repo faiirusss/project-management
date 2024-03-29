@@ -13,8 +13,8 @@
 <div class="row g-4">
 <div class="col-sm-12 col-xl-10">
     <div class="bg-secondary rounded h-100 p-4">
-        <h3 class="mb-4">List Assumsition</h3>
-        <form action="/listAssumsition/store" method="POST">
+        <h3 class="mb-4">Edit List Assumsition</h3>
+        <form action="/listAssumsition/{{ $listAssumsition->id }}/update" method="POST">
             @csrf
         <div class="row mb-3">
             <div class="col-md-6">
@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-12">
                 <label for="" class="form-label text-white">Deskripsi</label>
-                <input type="text" name="deskripsi" id="" class="form-control mb-3 text-white" required>
+                <input type="text" name="deskripsi" id="" class="form-control mb-3 text-white" value="{{ $listAssumsition->deskripsi }}" required>
             </div>
         </div>        
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>

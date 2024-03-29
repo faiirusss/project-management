@@ -24,54 +24,10 @@ class ProcurementController extends Controller
             $quality = planning_quality::all();
             $guarantee = planning_procurement_guarantee::all();
             $projectDefinition = Initiating_ProjectDefinition::all();
-            $procurement = planning_procurement_costContractToValue::all();
-            return view('planning.procurement.procurement', compact(['projectDefinition', 'procurement', 'bebanbarang', 'bebansubkon', 'termPlan', 'quality', 'guarantee']));
+            $costContractValue = planning_procurement_costContractToValue::all();
+            return view('planning.procurement.procurement', compact(['projectDefinition', 'costContractValue', 'bebanbarang', 'bebansubkon', 'termPlan', 'quality', 'guarantee']));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }
-    }
-
-    public function create()
-    {
-        $projectDefinition = Initiating_ProjectDefinition::all();
-        $procurement = planning_procurement_costContractToValue::all();
-        return view('planning.procurement.addCostContract', compact(['projectDefinition', 'procurement']));
-    }
-
-    public function store(Request $request)
-    {
-        planning_procurement_costContractToValue::create([
-            'name_project' => $request->name_project,
-            'value' => $request->value,
-            'contract_value' => $request->contract_value,
-            $request->except(['_token']),
-        ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
-    }
-
-
-    public function destroy($id)
-    {
-        $procurement = planning_procurement_costContractToValue::find($id);
-        $procurement->delete();
-        return redirect('/planning');
-    }
-
-    public function show($id)
-    {
-        $procurement = planning_procurement_costContractToValue::find($id);
-        return view('planning.procurement.editCostContract', compact('procurement'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $procurement = planning_procurement_costContractToValue::find($id);
-        $procurement->update([
-            'name_project' => $request->name_project,
-            'value' => $request->value,
-            'contract_value' => $request->contract_value,
-            $request->except(['_token']),
-        ]);
-        return redirect('/planning');
     }
 }
