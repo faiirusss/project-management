@@ -57,23 +57,23 @@
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
-                <h4 class="mb-4"><i class="fa fa-book"></i>Project Income Statement</h4>
+                <h4 class="mb-4">Project Income Statement</h4>
                 <a href="/projectIncomeStatement/create" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br> 
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-condensed">
                         <thead>
                             <tr class="text-white">
-                                <th><small>Name Project</small></th>
-                                <th><small>Cost Category</small></th>
-                                <th><small>Description</small></th>
-                                <th><small>Total</small></th>
-                                <th><small>Action</small></th>
+                                <th valign="top"><small>Name Project</small></th>
+                                <th valign="top"><small>Cost Category</small></th>
+                                <th valign="top"><small>Description</small></th>
+                                <th valign="top"><small>Total</small></th>
+                                <th valign="top"><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>                            
                             @foreach ($projectIncomeStatement as $data)
-                                <tr>
+                                <tr class="text-white">
                                     <td><small>{{$data->name_project}}</small></td>
                                     <td><small>{{$data->cost_category}}</small></td>
                                     <td><small>{{$data->description}}</small></td>
@@ -95,7 +95,7 @@
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
-                <h4 class="mb-4"><i class="fa fa-book"></i>Case Flow</h4>
+                <h4 class="mb-4">Case Flow</h4>
                 <a href="/caseflow/create" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br> 
                 <div class="table-responsive">
@@ -110,7 +110,7 @@
                         </thead>
                         <tbody>                            
                             @foreach ($caseflow as $u)
-                                <tr>
+                                <tr class="text-white">
                                     <td><small>{{$u->name_project}}</small></td>
                                     <td><small>{{$u->waktu}}</small></td>
                                     <td><small>{{$u->nilai_rupiah}}</small></td>
@@ -131,7 +131,7 @@
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
-                <h4 class="mb-4"><i class="fa fa-book"></i>List Assumsition</h4>
+                <h4 class="mb-4">List Assumsition</h4>
                 <a href="/listAssumsition/create" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br> 
                 <div class="table-responsive">
@@ -145,7 +145,7 @@
                         </thead>
                         <tbody>                            
                             @foreach ($listAssumsition as $u)
-                                <tr>
+                                <tr class="text-white">
                                     <td><small>{{$u->name_project}}</small></td>
                                     <td><small>{{$u->deskripsi}}</small></td>
                                     <td>

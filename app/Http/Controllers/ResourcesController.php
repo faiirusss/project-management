@@ -37,19 +37,20 @@ class ResourcesController extends Controller
             'status' => $request->status,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/resources');
     }
 
     public function destroy($id)
     {
         $resources = planning_resources::find($id);
         $resources->delete();
-        return redirect('/planning');
+        return redirect('/resources');
     }
     public function show($id)
     {
-        $resources = planning_resources::find($id);
-        return view('planning.resources.edit');
+        $resource = planning_resources::find($id);
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.resources.edit', compact('resource','projectDefinition'));
     }
 
     public function update(Request $request, $id)
@@ -64,6 +65,6 @@ class ResourcesController extends Controller
             'status' => $request->status,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/resources');
     }
 }

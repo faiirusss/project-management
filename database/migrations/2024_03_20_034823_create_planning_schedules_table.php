@@ -15,6 +15,7 @@ class CreatePlanningSchedulesTable extends Migration
     {
         Schema::create('planning_schedules', function (Blueprint $table) {
             $table->id();
+            $table->string('name_project');
             $table->string('task');
             $table->date('start_date');
             $table->date('finish_date');

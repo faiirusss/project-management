@@ -35,7 +35,7 @@ class TermPlanController extends Controller
             'month_plan' => $request->month_plan,
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/procurement')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -43,7 +43,7 @@ class TermPlanController extends Controller
     {
         $termplan = planning_procurement_termOfPaymentPlan::find($id);
         $termplan->delete();
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 
     public function show($id)
@@ -63,6 +63,6 @@ class TermPlanController extends Controller
             'month_plan' => $request->month_plan,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 }

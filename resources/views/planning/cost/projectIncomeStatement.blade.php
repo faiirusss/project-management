@@ -26,8 +26,8 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <label for="cost_category" class="form-label text-white">Cost Category</label>
-                <select name="cost_category" id="cost_category" class="form-control mb-3 text- bg-dark">
+                <label for="" class="form-label text-white">Cost Category</label>
+                <select name="cost_category" id="" class="form-control mb-3 text- bg-dark">
                     <option selected="true" disabled="disabled" hidden>Choose One</option>  
                     <option value="direct cost">Direct Cost</option>
                     <option value="indirect cost">Indirect Cost</option>

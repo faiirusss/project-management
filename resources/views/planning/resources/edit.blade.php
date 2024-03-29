@@ -58,9 +58,17 @@
 <div class="col-sm-12 col-xl-10">
     <div class="bg-secondary rounded h-100 p-4">
         <h2 class="mb-4">Resources Plan</h2>
-        <form action="/resource/{{ $resource->id }}/update" method="post">
+        <form action="/resources/{{ $resource->id }}/update" method="post">
             @csrf
         <div class="row mb-2">
+            <div class="col-md-6">
+                <label for="nameProject" class="form-label text-white">Name Project</label>
+                <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
+                    @foreach($projectDefinition as $project)
+                    <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="col-md-8">
                 <label for="" class="form-label text-white">Name</label>
                 <input type="text" name="name" id="" value="{{$resource->name}}" class="form-control mb-3 text-white"  required>

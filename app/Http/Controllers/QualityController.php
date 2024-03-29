@@ -36,7 +36,7 @@ class QualityController extends Controller
             'category' => $request->category,
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/quality')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -44,13 +44,14 @@ class QualityController extends Controller
     {
         $quality = planning_quality::find($id);
         $quality->delete();
-        return redirect('/planning');
+        return redirect('/quality');
     }
 
     public function show($id)
     {
         $quality = planning_quality::find($id);
-        return view('planning.quality.edit', compact('quality'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.quality.edit', compact('quality','projectDefinition'));
     }
 
     public function update(Request $request, $id)
@@ -62,6 +63,6 @@ class QualityController extends Controller
             'category' => $request->category,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/quality');
     }
 }

@@ -52,7 +52,7 @@ class BebanSubkonController extends Controller
             'finish_toOrder_subkon' => $request->finish_toOrder_subkon,
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/procurement')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -60,7 +60,7 @@ class BebanSubkonController extends Controller
     {
         $bebansubkon = planning_procurement_bebanSubkon::find($id);
         $bebansubkon->delete();
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 
     public function show($id)
@@ -85,6 +85,6 @@ class BebanSubkonController extends Controller
             'finish_toOrder_subkon' => $request->finish_toOrder,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 }

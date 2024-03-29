@@ -46,7 +46,7 @@ class RiskController extends Controller
             'due_date' => $request->due_date,
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/risk')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -54,7 +54,7 @@ class RiskController extends Controller
     {
         $risks = planning_risk::find($id);
         $risks->delete();
-        return redirect('/planning');
+        return redirect('/risk');
     }
 
     public function show($id)
@@ -83,6 +83,6 @@ class RiskController extends Controller
             'due_date' => $request->due_date,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/risk');
     }
 }

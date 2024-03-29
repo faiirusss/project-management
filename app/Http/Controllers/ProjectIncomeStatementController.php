@@ -32,20 +32,20 @@ class ProjectIncomeStatementController extends Controller
             'total' => $request->total,
             $request->except(['_token']),
         ]);
-        return redirect('/costExecuting');
+        return redirect('/cost');
     }
 
     public function destroy($id)
     {
         $projectIncomeStatement = planning_cost_projectIncomeStatement::find($id);
         $projectIncomeStatement->delete();
-        return redirect('/costExecuting');
+        return redirect('/cost');
     }
     public function show($id)
     {
         $projectIncomeStatement = planning_cost_projectIncomeStatement::find($id);
-
-        return view('executing.projectIncomeStatementExecuting.editProjectIncome', compact('projectIncomeStatement'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.cost.editProjectIncomeStatement', compact('projectIncomeStatement','projectDefinition'));
     }
 
 
@@ -59,6 +59,6 @@ class ProjectIncomeStatementController extends Controller
             'description' => $request->description,
             'total' => $request->total,
         ]);
-        return redirect('/costExecuting');
+        return redirect('/cost');
     }
 }
