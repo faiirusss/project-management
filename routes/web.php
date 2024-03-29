@@ -40,6 +40,8 @@ use App\Http\Controllers\projectAnouncementController;
 use App\Http\Controllers\BebanBahanExecutingController;
 use App\Http\Controllers\BebanSubkonExecutingController;
 use App\Http\Controllers\CommunicationExecutingController;
+use App\Http\Controllers\CostContractValue;
+use App\Http\Controllers\CostContractValueController;
 use App\Http\Controllers\ExecutingQualityController;
 use App\Http\Controllers\ExecutingScheduleController;
 use App\Http\Controllers\ExecutingScopeController;
@@ -137,6 +139,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/scope/{id}/edit', [ScopeController::class, 'show']);
     Route::post('/scope/{id}/update', [ScopeController::class, 'update']);
 
+    //Caseflow
+    Route::get('/caseflow', [caseFlowController::class, 'index']);
+    Route::get('/caseflow/create', [caseFlowController::class, 'create']);
+    Route::post('/caseflow/store', [caseFlowController::class, 'store']);
+    Route::get('/caseflow/{id}/delete', [caseFlowController::class, 'destroy']);
+    Route::get('/caseflow/{id}/edit', [caseFlowController::class, 'show']);
+    Route::post('/caseflow/{id}/update', [caseFlowController::class, 'update']);
+    //list Assumsition
+    Route::get('/listAssumsition', [listAssumsitionController::class, 'index']);
+    Route::get('/listAssumsition/create', [listAssumsitionController::class, 'create']);
+    Route::post('/listAssumsition/store', [listAssumsitionController::class, 'store']);
+    Route::get('/listAssumsition/{id}/delete', [listAssumsitionController::class, 'destroy']);
+    Route::get('/listAssumsition/{id}/edit', [listAssumsitionController::class, 'show']);
+    Route::post('/listAssumsition/{id}/update', [listAssumsitionController::class, 'update']);
+
     //PLANNING => RESOURCES
     Route::get('/resources', [ResourcesController::class, 'index']);
     Route::get('/resources/add', [ResourcesController::class, 'create']);
@@ -163,11 +180,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     //PLANNING => PROCUREMENT
     Route::get('/procurement', [ProcurementController::class, 'index']);
-    Route::get('/procurement/add', [ProcurementController::class, 'create']);
-    Route::post('/procurement/save', [ProcurementController::class, 'store']);
-    Route::get('/procurement/{id}/delete', [ProcurementController::class, 'destroy']);
-    Route::get('/procurement/{id}/edit', [ProcurementController::class, 'show']);
-    Route::post('/procurement/{id}/update', [ProcurementController::class, 'update']);
+
+    Route::get('/costContractValue/add', [CostContractValueController::class, 'create']);
+    Route::post('/costContractValue/save', [CostContractValueController::class, 'store']);
+    Route::get('/costContractValue/{id}/delete', [CostContractValueController::class, 'destroy']);
+    Route::get('/costContractValue/{id}/edit', [CostContractValueController::class, 'show']);
+    Route::post('/costContractValue/{id}/update', [CostContractValueController::class, 'update']);
 
     // PLANNING => PROCUREMENT => BEBAN BAHAN
     Route::get('/bebanbarang', [BebanBarangController::class, 'index']);
@@ -409,20 +427,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 
-    //Caseflow
-    Route::get('/caseflow', [caseFlowController::class, 'index']);
-    Route::get('/caseflow/create', [caseFlowController::class, 'create']);
-    Route::post('/caseflow/store', [caseFlowController::class, 'store']);
-    Route::get('/caseflow/{id}/delete', [caseFlowController::class, 'destroy']);
-    Route::get('/caseflow/{id}/edit', [caseFlowController::class, 'show']);
-    Route::post('/caseflow/{id}/update', [caseFlowController::class, 'update']);
-    //list Assumsition
-    Route::get('/listAssumsition', [listAssumsitionController::class, 'index']);
-    Route::get('/listAssumsition/create', [listAssumsitionController::class, 'create']);
-    Route::post('/listAssumsition/store', [listAssumsitionController::class, 'store']);
-    Route::get('/listAssumsition/{id}/delete', [listAssumsitionController::class, 'destroy']);
-    Route::get('/listAssumsition/{id}/edit', [listAssumsitionController::class, 'show']);
-    Route::post('/listAssumsition/{id}/update', [listAssumsitionController::class, 'update']);
 
     Route::get('/closing', [ClosingController::class, 'index']);
 

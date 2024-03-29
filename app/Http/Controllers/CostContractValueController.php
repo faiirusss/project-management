@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Initiating_ProjectDefinition;
-use App\Models\planning_procurement_guarantee;
+use App\Models\planning_procurement_costContractToValue;
 use Illuminate\Http\Request;
 
-class GuaranteeController extends Controller
+class CostContractValueController extends Controller
 {
     public function index()
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
+            $costContractValue = planning_procurement_costContractToValue::all();
             $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('planning.procurement.procurement', compact('projectDefinition'));
+            return view('planning.procurement.procurement', compact(['projectDefinition', 'costContractValue']));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }
@@ -21,17 +22,16 @@ class GuaranteeController extends Controller
     public function create()
     {
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.procurement.addGuarantee', compact(['projectDefinition']));
+        $costContractValue = planning_procurement_costContractToValue::all();
+        return view('planning.procurement.addCostContract', compact(['projectDefinition', 'costContractValue']));
     }
 
     public function store(Request $request)
     {
-        planning_procurement_guarantee::create([
+        planning_procurement_costContractToValue::create([
             'name_project' => $request->name_project,
-            'deskripsi' => $request->deskripsi,
-            'persen' => $request->persen,
-            'radio' => $request->radio,
-
+            'value' => $request->value,
+            'contract_value' => $request->contract_value,
             $request->except(['_token']),
         ]);
         return redirect('/procurement')->with('success', 'Risk has been added successfully.');
@@ -40,27 +40,25 @@ class GuaranteeController extends Controller
 
     public function destroy($id)
     {
-        $guarantee = planning_procurement_guarantee::find($id);
-        $guarantee->delete();
+        $procurement = planning_procurement_costContractToValue::find($id);
+        $procurement->delete();
         return redirect('/procurement');
     }
 
     public function show($id)
     {
-        $guarantee = planning_procurement_guarantee::find($id);
+        $costContractValue = planning_procurement_costContractToValue::find($id);
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.procurement.editGuarantee', compact('guarantee', 'projectDefinition'));
+        return view('planning.procurement.editCostContract', compact('costContractValue', 'projectDefinition'));
     }
 
     public function update(Request $request, $id)
     {
-        $guarantee = planning_procurement_guarantee::find($id);
-        $guarantee->update([
+        $procurement = planning_procurement_costContractToValue::find($id);
+        $procurement->update([
             'name_project' => $request->name_project,
-            'deskripsi' => $request->deskripsi,
-            'persen' => $request->persen,
-            'radio' => $request->radio,
-
+            'value' => $request->value,
+            'contract_value' => $request->contract_value,
             $request->except(['_token']),
         ]);
         return redirect('/procurement');

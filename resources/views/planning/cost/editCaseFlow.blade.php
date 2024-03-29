@@ -13,8 +13,8 @@
 <div class="row g-4">
 <div class="col-sm-12 col-xl-10">
     <div class="bg-secondary rounded h-100 p-4">
-        <h3 class="mb-4">Edit List Assumsition</h3>
-        <form action="/listAssumsition/{{ $listAssumsition->id }}/update" method="POST">
+        <h3 class="mb-4">Edit CaseFlow</h3>
+        <form action="/caseflow/{{ $caseflow->id }}/update" method="POST">
             @csrf
         <div class="row mb-3">
             <div class="col-md-6">
@@ -25,9 +25,13 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-12">
-                <label for="" class="form-label text-white">Deskripsi</label>
-                <input type="text" name="deskripsi" id="" class="form-control mb-3 text-white" value="{{ $listAssumsition->deskripsi }}" required>
+            <div class="col-md-4">
+                <label for="nilai_rupiah" class="form-label text-white">Nilai Rupiah</label>
+                <input type="text" name="nilai_rupiah" id="nilai_rupiah" class="form-control mb-3 text-white" value="{{ $caseflow->nilai_rupiah }}" required>
+            </div>
+            <div class="col-md-4">
+                <label for="waktu" class="form-label text-white">Waktu</label>
+                <input type="date" name="waktu" id="waktu" class="form-control mb-3 text-white" value="{{ $caseflow->waktu }}" required>
             </div>
         </div>        
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>

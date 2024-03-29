@@ -53,6 +53,8 @@
         </div>
     </center>
 </nav>
+
+{{-- project income statement --}}
 <div class="container-fluid pt-4 px-4 mb-5">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -91,6 +93,8 @@
         </div>
     </div>
 </div>
+
+{{-- case flow --}}
 <div class="container-fluid pt-4 px-4 mb-5">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -127,6 +131,8 @@
         </div>
     </div>
 </div>
+
+{{-- list assumsition --}}
 <div class="container-fluid pt-4 px-4 mb-5">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -149,8 +155,8 @@
                                     <td><small>{{$u->name_project}}</small></td>
                                     <td><small>{{$u->deskripsi}}</small></td>
                                     <td>
-                                        <a href="/caseflow/{{ $u->id }}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>                                        
-                                        <a href="/caseflow/{{ $u->id }}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>
+                                        <a href="/listAssumsition/{{ $u->id }}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>                                        
+                                        <a href="/listAssumsition/{{ $u->id }}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

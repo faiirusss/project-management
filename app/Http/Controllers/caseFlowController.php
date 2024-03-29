@@ -12,7 +12,7 @@ class caseFlowController extends Controller
     {
         $caseflow = planning_cost_caseFlow::all();
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.cost.caseFlow', compact('caseFlow','projectDefinition'));
+        return view('planning.cost.caseFlow', compact('caseFlow', 'projectDefinition'));
     }
 
 
@@ -43,7 +43,7 @@ class caseFlowController extends Controller
     {
         $caseflow = planning_cost_caseFlow::find($id);
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.projectIncomeStatementExecuting.', compact('projectIncomeStatement','projectDefinition'));
+        return view('planning.cost.editCaseFlow', compact('caseflow', 'projectDefinition'));
     }
 
 

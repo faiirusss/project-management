@@ -49,7 +49,8 @@ class TermPlanController extends Controller
     public function show($id)
     {
         $termplan = planning_procurement_termOfPaymentPlan::find($id);
-        return view('planning.procurement.editTermPlan', compact('termplan'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.procurement.editTermPlan', compact('termplan', 'projectDefinition'));
     }
 
     public function update(Request $request, $id)

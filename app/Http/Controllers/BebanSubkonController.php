@@ -82,7 +82,7 @@ class BebanSubkonController extends Controller
             'units_subkon' => $request->units_subkon,
             'total_subkon' => $request->total_subkon,
             'start_toOrder_subkon' => $request->start_toOrder_subkon,
-            'finish_toOrder_subkon' => $request->finish_toOrder,
+            'finish_toOrder_subkon' => $request->finish_toOrder_subkon,
             $request->except(['_token']),
         ]);
         return redirect('/procurement');

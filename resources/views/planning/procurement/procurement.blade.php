@@ -53,6 +53,8 @@
         </div>
     </center>
 </nav>
+
+{{-- cost contract to value --}}
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -71,14 +73,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($procurement as $r)
+                            @foreach ($costContractValue as $r)
                             <tr class="text-white">
                                 <td><small>{{$r->name_project}}</small></td>
                                 <td><small>{{$r->value}}</small></td>
                                 <td><small>{{$r->contract_value}}</small></td>
                                 <td>
-                                    <a href="/procurement/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
-                                    <a href="/procurement/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
+                                    <a href="/costContractValue/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
+                                    <a href="/costContractValue/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
                                 </td>
                             </tr>
                             @endforeach
@@ -89,6 +91,8 @@
         </div>
     </div>
 </div>
+
+{{-- beban bahan --}}
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -109,6 +113,7 @@
                                 <th><small>Total</small></th>
                                 <th><small>Start to Order</small></th>
                                 <th><small>Finish to Order</small></th>
+                                <th><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -136,6 +141,8 @@
         </div>
     </div>
 </div>
+
+{{-- beban subkon --}}
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -156,6 +163,7 @@
                                 <th><small>Total</small></th>
                                 <th><small>Start to Order</small></th>
                                 <th><small>Finish to Order</small></th>
+                                <th><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -183,6 +191,7 @@
         </div>
     </div>
 </div>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -199,7 +208,6 @@
                                 <th><small>Value (%)</small></th>
                                 <th><small>Value (Rp)</small></th>
                                 <th><small>Month (Plan)</small></th>
-                                <th><small>Radios</small></th>
                                 <th><small>Action</small></th>
                             </tr>
                         </thead>
@@ -211,7 +219,6 @@
                                 <td><small>{{$r->value_term}}</small></td>
                                 <td><small>{{$r->value_rp_term}}</small></td>
                                 <td><small>{{$r->month_plan}}</small></td>
-                                <td><small>{{$r->option_available}}</small></td>
                                 <td>
                                     <a href="/termplan/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
                                     <a href="/termplan/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   

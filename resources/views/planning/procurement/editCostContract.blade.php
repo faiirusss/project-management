@@ -58,7 +58,7 @@
         <div class="col-sm-12 col-xl-10">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Cost Contract to Value</h2>
-                <form action="/procurement/{{ $procurement->id }}/update" method="post">
+                <form action="/costContractValue/{{ $costContractValue->id }}/update" method="post">
                     @csrf
                     <div class="row mb-2">
                         <div class="col-md-6">
@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Value</label>
-                            <input type="text" name="value" id="" value="{{$procurement->value}}" class="form-control mb-3 text-white"  required>
+                            <input type="text" name="value" id="" value="{{$costContractValue->value}}" class="form-control mb-3 text-white"  required>
                         </div>   
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Contract Value</label>
