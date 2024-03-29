@@ -34,7 +34,7 @@ class GuaranteeController extends Controller
 
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/procurement')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -42,7 +42,7 @@ class GuaranteeController extends Controller
     {
         $guarantee = planning_procurement_guarantee::find($id);
         $guarantee->delete();
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 
     public function show($id)
@@ -62,6 +62,6 @@ class GuaranteeController extends Controller
 
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 }

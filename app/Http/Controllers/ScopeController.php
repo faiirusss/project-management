@@ -38,7 +38,7 @@ class ScopeController extends Controller
             'system_requirements' => $request->system_requirements,
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/scope')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -46,13 +46,14 @@ class ScopeController extends Controller
     {
         $scope = planning_scope::find($id);
         $scope->delete();
-        return redirect('/planning');
+        return redirect('/scope');
     }
 
     public function show($id)
     {
         $scope = planning_scope::find($id);
-        return view('planning.scope.edit', compact('scope'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.scope.edit', compact('scope','projectDefinition'));
     }
 
     public function update(Request $request, $id)
@@ -68,6 +69,6 @@ class ScopeController extends Controller
             'system_requirements' => $request->system_requirements,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/scope');
     }
 }

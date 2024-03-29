@@ -46,7 +46,7 @@ class ProcurementController extends Controller
             'contract_value' => $request->contract_value,
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/procurement')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -54,7 +54,7 @@ class ProcurementController extends Controller
     {
         $procurement = planning_procurement_costContractToValue::find($id);
         $procurement->delete();
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 
     public function show($id)
@@ -72,6 +72,6 @@ class ProcurementController extends Controller
             'contract_value' => $request->contract_value,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 }
