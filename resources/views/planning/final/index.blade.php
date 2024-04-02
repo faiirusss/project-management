@@ -57,36 +57,52 @@
         </div>
     </center>
 </nav>
+
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
-                <h2 class="mb-4">Resources Plan</h2>
-                <a href="/resources/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <h2 class="mb-4">Final Planning</h2>
+                <a href="/finalPlanning/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover" >
                         <thead>
                             <tr class="text-white">
                                 <th><small>Name Project</small></th>
-                                <th><small>Name</small></th>
-                                <th><small>Position</small></th>
-                                <th><small>Duration</small></th>
+                                <th><small>Scope</small></th>
+                                <th><small>Schedule</small></th>
                                 <th><small>Status</small></th>
                                 <th><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($resources as $r)
+                            @foreach ($planningFinal as $r)
+                            @php
+                                $planningScope = json_decode($r->planningScope);
+                                $planningSchedule = json_decode($r->planningSchedule);
+                            @endphp
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
-                                <td><small>{{$r->name}}</small></td>    
-                                <td><small>{{$r->position}}</small></td>
-                                <td><small>{{$r->duration}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
+                                <td>
+                                    <small>
+                                    @foreach ($planningScope as $value)
+                                        {{ $value }}<br>
+                                    @endforeach
+                                    </small>
+                                </td>
+                                <td>
+                                    <small>
+                                    @foreach ($planningSchedule as $item)
+                                        {{ $item }}<br>
+                                    @endforeach
+                                    </small>
+                                </td>
                                 <td><small>{{$r->status}}</small></td>
                                 <td>
-                                    <a href="/resources/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
-                                    <a href="/resources/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
+                                    <a href="/finalPlanning/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
+                                    <a href="/finalPlanning/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
                                 </td>
                             </tr>
                             @endforeach

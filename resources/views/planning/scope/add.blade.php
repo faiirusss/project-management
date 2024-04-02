@@ -65,7 +65,9 @@
                             <label for="nameProject" class="form-label text-white">Name Project</label>
                             <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                                 @foreach($projectDefinition as $project)
-                                <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                                @if ($project->status == 'open')
+                                    <option value="{{ $project->id }}">{{ $project->name_project }}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>

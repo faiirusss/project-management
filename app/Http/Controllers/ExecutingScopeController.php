@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\executing_scope;
 use App\Models\Initiating_ProjectDefinition;
+use App\Models\Planning_ProjectDefinition;
 use Illuminate\Http\Request;
 
 class ExecutingScopeController extends Controller
@@ -22,7 +23,8 @@ class ExecutingScopeController extends Controller
     public function create()
     {
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('executing.scope.create', compact('projectDefinition'));
+        $finalPlanning = Planning_ProjectDefinition::all();
+        return view('executing.scope.create', compact('projectDefinition', 'finalPlanning'));
     }
 
     public function store(Request $request)

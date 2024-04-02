@@ -64,8 +64,10 @@
                         <div class="col-md-6">
                             <label for="name_project" class="form-label text-white">Name Project</label>
                             <select name="name_project" id="name_project" class="form-select mb-3 text-white" required>
-                                @foreach ($projectDefinition as $project)
-                                    <option value="{{ $project->name_project }}">{{ $project->name_project }}</option>
+                                @foreach ($finalPlanning as $project)
+                                    @if ($project->status == 'Close' || $project->status == 'close')
+                                        <option value="{{ $project->id }}">{{ $project->project_definition_id }}</option>                                        
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

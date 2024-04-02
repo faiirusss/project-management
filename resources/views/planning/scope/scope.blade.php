@@ -50,6 +50,10 @@
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
             </a> 
+            <a href="/finalPlanning" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
+                <i class="fas fa-users-cog me-lg-2"></i>
+                <span class="d-none d-lg-inline-flex">Final Planning</span>
+            </a>
         </div>
     </center>
 </nav>
@@ -76,14 +80,15 @@
                         </thead>
                         <tbody>
                             @foreach ($scope as $r)
-                            <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                            <tr class="text-white">   
+                                <td><small>{{ $r->projectDefinition['name_project'] }}</small></td>
                                 <td><small>{{$r->technical_requirements}}</small></td>
                                 <td><small>{{$r->perfomance_requirements}}</small></td>
                                 <td><small>{{$r->bussines_requirements}}</small></td>
                                 <td><small>{{$r->regulatory_requirements}}</small></td>
                                 <td><small>{{$r->user_requirements}}</small></td>
                                 <td><small>{{$r->system_requirements}}</small></td>
+                                for
                                 <td>
                                     <a href="/scope/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
                                     <a href="/scope/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
