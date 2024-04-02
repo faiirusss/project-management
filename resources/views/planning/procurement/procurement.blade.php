@@ -64,7 +64,7 @@
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Cost Contract to Value </h2>
-                <a href="/procurement/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <a href="/costContractValue/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" >

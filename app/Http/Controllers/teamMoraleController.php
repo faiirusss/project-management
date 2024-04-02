@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\planning_communication_teamMorale;
-use App\Models\teamMorale;
+use App\Models\planning_com_tems;
 use Illuminate\Http\Request;
 
 class teamMoraleController extends Controller
 {
     public function index()
     {
-        $teamMorale = planning_communication_teamMorale::all();
+        $teamMorale = planning_com_tems::all();
         return view('planning.communication.index', compact('teamMorale'));
     }
 
@@ -21,7 +20,7 @@ class teamMoraleController extends Controller
 
     public function store(Request $request)
     {
-        planning_communication_teamMorale::create([
+        planning_com_tems::create([
             'deliverable' => $request->deliverable,
             'description' => $request->description,
             'delivery_method' => $request->delivery_method,
@@ -35,13 +34,13 @@ class teamMoraleController extends Controller
 
     public function destroy($id)
     {
-        $teamMorale = planning_communication_teamMorale::find($id);
+        $teamMorale = planning_com_tems::find($id);
         $teamMorale->delete();
         return redirect('/communication');
     }
     public function show($id)
     {
-        $teamMorale = planning_communication_teamMorale::find($id);
+        $teamMorale = planning_com_tems::find($id);
 
         return view('planning.communication.editTeamMorale', compact('teamMorale'));
     }
@@ -49,7 +48,7 @@ class teamMoraleController extends Controller
     public function update(Request $request, $id)
     {
 
-        $teamMorale = planning_communication_teamMorale::find($id);
+        $teamMorale = planning_com_tems::find($id);
         $teamMorale->update([
             'deliverable' => $request->deliverable,
             'description' => $request->description,

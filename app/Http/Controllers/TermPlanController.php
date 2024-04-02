@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_procurement_termOfPaymentPlan;
+use App\Models\planning_procurement_termplans;
 use App\Models\TermPlan;
 use Illuminate\Http\Request;
 use App\Models\ProjectDefinition;
@@ -27,7 +28,7 @@ class TermPlanController extends Controller
 
     public function store(Request $request)
     {
-        planning_procurement_termOfPaymentPlan::create([
+        planning_procurement_termplans::create([
             'term_type' => $request->term_type,
             'name_project' => $request->name_project,
             'value_term' => $request->value_term,
@@ -41,21 +42,21 @@ class TermPlanController extends Controller
 
     public function destroy($id)
     {
-        $termplan = planning_procurement_termOfPaymentPlan::find($id);
+        $termplan = planning_procurement_termplans::find($id);
         $termplan->delete();
         return redirect('/procurement');
     }
 
     public function show($id)
     {
-        $termplan = planning_procurement_termOfPaymentPlan::find($id);
+        $termplan = planning_procurement_termplans::find($id);
         $projectDefinition = Initiating_ProjectDefinition::all();
         return view('planning.procurement.editTermPlan', compact('termplan', 'projectDefinition'));
     }
 
     public function update(Request $request, $id)
     {
-        $termplan = planning_procurement_termOfPaymentPlan::find($id);
+        $termplan = planning_procurement_termplans::find($id);
         $termplan->update([
             'term_type' => $request->term_type,
             'name_project' => $request->name_project,

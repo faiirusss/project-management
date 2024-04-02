@@ -20,6 +20,7 @@ class planning_risk extends Model
         'assigned_to',
         'status',
         'due_date',
+        'project_definition_id'
     ];
 
     public function sluggable(): array
@@ -38,5 +39,15 @@ class planning_risk extends Model
                 $query->where('name_project', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->hasOne(planning_project_definitions::class);
     }
 }

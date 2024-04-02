@@ -72,7 +72,9 @@
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                     @foreach($projectDefinition as $project)
                         @if ($project->status == 'open')
-                            <option value="{{ $project->id }}">{{ $project->name_project }}</option>
+                            <option value="{{ $project->id }}" {{ $project->id == $planningFinal->id ? 'selected' : '' }}>
+                                {{ $project->name_project }}
+                            </option>
                         @endif
                     @endforeach
                 </select>
@@ -82,7 +84,9 @@
                 <label for="planning_scope_id" class="form-label text-white">Scope</label>
                 <select name="planning_scope_id" id="planning_scope_id" class="form-select mb-3 text-white" required>
                     @foreach ($scope as $row)
-                        <option value="{{ $row->id }}">{{ $row->projectDefinition['name_project'] }}</option>
+                        <option value="{{ $row->id }}" {{ $row->id == $planningFinal->id ? 'selected' : '' }}>
+                            {{ $row->projectDefinition['name_project'] }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -90,7 +94,9 @@
                 <label for="planning_schedule_id" class="form-label text-white">Schedule</label>
                 <select name="planning_schedule_id" id="planning_schedule_id" class="form-select mb-3 text-white" required>
                     @foreach ($schedule as $item)
-                        <option value="{{ $item->id }}">{{ $item->projectDefinition['name_project'] }}</option>
+                        <option value="{{ $item->id }}" {{ $item->id == $planningFinal->id ? 'selected' : '' }}>
+                            {{ $item->projectDefinition['name_project'] }}
+                        </option>
                     @endforeach
                 </select>
             </div>  

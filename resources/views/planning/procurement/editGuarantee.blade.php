@@ -70,7 +70,7 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="" class="form-label text-white">Term Type</label>
+                             <label for="" class="form-label text-white">Term Type</label>
                             <input type="text" name="deskripsi" id="" value="{{$guarantee->deskripsi}}" class="form-control mb-3 text-white"  required>
                         </div>
                         <div class="col-md-6">

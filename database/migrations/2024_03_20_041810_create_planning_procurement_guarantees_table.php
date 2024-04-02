@@ -15,11 +15,13 @@ class CreatePlanningProcurementGuaranteesTable extends Migration
     {
         Schema::create('planning_procurement_guarantees', function (Blueprint $table) {
             $table->id();
-            $table->string('name_project');
             $table->string('deskripsi');
             $table->string('persen');
             $table->string('radio');
+            $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
+
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
         });
     }
 

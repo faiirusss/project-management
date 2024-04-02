@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlanningCommunicationReportsTable extends Migration
+class CreatePlanningComPresentationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePlanningCommunicationReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('planning_communication_reports', function (Blueprint $table) {
+        Schema::create('planning_com_presentations', function (Blueprint $table) {
             $table->id();
             $table->string('deliverable');
             $table->string('description');
@@ -21,7 +21,10 @@ class CreatePlanningCommunicationReportsTable extends Migration
             $table->string('frequency');
             $table->string('owner');
             $table->string('audience');
+            $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
+
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
         });
     }
 
@@ -32,6 +35,6 @@ class CreatePlanningCommunicationReportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('planning_communication_reports');
+        Schema::dropIfExists('planning_com_presentations');
     }
 }

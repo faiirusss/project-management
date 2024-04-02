@@ -12,4 +12,14 @@ class planning_cost_caseFlow extends Model
         'waktu',
         'nilai_rupiah',
     ];
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->hasOne(planning_project_definitions::class);
+    }
 }

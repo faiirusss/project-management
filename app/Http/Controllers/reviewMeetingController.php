@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\planning_communication_reviewAndMeeting;
-use App\Models\reviewMeeting;
+use App\Models\planning_com_reviews;
 use Illuminate\Http\Request;
 
 class reviewMeetingController extends Controller
 {
     public function index()
     {
-        $reviewMeeting = planning_communication_reviewAndMeeting::all();
+        $reviewMeeting = planning_com_reviews::all();
         return view('planning.communication.index', compact('reviewMeeting'));
     }
 
@@ -21,7 +20,7 @@ class reviewMeetingController extends Controller
 
     public function store(Request $request)
     {
-        planning_communication_reviewAndMeeting::create([
+        planning_com_reviews::create([
             'deliverable' => $request->deliverable,
             'description' => $request->description,
             'delivery_method' => $request->delivery_method,
@@ -35,13 +34,13 @@ class reviewMeetingController extends Controller
 
     public function destroy($id)
     {
-        $reviewMeeting = planning_communication_reviewAndMeeting::find($id);
+        $reviewMeeting = planning_com_reviews::find($id);
         $reviewMeeting->delete();
         return redirect('/communication');
     }
     public function show($id)
     {
-        $reviewMeeting = planning_communication_reviewAndMeeting::find($id);
+        $reviewMeeting = planning_com_reviews::find($id);
 
         return view('planning.communication.editReviewMeeting', compact('reviewMeeting'));
     }
@@ -49,7 +48,7 @@ class reviewMeetingController extends Controller
     public function update(Request $request, $id)
     {
 
-        $reviewMeeting = planning_communication_reviewAndMeeting::find($id);
+        $reviewMeeting = planning_com_reviews::find($id);
         $reviewMeeting->update([
             'deliverable' => $request->deliverable,
             'description' => $request->description,

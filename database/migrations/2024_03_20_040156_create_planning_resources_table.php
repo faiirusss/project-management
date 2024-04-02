@@ -15,12 +15,14 @@ class CreatePlanningResourcesTable extends Migration
     {
         Schema::create('planning_resources', function (Blueprint $table) {
             $table->id();
-            $table->string('name_project');
             $table->string('name');
             $table->string('position');
             $table->string('duration');
             $table->string('status');
+            $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
+
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
         });
     }
 

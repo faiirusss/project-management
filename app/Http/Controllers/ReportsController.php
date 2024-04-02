@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\planning_com_announcements;
+use App\Models\planning_com_presentations;
+use App\Models\planning_com_reports;
 use App\Models\planning_communication_presentation;
 use App\Models\planning_communication_projectAnnouncement;
 use App\Models\planning_communication_report;
@@ -14,21 +17,21 @@ class ReportsController extends Controller
 {
     public function index()
     {
-        $reports = planning_communication_report::all();
+        $reports = planning_com_reports::all();
         return view('planning.communication.index', compact('reports'));
     }
 
     public function create()
     {
-        $reports = planning_communication_report::all();
-        $presentation = planning_communication_presentation::all();
-        $projectAnouncement = planning_communication_projectAnnouncement::all();
+        $reports = planning_com_reports::all();
+        $presentation = planning_com_presentations::all();
+        $projectAnouncement = planning_com_announcements::all();
         return view('planning.communication.reports', compact('reports', 'presentation', 'projectAnouncement'));
     }
 
     public function store(Request $request)
     {
-        planning_communication_report::create([
+        planning_com_reports::create([
             'deliverable' => $request->deliverable,
             'description' => $request->description,
             'delivery_method' => $request->delivery_method,
@@ -42,13 +45,13 @@ class ReportsController extends Controller
 
     public function destroy($id)
     {
-        $reports = planning_communication_report::find($id);
+        $reports = planning_com_reports::find($id);
         $reports->delete();
         return redirect('/communication');
     }
     public function show($id)
     {
-        $reports = planning_communication_report::find($id);
+        $reports = planning_com_reports::find($id);
 
         return view('planning.communication.editReport', compact('reports'));
     }
@@ -56,7 +59,7 @@ class ReportsController extends Controller
     public function update(Request $request, $id)
     {
 
-        $report = planning_communication_report::find($id);
+        $report = planning_com_reports::find($id);
         $report->update([
             'deliverable' => $request->deliverable,
             'description' => $request->description,

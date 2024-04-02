@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class planning_procurement_costContractToValue extends Model
+class planning_procurement_termplans extends Model
 {
     protected $fillable = [
-        'value',
         'name_project',
-        'contract_value',
+        'term_type',
+        'value_term',
+        'value_rp_term',
+        'month_plan',
     ];
 
     public function sluggable(): array
@@ -28,5 +30,15 @@ class planning_procurement_costContractToValue extends Model
                 $query->where('name_project', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->hasOne(planning_project_definitions::class);
     }
 }

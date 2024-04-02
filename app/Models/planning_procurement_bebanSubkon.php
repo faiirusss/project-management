@@ -35,4 +35,14 @@ class planning_procurement_bebanSubkon extends Model
             });
         });
     }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->hasOne(planning_project_definitions::class);
+    }
 }

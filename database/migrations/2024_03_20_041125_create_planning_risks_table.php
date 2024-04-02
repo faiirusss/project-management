@@ -18,7 +18,6 @@ class CreatePlanningRisksTable extends Migration
             $table->date('start_date');
             $table->text('description_ofrisk');
             $table->string('submitter');
-            $table->string('name_project');
             $table->integer('probability_factor');
             $table->integer('impact_factor');
             $table->integer('exposure');
@@ -27,7 +26,10 @@ class CreatePlanningRisksTable extends Migration
             $table->string('assigned_to');
             $table->string('status');
             $table->date('due_date');
+            $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
+
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
         });
     }
 

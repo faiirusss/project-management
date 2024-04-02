@@ -15,7 +15,6 @@ class CreatePlanningProcurementBebanBahansTable extends Migration
     {
         Schema::create('planning_procurement_beban_bahans', function (Blueprint $table) {
             $table->id();
-            $table->string('name_project');
             $table->string('procurement');
             $table->string('vendor');
             $table->string('description_service');
@@ -24,7 +23,10 @@ class CreatePlanningProcurementBebanBahansTable extends Migration
             $table->string('total');
             $table->date('start_toOrder');
             $table->date('finish_toOrder');
+            $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
+
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
         });
     }
 

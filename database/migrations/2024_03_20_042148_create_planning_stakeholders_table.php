@@ -15,7 +15,6 @@ class CreatePlanningStakeholdersTable extends Migration
     {
         Schema::create('planning_stakeholders', function (Blueprint $table) {
             $table->id();
-            $table->string('name_project');
             $table->string('stakeholder');
             $table->string('role');
             $table->string('power');
@@ -26,7 +25,10 @@ class CreatePlanningStakeholdersTable extends Migration
             $table->string('control');
             $table->string('close');
             $table->string('engagement_level');
+            $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
+
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
         });
     }
 

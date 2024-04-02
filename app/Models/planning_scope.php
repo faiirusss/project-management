@@ -44,6 +44,6 @@ class planning_scope extends Model
 
     public function planningFinal()
     {
-        return $this->hasOne(Planning_ProjectDefinition::class);
+        return $this->hasOne(planning_project_definitions::class);
     }
 }

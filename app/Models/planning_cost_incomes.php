@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class planning_cost_listAssumsition extends Model
+class planning_cost_incomes extends Model
 {
     protected $fillable = [
         'name_project',
-        'deskripsi',
+        'cost_category',
+        'description',
+        'total',
     ];
 
     public function projectDefinition()
