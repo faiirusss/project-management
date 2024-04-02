@@ -2,19 +2,21 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\ProjectCharterController;
+use App\Http\Controllers\ProjectDefinitionController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class planning_scope extends Model
 {
     protected $fillable = [
-        'name_project',
         'technical_requirements',
         'perfomance_requirements',
         'bussines_requirements',
         'regulatory_requirements',
         'user_requirements',
         'system_requirements',
+        'project_definition_id',
     ];
 
     public function sluggable(): array
@@ -33,5 +35,15 @@ class planning_scope extends Model
                 $query->where('name_project', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->hasOne(Planning_ProjectDefinition::class);
     }
 }

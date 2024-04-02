@@ -50,6 +50,10 @@
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
             </a> 
+            <a href="/finalPlanning" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
+                <i class="fas fa-users-cog me-lg-2"></i>
+                <span class="d-none d-lg-inline-flex">Final Planning</span>
+            </a>
         </div>
     </center>
 </nav>
@@ -76,7 +80,7 @@
                         <tbody>
                             @foreach ($schedule as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->task}}</small></td>
                                 <td><small>{{$r->start_date}}</small></td>
                                 <td><small>{{$r->finish_date}}</small></td>

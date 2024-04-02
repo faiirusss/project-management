@@ -43,4 +43,19 @@ class Initiating_ProjectDefinition extends Model
             });
         });
     }
+
+    public function planningScope()
+    {
+        return $this->hasOne(planning_scope::class);
+    }
+
+    public function planningSchedule()
+    {
+        return $this->hasOne(planning_schedule::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->hasOne(Planning_ProjectDefinition::class);
+    }
 }

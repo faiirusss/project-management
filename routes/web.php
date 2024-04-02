@@ -46,6 +46,7 @@ use App\Http\Controllers\ExecutingQualityController;
 use App\Http\Controllers\ExecutingScheduleController;
 use App\Http\Controllers\ExecutingScopeController;
 use App\Http\Controllers\ExecutingStakeholderController;
+use App\Http\Controllers\PlanningProjectDefinitionController;
 use App\Http\Controllers\PresentationExecutingController;
 use App\Http\Controllers\ProcurementExecutingController;
 use App\Http\Controllers\projectAnouncementExecutingController;
@@ -270,6 +271,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/schedule/{id}/update', [ScheduleController::class, 'update']);
     Route::get('/schedule/{id}/edit', [ScheduleController::class, 'show']);
 
+    Route::get('/finalPlanning', [PlanningProjectDefinitionController::class, 'index']);
+    Route::get('/finalPlanning/add', [PlanningProjectDefinitionController::class, 'create']);
+    Route::post('/finalPlanning/save', [PlanningProjectDefinitionController::class, 'store']);
+    Route::get('/finalPlanning/{id}/delete', [PlanningProjectDefinitionController::class, 'destroy']);
+    Route::post('/finalPlanning/{id}/update', [PlanningProjectDefinitionController::class, 'update']);
+    Route::get('/finalPlanning/{id}/edit', [PlanningProjectDefinitionController::class, 'show']);
 
     // EXECUTING
     Route::get('/executing', [ExecutingController::class, 'index']);
