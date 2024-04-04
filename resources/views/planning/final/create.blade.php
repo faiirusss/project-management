@@ -81,8 +81,8 @@
             <div class="col-md-4">
                 <label for="scope" class="form-label text-white">Scope</label>
                 <select name="scope" id="scope" class="form-select mb-3 text-white" required>
-                    @foreach ($scope as $row)
-                        <option value="{{ $row->id }}">{{ $row->projectDefinition['name_project'] }}</option>
+                    @foreach ($planningFinal as $row)
+                        <option value="{{ $row->id }}">{{ $row->planningScope['system_requirements'] }}</option>
                     @endforeach
                 </select>
             </div> 
@@ -252,7 +252,7 @@
         </div>                   
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>
             <button type="reset" class="btn btn-sm btn-outline-danger m-2">Reset</button>
-            <a href="/finalPlanning" class="btn btn-sm btn-outline-warning m-2">Cancel</a>
+            <a href="/planning" class="btn btn-sm btn-outline-warning m-2">Cancel</a>
         </form>
     </div>
 </div>

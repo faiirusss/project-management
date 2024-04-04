@@ -49,11 +49,7 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
-            <a href="/finalPlanning" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
-                <i class="fas fa-users-cog me-lg-2"></i>
-                <span class="d-none d-lg-inline-flex">Final Planning</span>
-            </a>
+            </a>             
         </div>
     </center>
 </nav>
@@ -63,7 +59,6 @@
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Final Planning</h2>
-                <a href="/finalPlanning/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" >
@@ -99,10 +94,7 @@
                                     </small>
                                 </td>
                                 <td><small>{{$r->status}}</small></td>
-                                <td>
-                                    <a href="/finalPlanning/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
-                                    <a href="/finalPlanning/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
-                                </td>
+                                
                             </tr>
                             @endforeach
                         </tbody>
@@ -113,91 +105,5 @@
     </div>
 </div>
 
-{{-- scope --}}
-<div class="container-fluid pt-4 px-4">
-    <div class="row g-10">
-        <div class="col-sm-12 col-xl-12">
-            <div class="bg-secondary rounded h-100 p-4">
-                <h2 class="mb-4">Scope</h2>
-                <br>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover" >
-                        <thead>
-                            <tr class="text-white">
-                                <th><small>Project Name</small></th>
-                                <th><small>Technical Requirements</small></th>
-                                <th><small>Perfomance Requirements</small></th>
-                                <th><small>Bussines Requirements</small></th>
-                                <th><small>Regulatory Requirements</small></th>
-                                <th><small>User Requirements</small></th>
-                                <th><small>System Requirements</small></th>
-                                <th><small>Action</small></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($planningFinal as $r)
-                            <tr class="text-white">
-                                <td>{{ $r->projectDefinition['name_project'] }}</td>
-                                <td>{{ $r->planningScope['technical_requirements'] }}</td>
-                                <td>{{ $r->planningScope['perfomance_requirements'] }}</td>
-                                <td>{{ $r->planningScope['bussines_requirements'] }}</td>
-                                <td>{{ $r->planningScope['regulatory_requirements'] }}</td>
-                                <td>{{ $r->planningScope['user_requirements'] }}</td>
-                                <td>{{ $r->planningScope['system_requirements'] }}</td>
-                                <td>
-                                    <a href="/risk/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
-                                    <a href="/risk/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-{{-- schedule --}}
-<div class="container-fluid pt-4 px-4">
-    <div class="row g-10">
-        <div class="col-sm-12 col-xl-12">
-            <div class="bg-secondary rounded h-100 p-4">
-                <h2 class="mb-4">Schedule</h2>
-                <br>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover" >
-                        <thead>
-                            <tr class="text-white">
-                                <th><small>Project Name</small></th>
-                                <th><small>Task</small></th>
-                                <th><small>Start Date</small></th>
-                                <th><small>Finish Date</small></th>
-                                <th><small>Description Task</small></th>
-                                <th><small>Assign to</small></th>
-                                <th><small>Action</small></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($planningFinal as $r)
-                            <tr class="text-white">
-                                <td>{{ $r->projectDefinition['name_project'] }}</td>
-                                <td>{{ $r->planningSchedule['task'] }}</td>
-                                <td>{{ $r->planningSchedule['start_date'] }}</td>
-                                <td>{{ $r->planningSchedule['finish_date'] }}</td>
-                                <td>{{ $r->planningSchedule['description_task'] }}</td>
-                                <td>{{ $r->planningSchedule['assign_to'] }}</td>
-                                <td>
-                                    <a href="/risk/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
-                                    <a href="/risk/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

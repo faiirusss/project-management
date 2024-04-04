@@ -1,6 +1,17 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+
+<style>
+    .table-responsive table {
+        overflow-x: scroll;
+    }
+
+    .table-striped td, .table-striped th {
+        white-space: nowrap;
+    }
+</style>
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -49,11 +60,7 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
-            <a href="/finalPlanning" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
-                <i class="fas fa-users-cog me-lg-2"></i>
-                <span class="d-none d-lg-inline-flex">Final Planning</span>
-            </a>
+            </a>             
         </div>
     </center>
 </nav>
@@ -87,8 +94,7 @@
                                 <td><small>{{$r->bussines_requirements}}</small></td>
                                 <td><small>{{$r->regulatory_requirements}}</small></td>
                                 <td><small>{{$r->user_requirements}}</small></td>
-                                <td><small>{{$r->system_requirements}}</small></td>
-                                for
+                                <td><small>{{$r->system_requirements}}</small></td>                                
                                 <td>
                                     <a href="/scope/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
                                     <a href="/scope/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   

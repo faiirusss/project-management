@@ -49,11 +49,7 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
-            <a href="/finalPlanning" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
-                <i class="fas fa-users-cog me-lg-2"></i>
-                <span class="d-none d-lg-inline-flex">Final Planning</span>
-            </a>
+            </a>             
         </div>
     </center>
 </nav>

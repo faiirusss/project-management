@@ -38,6 +38,6 @@ class executing_procurement_guarantee extends Model
 
     public function executingFinal()
     {
-        return $this->hasOne(Executing_ProjectDefinition::class);
+        return $this->hasOne(executing_project_definitions::class);
     }
 }

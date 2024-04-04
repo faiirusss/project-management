@@ -69,6 +69,8 @@ class ExecutingScopeController extends Controller
             'user_requirements' => $request->user_requirements,
             'system_requirements' => $request->system_requirements,
             $request->except(['_token']),
+
+            
         ]);
         return redirect('/scopeExecuting');
     }
