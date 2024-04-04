@@ -8,6 +8,7 @@ use App\Models\planning_procurement_bebanSubkon;
 use App\Models\planning_procurement_contracts;
 use App\Models\planning_procurement_guarantee;
 use App\Models\planning_procurement_termplans;
+use App\Models\planning_project_definitions;
 use App\Models\planning_quality;
 use App\Models\planning_risk;
 use App\Models\planning_scope;
@@ -30,7 +31,8 @@ class PlanningController extends Controller
             $quality = planning_quality::all();
             $guarantee = planning_procurement_guarantee::all();
             $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('planning.index', compact('risks', 'scope', 'stakeholder', 'quality', 'procurement', 'bebanbarang', 'bebansubkon', 'termPlan', 'quality', 'guarantee', 'projectDefinition'));
+            $finalPLanning = planning_project_definitions::all();
+            return view('planning.index', compact('finalPLanning', 'risks', 'scope', 'stakeholder', 'quality', 'procurement', 'bebanbarang', 'bebansubkon', 'termPlan', 'quality', 'guarantee', 'projectDefinition'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }

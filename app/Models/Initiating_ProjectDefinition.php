@@ -49,7 +49,7 @@ class Initiating_ProjectDefinition extends Model
     // planning -> scope
     public function planningScope()
     {
-        return $this->hasOne(planning_scope::class);
+        return $this->hasMany(planning_scope::class, 'project_definition_id', 'id');
     }
 
     // planning -> schedule

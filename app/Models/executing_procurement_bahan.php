@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class executing_procurement_bebanBahan extends Model
+class executing_procurement_bahan extends Model
 {
     protected $fillable = [
         'procurement',
@@ -17,7 +17,7 @@ class executing_procurement_bebanBahan extends Model
         'total',
         'start_toOrder',
         'finish_toOrder',
-    ];  
+    ];
 
     public function projectDefinition()
     {
@@ -26,6 +26,6 @@ class executing_procurement_bebanBahan extends Model
 
     public function executingFinal()
     {
-        return $this->hasOne(Executing_ProjectDefinition::class);
+        return $this->hasOne(executing_project_definitions::class);
     }
 }

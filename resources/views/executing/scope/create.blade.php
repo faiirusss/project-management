@@ -66,7 +66,7 @@
                             <select name="name_project" id="name_project" class="form-select mb-3 text-white" required>
                                 @foreach ($finalPlanning as $project)
                                     @if ($project->status == 'Close' || $project->status == 'close')
-                                        <option value="{{ $project->id }}">{{ $project->project_definition_id }}</option>                                        
+                                        <option value="{{ $project->id }}">{{ $project->projectDefinition['name_project'] }}</option>                                        
                                     @endif
                                 @endforeach
                             </select>

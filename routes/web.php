@@ -59,6 +59,7 @@ use App\Http\Controllers\ExecutingContractController;
 use App\Http\Controllers\ExecutingGuaranteeController;
 use App\Http\Controllers\ExecutingTermplanController;
 use App\Http\Controllers\ExecutingCaseFlowController;
+use App\Http\Controllers\ExecutinglistAssumsitionController;
 use App\Http\Controllers\ExecutingProjectIncomeStatementController;
 use App\Http\Controllers\ExecutinglistIncomeStatementController;
 
@@ -453,7 +454,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/projectIncomeStatementExecuting/{id}/delete', [ExecutingProjectIncomeStatementController::class, 'destroy']);
     Route::get('/projectIncomeStatementExecuting/{id}/edit', [ExecutingProjectIncomeStatementController::class, 'show']);
     Route::post('/projectIncomeStatementExecuting/{id}/update', [ExecutingProjectIncomeStatementController::class, 'update']);
-    
+
     //project Income Statement Executing
     Route::get('/projectIncomeStatement', [ProjectIncomeStatementController::class, 'index']);
     Route::get('/projectIncomeStatement/add', [ProjectIncomeStatementController::class, 'create']);
