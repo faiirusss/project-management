@@ -61,6 +61,10 @@
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
             </a> 
+            <a href="/finalExecuting" class="nav-link" >
+                <i class="fas fa-users-cog me-lg-2"></i>
+                <span class="d-none d-lg-inline-flex">Final Planning</span>
+            </a> 
     </div>
     </center>
 </nav>

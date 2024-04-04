@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\executing_communication_team_morales;
+use App\Models\executing_com_tems;
 use Illuminate\Http\Request;
 
 class teamMoraleExecutingController extends Controller
 {
     public function index()
     {
-        $teamMoraleExecuting = executing_communication_team_morales::all();
+        $teamMoraleExecuting = executing_com_tems::all();
         return view('executing.communicationExecuting.index', compact('teamMoraleExecuting'));
     }
 
@@ -20,7 +20,7 @@ class teamMoraleExecutingController extends Controller
 
     public function store(Request $request)
     {
-        executing_communication_team_morales::create([
+        executing_com_tems::create([
             'deliverable' => $request->deliverable,
             'description' => $request->description,
             'delivery_method' => $request->delivery_method,
@@ -35,13 +35,13 @@ class teamMoraleExecutingController extends Controller
 
     public function destroy($id)
     {
-        $teamMoraleExecuting = executing_communication_team_morales::find($id);
+        $teamMoraleExecuting = executing_com_tems::find($id);
         $teamMoraleExecuting->delete();
         return redirect('/communicationExecuting');
     }
     public function show($id)
     {
-        $teamMoraleExecuting = executing_communication_team_morales::find($id);
+        $teamMoraleExecuting = executing_com_tems::find($id);
 
         return view('executing.communicationExecuting.editTeamMorale', compact('teamMoraleExecuting'));
     }
@@ -49,7 +49,7 @@ class teamMoraleExecutingController extends Controller
     public function update(Request $request, $id)
     {
 
-        $teamMoraleExecuting = executing_communication_team_morales::find($id);
+        $teamMoraleExecuting = executing_com_tems::find($id);
         $teamMoraleExecuting->update([
             'deliverable' => $request->deliverable,
             'description' => $request->description,

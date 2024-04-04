@@ -145,9 +145,7 @@ class PlanningProjectDefinitionController extends Controller
             'status' => $request->status,
             $request->except(['_token']),
         ]);
-
-
-
+        
         return redirect('/finalPlanning');
     }
 }

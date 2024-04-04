@@ -15,7 +15,6 @@ class CreateExecutingCostBebanSubkonsTable extends Migration
     {
         Schema::create('executing_cost_beban_subkons', function (Blueprint $table) {
             $table->id();
-            $table->string('name_project');
             $table->string('procurement_subkon');
             $table->string('vendor_subkon');
             $table->string('description_service_subkon');
@@ -24,7 +23,10 @@ class CreateExecutingCostBebanSubkonsTable extends Migration
             $table->string('total_subkon');
             $table->date('start_toOrder_subkon');
             $table->date('finish_toOrder_subkon');
+            $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
+
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
         });
     }
 

@@ -22,7 +22,10 @@ class CreateExecutingCostBebanBahansTable extends Migration
             $table->integer('volume');
             $table->string('unit');
             $table->string('total');
+            $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
+
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
         });
     }
 

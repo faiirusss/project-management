@@ -18,4 +18,14 @@ class executing_procurement_bebanSubkon extends Model
         'start_toOrder_subkon',
         'finish_toOrder_subkon',
     ];
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function executingFinal()
+    {
+        return $this->hasOne(Executing_ProjectDefinition::class);
+    }
 }

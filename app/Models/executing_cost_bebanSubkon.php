@@ -27,4 +27,14 @@ class executing_cost_bebanSubkon extends Model
             });
         });
     }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function executingFinal()
+    {
+        return $this->hasOne(Executing_ProjectDefinition::class);
+    }
 }

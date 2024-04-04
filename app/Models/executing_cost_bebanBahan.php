@@ -16,4 +16,14 @@ class executing_cost_bebanBahan extends Model
         'unit',
         'total',
     ];
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function executingFinal()
+    {
+        return $this->hasOne(Executing_ProjectDefinition::class);
+    }
 }
