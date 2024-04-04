@@ -114,7 +114,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($finalPLanning as $row)
+                            @foreach ($finalPlanning as $row)
                             <tr class="text-white">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $row->projectDefinition['name_project'] }}</td>
@@ -224,14 +224,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($finalPLanning as $r)
+                            @foreach ($projectDefinition as $r)
                             <tr class="text-white">
-                                <td>{{ $r->projectDefinition['name_project'] }}</td>
-                                <td>{{ $r->planningSchedule['task'] }}</td>
-                                <td>{{ $r->planningSchedule['start_date'] }}</td>
-                                <td>{{ $r->planningSchedule['finish_date'] }}</td>
-                                <td>{{ $r->planningSchedule['description_task'] }}</td>
-                                <td>{{ $r->planningSchedule['assign_to'] }}</td>
+                                <td>{{ $r->name_project }}</td>
+                                <td>
+                                    @foreach ($r->planningSchedule as $item)
+                                        - {{ $item['task'] }}<br>
+                                    @endforeach
+                                </td> 
                                 <td>
                                     <a href="/risk/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
                                     <a href="/risk/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
@@ -247,7 +247,7 @@
 </div>
 
 {{-- cost project income statement --}}
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -278,10 +278,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 {{-- cost project income statement --}}
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -310,10 +310,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 {{-- cost list asumsition --}}
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -340,10 +340,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 {{-- quality --}}
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -370,6 +370,6 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 @endsection

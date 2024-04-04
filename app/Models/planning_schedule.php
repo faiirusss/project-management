@@ -23,6 +23,6 @@ class planning_schedule extends Model
 
     public function planningFinal()
     {
-        return $this->hasOne(planning_project_definitions::class);
+        return $this->belongsTo(planning_project_definitions::class);
     }
 }

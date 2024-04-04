@@ -37,6 +37,8 @@ class planning_scope extends Model
         });
     }
 
+
+    // relasi ke model project definisi dengan relasi many to one
     public function projectDefinition()
     {
         return $this->belongsTo(Initiating_ProjectDefinition::class);

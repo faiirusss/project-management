@@ -31,8 +31,8 @@ class PlanningController extends Controller
             $quality = planning_quality::all();
             $guarantee = planning_procurement_guarantee::all();
             $projectDefinition = Initiating_ProjectDefinition::all();
-            $finalPLanning = planning_project_definitions::all();
-            return view('planning.index', compact('finalPLanning', 'risks', 'scope', 'stakeholder', 'quality', 'procurement', 'bebanbarang', 'bebansubkon', 'termPlan', 'quality', 'guarantee', 'projectDefinition'));
+            $finalPlanning = planning_project_definitions::all();
+            return view('planning.index', compact('finalPlanning', 'risks', 'scope', 'stakeholder', 'quality', 'procurement', 'bebanbarang', 'bebansubkon', 'termPlan', 'quality', 'guarantee', 'projectDefinition'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }

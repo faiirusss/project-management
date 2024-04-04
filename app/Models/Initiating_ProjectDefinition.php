@@ -29,12 +29,6 @@ class Initiating_ProjectDefinition extends Model
         ];
     }
 
-    // public function scopeFilter($query, array $filter)
-    // {
-    //     $query->when($filter['search'] ?? false, function ($query) use ($filter) {
-    //         return $query->where('name_project', 'like', '%' . $filter['search'] . '%');
-    //     });
-    // }
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
@@ -44,18 +38,19 @@ class Initiating_ProjectDefinition extends Model
         });
     }
 
+
     // model relationship
 
-    // planning -> scope
+    // planning -> scope relasi ke model scope planning dengan relasi one to many
     public function planningScope()
     {
         return $this->hasMany(planning_scope::class, 'project_definition_id', 'id');
     }
 
-    // planning -> schedule
+    // planning -> schedule relasi ke model schedule planning dengan relasi one to many
     public function planningSchedule()
     {
-        return $this->hasOne(planning_schedule::class);
+        return $this->hasMany(planning_schedule::class, 'project_definition_id', 'id');
     }
 
     // planning -> cost -> income statement
@@ -154,9 +149,9 @@ class Initiating_ProjectDefinition extends Model
         return $this->hasOne(planning_stakeholder::class);
     }
 
-    // planning -> final planning
+    // planning -> final planning many to one
     public function planningFinal()
     {
-        return $this->hasOne(planning_project_definitions::class);
+        return $this->hasMany(planning_project_definitions::class, 'project_definition_id', 'id');
     }
 }
