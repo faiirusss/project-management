@@ -61,10 +61,6 @@
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
             </a> 
-            <a href="/finalExecuting" class="nav-link" >
-                <i class="fas fa-users-cog me-lg-2"></i>
-                <span class="d-none d-lg-inline-flex">Final Planning</span>
-            </a> 
     </div>
     </center>
 </nav>
@@ -96,6 +92,8 @@
         </div>
     </div>
 </div>
+
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -121,8 +119,6 @@
                             @foreach ($executingScope as $r)
                             <tr class="text-white">
                                 <td><small>{{$r->name_project}}</small></td>
-                                <td><small>{{$r->technical_requirements}}</small></td>
-                                <td><small>{{$r->perfomance_requirements}}</small></td>
                                 <td><small>{{$r->bussines_requirements}}</small></td>
                                 <td><small>{{$r->regulatory_requirements}}</small></td>
                                 <td><small>{{$r->user_requirements}}</small></td>

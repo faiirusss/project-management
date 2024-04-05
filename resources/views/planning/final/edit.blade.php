@@ -66,16 +66,30 @@
             <div class="col-md-3">
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                    @foreach($projectDefinition as $project)
-                        @if ($project->status == 'open')
-                            <option value="{{ $project->id }}" {{ $project->id == $planningFinal->id ? 'selected' : '' }}>
-                                {{ $project->name_project }}
+                    @foreach($planFinal as $item)
+                        @if ($item->projectDefinition) <!-- Memastikan projectDefinition tidak null -->
+                            <option value="{{ $planningFinal->project_definition_id }}" {{ $item->projectDefinition->id == $planningFinal->id ? 'selected' : '' }}>
+                                {{ $item->projectDefinition->name_project }}
                             </option>
                         @endif
                     @endforeach
                 </select>
-
-            </div>   
+            </div>
+            <div class="col-md-3">
+                <label for="status" class="form-label text-white">Status</label>
+                <select name="status" id="status" class="form-select mb-3 text-white" required>
+                    <option value="Open" @if($planningFinal->status == "Open") selected @endif>Open</option>
+                    <option value="Close" @if($planningFinal->status == "Close") selected @endif>Close</option>
+                </select>
+            </div>        
+        </div>        
+            <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>
+            <button type="reset" class="btn btn-sm btn-outline-danger m-2">Reset</button>
+            <a href="/planning" class="btn btn-sm btn-outline-warning">Cancel</a>
+        </form>
+    </div>
+</div>
+@endsection
             {{-- <div class="col-md-3">
                 <label for="planning_scope_id" class="form-label text-white">Scope</label>
                 <select name="planning_scope_id" id="planning_scope_id" class="form-select mb-3 text-white" required>
@@ -266,18 +280,4 @@
                     @endforeach
                 </select>
             </div>                --}}
-            <div class="col-md-3">
-                <label for="status" class="form-label text-white">Status</label>
-                <select name="status" id="status" class="form-select mb-3 text-white" required>
-                    <option value="Open" @if($planningFinal->status == "Open") selected @endif>Open</option>
-                    <option value="Close" @if($planningFinal->status == "Close") selected @endif>Close</option>
-                </select>
-            </div>        
-        </div>        
-            <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>
-            <button type="reset" class="btn btn-sm btn-outline-danger m-2">Reset</button>
-            <a href="/planning" class="btn btn-sm btn-outline-warning">Cancel</a>
-        </form>
-    </div>
-</div>
-@endsection
+            

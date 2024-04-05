@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\executing_project_definitions;
 use App\Models\Executing_ProjectDefinition;
+use App\Models\executing_scope;
 use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_com_announcements;
 use App\Models\planning_com_presentations;
@@ -92,59 +93,62 @@ class PlanningProjectDefinitionController extends Controller
 
     public function store(Request $request)
     {
-        planning_project_definitions::create([
-            'project_definition_id' => $request->name_project,
-            'scope_id' => $request->scope,
-            'schedule_id' => $request->schedule,
-            'cost_projectincome_id' => $request->projectincome,
-            'cost_caseflow_id' => $request->caseflow,
-            'cost_listasumsition_id' => $request->listassumsition,
-            'quality_id' => $request->quality,
-            'resource_id' => $request->resource,
-            'reports_id' => $request->report,
-            'presentation_id' => $request->presentation,
-            'projectanouncement_id' => $request->announcement,
-            'reviewmeeting_id' => $request->reviewmeeting,
-            'teammorale_id' => $request->teammorale,
-            'risk_id' => $request->risk,
-            'costcontract_id' => $request->costcontract,
-            'bebanbahan_id' => $request->bebanbahan,
-            'bebansubkon_id' => $request->bebansubkon,
-            'termpayment_id' => $request->termpayment,
-            'guarantee_id' => $request->guarantee,
-            'stakeholder_id' => $request->stakeholder,
-            'status' => 'open',
+        // Lakukan query untuk mendapatkan scope berdasarkan project_definition_id
+        $scope = planning_scope::where('project_definition_id', $request->name_project)->first();
+        $schedule_id = planning_schedule::where('project_definition_id', $request->name_project)->first();
+        $cost_projectincome_id = planning_cost_incomes::where('project_definition_id', $request->name_project)->first();
+        $cost_caseflow_id = planning_cost_caseFlow::where('project_definition_id', $request->name_project)->first();
+        $cost_listasumsition_id = planning_cost_listAssumsition::where('project_definition_id', $request->name_project)->first();
+        $quality_id = planning_quality::where('project_definition_id', $request->name_project)->first();
+        $resource_id = planning_resources::where('project_definition_id', $request->name_project)->first();
+        $reports_id = planning_com_reports::where('project_definition_id', $request->name_project)->first();
+        $presentation_id = planning_com_presentations::where('project_definition_id', $request->name_project)->first();
+        $projectanouncement_id = planning_com_announcements::where('project_definition_id', $request->name_project)->first();
+        $reviewmeeting_id = planning_com_reviews::where('project_definition_id', $request->name_project)->first();
+        $teammorale_id = planning_com_tems::where('project_definition_id', $request->name_project)->first();
+        $risk_id = planning_risk::where('project_definition_id', $request->name_project)->first();
+        $costcontract_id = planning_procurement_contracts::where('project_definition_id', $request->name_project)->first();
+        $bebanbahan_id = planning_procurement_bebanBahan::where('project_definition_id', $request->name_project)->first();
+        $bebansubkon_id = planning_procurement_bebanSubkon::where('project_definition_id', $request->name_project)->first();
+        $termpayment_id = planning_procurement_termplans::where('project_definition_id', $request->name_project)->first();
+        $guarantee_id = planning_procurement_guarantee::where('project_definition_id', $request->name_project)->first();
+        $stakeholder_id = planning_stakeholder::where('project_definition_id', $request->name_project)->first();
+        // Buat instance baru dari model dan atur nilai attribut
 
-            $request->except(['_token']),
-        ]);
-        // executing_project_definitions::create([
-        //     'project_definition_id' => $request->name_project,
-        //     'scope_id' => $request->scope,
-        //     'schedule_id' => $request->schedule,
-        //     'cost_projectincome_id' => $request->projectincome,
-        //     'cost_caseflow_id' => $request->caseflow,
-        //     'cost_listasumsition_id' => $request->listassumsition,
-        //     'quality_id' => $request->quality,
-        //     'resource_id' => $request->resource,
-        //     'reports_id' => $request->report,
-        //     'presentation_id' => $request->presentation,
-        //     'projectanouncement_id' => $request->announcement,
-        //     'reviewmeeting_id' => $request->reviewmeeting,
-        //     'teammorale_id' => $request->teammorale,
-        //     'risk_id' => $request->risk,
-        //     'costcontract_id' => $request->costcontract,
-        //     'bebanbahan_id' => $request->bebanbahan,
-        //     'bebansubkon_id' => $request->bebansubkon,
-        //     'termpayment_id' => $request->termpayment,
-        //     'guarantee_id' => $request->guarantee,
-        //     'stakeholder_id' => $request->stakeholder,
-        //     'status' => 'open',
+        $planningProject = new planning_project_definitions();
+        $planningProject->project_definition_id = $request->name_project;
+        $planningProject->scope_id = $scope->id;
+        $planningProject->schedule_id = $schedule_id->id;
+        $planningProject->cost_projectincome_id = $cost_projectincome_id->id;
+        $planningProject->cost_caseflow_id = $cost_caseflow_id->id;
+        $planningProject->cost_listasumsition_id = $cost_listasumsition_id->id;
+        $planningProject->quality_id = $quality_id->id;
+        $planningProject->resource_id = $resource_id->id;
+        $planningProject->reports_id = $reports_id->id;
+        $planningProject->presentation_id = $presentation_id->id;
+        $planningProject->projectanouncement_id = $projectanouncement_id->id;
+        $planningProject->reviewmeeting_id = $reviewmeeting_id->id;
+        $planningProject->teammorale_id = $teammorale_id->id;
+        $planningProject->risk_id = $risk_id->id;
+        $planningProject->costcontract_id = $costcontract_id->id;
+        $planningProject->bebanbahan_id = $bebanbahan_id->id;
+        $planningProject->bebansubkon_id = $bebansubkon_id->id;
+        $planningProject->termpayment_id = $termpayment_id->id;
+        $planningProject->guarantee_id = $guarantee_id->id;
+        $planningProject->stakeholder_id = $stakeholder_id->id;
 
-        //     $request->except(['_token']),
-        // ]);
+        // Atur atribut status
+        $planningProject->status = 'open';
+
+        // Atur atribut lainnya menggunakan data dari request
+        $planningProject->fill($request->except(['_token']));
+
+        // Simpan instance yang baru dibuat ke dalam database
+        $planningProject->save();
 
         return redirect('/planning')->with('success', 'Risk has been added successfully.');
     }
+
 
 
     public function destroy($id)
@@ -207,28 +211,10 @@ class PlanningProjectDefinitionController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $scope = planning_project_definitions::find($id);
         $scope->update([
             'project_definition_id' => $request->name_project,
-            'scope_id' => $request->planning_scope_id,
-            'schedule_id' => $request->planning_schedule_id,
-            'cost_projectincome_id' => $request->projectincome,
-            'cost_caseflow_id' => $request->caseflow,
-            'cost_listasumsition_id' => $request->listassumsition,
-            'quality_id' => $request->quality,
-            'resource_id' => $request->resource,
-            'reports_id' => $request->report,
-            'presentation_id' => $request->presentation,
-            'projectanouncement_id' => $request->announcement,
-            'reviewmeeting_id' => $request->reviewmeeting,
-            'teammorale_id' => $request->teammorale,
-            'risk_id' => $request->risk,
-            'costcontract_id' => $request->costcontract,
-            'bebanbahan_id' => $request->bebanbahan,
-            'bebansubkon_id' => $request->bebansubkon,
-            'termpayment_id' => $request->termpayment,
-            'guarantee_id' => $request->guarantee,
-            'stakeholder_id' => $request->stakeholder,
             'status' => $request->status,
             $request->except(['_token']),
         ]);
@@ -256,6 +242,21 @@ class PlanningProjectDefinitionController extends Controller
             'stakeholder_id' => $scope->stakeholder_id,
             'status' => 'open',
         ]);
+
+        $scopeExecuting = planning_scope::where('project_definition_id', $request->name_project)->get();
+
+        foreach ($scopeExecuting as $scope) {
+            executing_scope::create([
+                'technical_requirements' => $scope->technical_requirements,
+                'perfomance_requirements' => $scope->perfomance_requirements, // Specify a default value
+                'bussines_requirements' => $scope->bussines_requirements,
+                'regulatory_requirements' => $scope->regulatory_requirements,
+                'user_requirements' => $scope->user_requirements,
+                'system_requirements' => $scope->system_requirements,
+                'project_definition_id' => $scope->project_definition_id,
+            ]);
+        }
+
 
         return redirect('/planning');
     }

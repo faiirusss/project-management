@@ -233,8 +233,28 @@
                                     @endforeach
                                 </td> 
                                 <td>
-                                    <a href="/risk/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
-                                    <a href="/risk/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
+                                    @foreach ($r->planningSchedule as $item)
+                                        - {{ $item['start_date'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningSchedule as $item)
+                                        - {{ $item['finish_date'] }}<br>
+                                    @endforeach
+                                </td>                              
+                                <td>
+                                    @foreach ($r->planningSchedule as $item)
+                                        - {{ $item['description_task'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningSchedule as $item)
+                                        - {{ $item['assign_to'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    <a href="/schedule/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
+                                    <a href="/schedule/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
                                 </td>
                             </tr>
                             @endforeach

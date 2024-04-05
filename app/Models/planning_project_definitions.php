@@ -35,7 +35,7 @@ class planning_project_definitions extends Model
 
     public function projectDefinition()
     {
-        return $this->belongsTo(Initiating_ProjectDefinition::class);
+        return $this->belongsTo(Initiating_ProjectDefinition::class, 'project_definition_id', 'id');
     }
 
     // planning -> scope

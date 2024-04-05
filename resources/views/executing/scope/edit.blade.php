@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -53,11 +54,13 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-10">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Scope</h2>
+                @dd($scope)
                 <form action="/scopeExecuting/{{ $scope->id }}/update" method="post">
                     @csrf
                     <div class="row mb-2">                        
