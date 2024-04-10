@@ -18,7 +18,7 @@ class ExecutingController extends Controller
             $executingSchedule = executing_schedule::all();
             $executingQuality = executing_quality::all();
             $executingStakeholder = executing_stakeholder::all();
-            $projectDefinition = Initiating_ProjectDefinition::all();
+            $projectDefinition = Initiating_ProjectDefinition::all()->sortDesc();
             return view('executing.index', compact('executingScope', 'executingSchedule', 'executingQuality', 'projectDefinition', 'executingStakeholder'));
         } elseif (Auth()->User()->roles == 'adminExecuting') {
             return view('executing.index');

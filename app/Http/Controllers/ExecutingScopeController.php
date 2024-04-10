@@ -16,7 +16,7 @@ class ExecutingScopeController extends Controller
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
             $executingScope = executing_scope::all();
             $projectExecuting = executing_project_definitions::all();
-            $projectDefinition = Initiating_ProjectDefinition::all()->sortDesc();
+            $projectDefinition = Initiating_ProjectDefinition::all()->sortBy('oroject_definition_id');
             return view('executing.scope.index', compact(['executingScope', 'projectDefinition', 'projectExecuting']));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
@@ -55,10 +55,7 @@ class ExecutingScopeController extends Controller
 
     public function show($id)
     {
-        $scope = executing_scope::where('project_definition_id', $id)->get();
-        foreach ($scope as $key) {
-            dd($key->id);
-        }
+        $scope = executing_scope::find($id);
         return view('executing.scope.edit', compact('scope'));
     }
 
@@ -72,10 +69,7 @@ class ExecutingScopeController extends Controller
             'regulatory_requirements' => $request->regulatory_requirements,
             'user_requirements' => $request->user_requirements,
             'system_requirements' => $request->system_requirements,
-            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
-
-
         ]);
         return redirect('/scopeExecuting');
     }

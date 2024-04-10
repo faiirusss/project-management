@@ -87,42 +87,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($projectDefinition as $row)                        
+                            @foreach ($executingScope as $r)
                             <tr class="text-white">
-                                <td><small>{{$row->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
+                                <td><small>{{$r->technical_requirements}}</small></td>
+                                <td><small>{{$r->perfomance_requirements}}</small></td>
+                                <td><small>{{$r->bussines_requirements}}</small></td>
+                                <td><small>{{$r->regulatory_requirements}}</small></td>
+                                <td><small>{{$r->user_requirements}}</small></td>
+                                <td><small>{{$r->system_requirements}}</small></td>
                                 <td>
-                                    @foreach ($row->executingScope as $item)
-                                        - {{ $item['technical_requirements'] }}<br>
-                                    @endforeach
-                                </td><td>                                    
-                                    @foreach ($row->executingScope as $item)
-                                        - {{ $item['perfomance_requirements'] }}<br>
-                                    @endforeach
-                                </td>                            
-                                <td>                                    
-                                    @foreach ($row->executingScope as $item)
-                                        - {{ $item['bussines_requirements'] }}<br>
-                                    @endforeach
-                                </td>                            
-                                <td>                                    
-                                    @foreach ($row->executingScope as $item)
-                                        - {{ $item['regulatory_requirements'] }}<br>
-                                    @endforeach
-                                </td>                            
-                                <td>                                    
-                                    @foreach ($row->executingScope as $item)
-                                        - {{ $item['user_requirements'] }}<br>
-                                    @endforeach
-                                </td>                            
-                                <td>                                    
-                                    @foreach ($row->executingScope as $item)
-                                        - {{ $item['system_requirements'] }}<br>
-                                    @endforeach
-                                </td> 
-                                <td><small>
-                                    <a href="/scopeExecuting/{{$row->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>   
-                                    <a href="/scopeExecuting/{{$row->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
-                                </small></td>
+                                    <a href="/scopeExecuting/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
+                                    <a href="/scopeExecuting/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

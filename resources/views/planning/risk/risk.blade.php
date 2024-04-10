@@ -1,6 +1,16 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+
+<style>
+    .table-responsive table {
+        overflow-x: scroll;
+    }
+
+    .table-striped td, .table-striped th {
+        white-space: nowrap;
+    }
+</style>
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -53,6 +63,7 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -64,6 +75,7 @@
                     <table class="table table-striped table-hover" >
                         <thead>
                             <tr class="text-white">
+                                <th><small>Name Project</small></th>
                                 <th><small>Entry Date</small></th>
                                 <th><small>Description Ofrisk</small></th>
                                 <th><small>Submitter</small></th>
@@ -82,6 +94,7 @@
                         <tbody>
                             @foreach ($risks as $r)
                             <tr class="text-white">
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->start_date}}</small></td>
                                 <td><small>{{$r->description_ofrisk}}</small></td>
                                 <td><small>{{$r->submitter}}</small></td>

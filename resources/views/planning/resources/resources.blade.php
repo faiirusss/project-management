@@ -75,7 +75,7 @@
                         <tbody>
                             @foreach ($resources as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->name}}</small></td>    
                                 <td><small>{{$r->position}}</small></td>
                                 <td><small>{{$r->duration}}</small></td>

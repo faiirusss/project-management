@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_com_announcements;
 use App\Models\planning_com_presentations;
 use App\Models\planning_com_reports;
@@ -23,6 +24,7 @@ class CommunicationController extends Controller
         $projectAnouncement = planning_com_announcements::all();
         $reviewMeeting = planning_com_reviews::all();
         $teamMorale = planning_com_tems::all();
-        return view('planning.communication.index', compact('reports', 'presentation', 'projectAnouncement', 'reviewMeeting', 'teamMorale'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.communication.index', compact('projectDefinition', 'reports', 'presentation', 'projectAnouncement', 'reviewMeeting', 'teamMorale'));
     }
 }

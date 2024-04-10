@@ -1,6 +1,16 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+<style>
+    .table-responsive table {
+        overflow-x: scroll;
+    }
+
+    .table-striped td, .table-striped th {
+        white-space: nowrap;
+    }
+</style>
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -75,7 +85,7 @@
                         <tbody>
                             @foreach ($costContractValue as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->value}}</small></td>
                                 <td><small>{{$r->contract_value}}</small></td>
                                 <td>
@@ -119,7 +129,7 @@
                         <tbody>
                             @foreach ($bebanbarang as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->procurement}}</small></td>
                                 <td><small>{{$r->vendor}}</small></td>
                                 <td><small>{{$r->description_service}}</small></td>
@@ -169,7 +179,7 @@
                         <tbody>
                             @foreach ($bebansubkon as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->procurement_subkon}}</small></td>
                                 <td><small>{{$r->vendor_subkon}}</small></td>
                                 <td><small>{{$r->description_service_subkon}}</small></td>
@@ -214,7 +224,7 @@
                         <tbody>
                             @foreach ($termPlan as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->term_type}}</small></td>
                                 <td><small>{{$r->value_term}}</small></td>
                                 <td><small>{{$r->value_rp_term}}</small></td>
@@ -253,7 +263,7 @@
                         <tbody>
                             @foreach ($guarantee as $l)
                             <tr class="text-white">
-                                <td><small>{{$l->name_project}}</small></td>
+                                <td><small>{{$l->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$l->deskripsi}}</small></td>
                                 <td><small>{{$l->persen}}</small></td>
                                 <td><small>{{$l->radio}}</small></td>

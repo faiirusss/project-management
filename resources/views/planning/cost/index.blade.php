@@ -53,6 +53,7 @@
         </div>
     </center>
 </nav>
+
 {{-- project income statement --}}
 <div class="container-fluid pt-4 px-4 mb-5">
     <div class="row g-10">
@@ -75,7 +76,7 @@
                         <tbody>                            
                             @foreach ($projectIncomeStatement as $data)
                                 <tr class="text-white">
-                                    <td><small>{{$data->name_project}}</small></td>
+                                    <td><small>{{$data->projectDefinition['name_project']}}</small></td>
                                     <td><small>{{$data->cost_category}}</small></td>
                                     <td><small>{{$data->description}}</small></td>
                                     <td><small>{{$data->total}}</small></td>
@@ -114,7 +115,7 @@
                         <tbody>                            
                             @foreach ($caseflow as $u)
                                 <tr class="text-white">
-                                    <td><small>{{$u->name_project}}</small></td>
+                                    <td><small>{{$u->projectDefinition['name_project']}}</small></td>
                                     <td><small>{{$u->waktu}}</small></td>
                                     <td><small>{{$u->nilai_rupiah}}</small></td>
                                     <td>
@@ -151,7 +152,7 @@
                         <tbody>                            
                             @foreach ($listAssumsition as $u)
                                 <tr class="text-white">
-                                    <td><small>{{$u->name_project}}</small></td>
+                                    <td><small>{{$u->projectDefinition['name_project']}}</small></td>
                                     <td><small>{{$u->deskripsi}}</small></td>
                                     <td>
                                         <a href="/listAssumsition/{{ $u->id }}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>                                        

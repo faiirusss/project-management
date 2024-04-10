@@ -53,6 +53,7 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -64,6 +65,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr class="text-white">
+                                <th><small>Name Project</small></th>
                                 <th><small>Deliverable</small></th>
                                 <th><small>Description</small></th>
                                 <th><small>Delivery Method</small></th>
@@ -75,7 +77,8 @@
                         </thead>
                         <tbody>
                             @foreach ($reports as $r)
-                                <tr>
+                                <tr class="text-white">
+                                    <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                     <td><small>{{$r->deliverable}}</small></td>
                                     <td><small>{{$r->description}}</small></td>
                                     <td><small>{{$r->delivery_method}}</small></td>
@@ -100,12 +103,13 @@
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h4 class="mb-4"><i class="	fas fa-chalkboard-teacher"></i>  Presentations</h4>
-                <a href="/presentations/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
-                <br>
+                <a href="/reports/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <br> 
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="example">
+                    <table class="table table-striped table-hover">
                         <thead>
                             <tr class="text-white">
+                                <th><small>Name Project</small></th>
                                 <th><small>Deliverable</small></th>
                                 <th><small>Description</small></th>
                                 <th><small>Delivery Method</small></th>
@@ -116,17 +120,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($presentation as $p)
-                                <tr>
-                                    <td><small>{{$p->deliverable}}</small></td>
-                                    <td><small>{{$p->description}}</small></td>
-                                    <td><small>{{$p->delivery_method}}</small></td>
-                                    <td><small>{{$p->frequency}}</small></td>
-                                    <td><small>{{$p->owner}}</small></td>
-                                    <td><small>{{$p->audience}}</small></td>
+                            @foreach ($presentation as $r)
+                                <tr class="text-white">
+                                    <td><small>{{$r->projectDefinition['name_project']}}</small></td>
+                                    <td><small>{{$r->deliverable}}</small></td>
+                                    <td><small>{{$r->description}}</small></td>
+                                    <td><small>{{$r->delivery_method}}</small></td>
+                                    <td><small>{{$r->frequency}}</small></td>
+                                    <td><small>{{$r->owner}}</small></td>
+                                    <td><small>{{$r->audience}}</small></td>
                                     <td>
-                                        <a href="/presentations/{{ $p->id }}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>
-                                        <a href="/presentations/{{ $p->id }}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>
+                                        <a href="/reports/{{ $r->id }}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>
+                                        <a href="/reports/{{ $r->id }}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -145,7 +150,7 @@
                 <a href="/projectAnouncement/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="example">
+                    <table class="table table-striped table-hover">
                         <thead>
                             <tr class="text-white">
                                 <th><small>Deliverable</small></th>
@@ -159,7 +164,7 @@
                         </thead>
                         <tbody>
                             @foreach ($projectAnouncement as $a)
-                                <tr>
+                                <tr class="text-white">
                                     <td><small>{{$a->deliverable}}</small></td>
                                     <td><small>{{$a->description}}</small></td>
                                     <td><small>{{$a->delivery_method}}</small></td>
@@ -187,7 +192,7 @@
                 <a href="/reviewMeeting/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="example">
+                    <table class="table table-striped table-hover">
                         <thead>
                             <tr class="text-white">
                                 <th><small>Deliverable</small></th>
@@ -201,7 +206,7 @@
                         </thead>
                         <tbody>
                             @foreach ($reviewMeeting as $m)
-                                <tr>
+                                <tr class="text-white">
                                     <td><small>{{$m->deliverable}}</small></td>
                                     <td><small>{{$m->description}}</small></td>
                                     <td><small>{{$m->delivery_method}}</small></td>
@@ -229,7 +234,7 @@
                 <a href="/teamMorale/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="example">
+                    <table class="table table-striped table-hover">
                         <thead>
                             <tr class="text-white">
                                 <th><small>Deliverable</small></th>
@@ -243,7 +248,7 @@
                         </thead>
                         <tbody>
                             @foreach ($teamMorale as $t)
-                                <tr>
+                                <tr class="text-white">
                                     <td><small>{{$t->deliverable}}</small></td>
                                     <td><small>{{$t->description}}</small></td>
                                     <td><small>{{$t->delivery_method}}</small></td>
