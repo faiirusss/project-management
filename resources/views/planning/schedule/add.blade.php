@@ -61,13 +61,13 @@
         <form action="/schedule/save" method="post">
             @csrf
             <div class="row mb-2">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <label for="nameProject" class="form-label text-white">Name Project</label>
                     <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                         @foreach($projectDefinition as $project)
-                        @if($project->status == 'open')
-                        <option value="{{ $project->id}}">{{$project->name_project}}</option>
-                        @endif
+                            @if($project->status == 'open' || $project->status == 'Open')
+                                <option value="{{ $project->id}}">{{$project->name_project}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
@@ -75,16 +75,6 @@
                     <label for="" class="form-label text-white">Task</label>
                     <input type="text" name="task" id="" class="form-control mb-3 text-white"  required>
                 </div>
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Start Date</label>
-                    <input type="date" name="start_date" id="" class="form-control mb-3 text-white"  required>
-                </div>
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Finish Date</label>
-                    <input type="date" name="finish_date" id="" class="form-control mb-3 text-white"  required>
-                </div> 
-            </div>     
-            <div class="row mb-2">
                 <div class="col-md-8">
                     <label for="" class="form-label text-white">Description Task</label>
                     <input type="text" name="description_task" id="" class="form-control mb-3 text-white"  required>
@@ -92,6 +82,17 @@
                 <div class="col-md-4">
                     <label for="" class="form-label text-white">Assign to</label>
                     <input type="text" name="assign_to" id="" class="form-control mb-3 text-white"  required>
+                </div> 
+                
+            </div>     
+            <div class="row mb-2">                
+                <div class="col-md-6">
+                    <label for="" class="form-label text-white">Start Date</label>
+                    <input type="date" name="start_date" id="" class="form-control mb-3 text-white"  required>
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label text-white">Finish Date</label>
+                    <input type="date" name="finish_date" id="" class="form-control mb-3 text-white"  required>
                 </div> 
             </div>    
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>

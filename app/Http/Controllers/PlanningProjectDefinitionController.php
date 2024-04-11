@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\executing_project_definitions;
 use App\Models\Executing_ProjectDefinition;
+use App\Models\executing_schedule;
 use App\Models\executing_scope;
 use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_com_announcements;
@@ -138,7 +139,7 @@ class PlanningProjectDefinitionController extends Controller
         $planningProject->stakeholder_id = $stakeholder_id->id;
 
         // Atur atribut status
-        $planningProject->status = 'open';
+        $planningProject->status = 'Open';
 
         // Atur atribut lainnya menggunakan data dari request
         $planningProject->fill($request->except(['_token']));
@@ -211,53 +212,81 @@ class PlanningProjectDefinitionController extends Controller
 
     public function update(Request $request, $id)
     {
-
-        $scope = planning_project_definitions::find($id);
-        $scope->update([
-            'project_definition_id' => $request->name_project,
-            'status' => $request->status,
-            $request->except(['_token']),
-        ]);
-
-        executing_project_definitions::create([
-            'project_definition_id' => $scope->project_definition_id,
-            'scope_id' => $scope->scope_id,
-            'schedule_id' => $scope->schedule_id,
-            'cost_projectincome_id' => $scope->cost_projectincome_id,
-            'cost_caseflow_id' => $scope->cost_caseflow_id,
-            'cost_listasumsition_id' => $scope->cost_listasumsition_id,
-            'quality_id' => $scope->quality_id,
-            'resource_id' => $scope->resource_id,
-            'reports_id' => $scope->reports_id,
-            'presentation_id' => $scope->presentation_id,
-            'projectanouncement_id' => $scope->projectanouncement_id,
-            'reviewmeeting_id' => $scope->reviewmeeting_id,
-            'teammorale_id' => $scope->teammorale_id,
-            'risk_id' => $scope->risk_id,
-            'costcontract_id' => $scope->costcontract_id,
-            'bebanbahan_id' => $scope->bebanbahan_id,
-            'bebansubkon_id' => $scope->bebansubkon_id,
-            'termpayment_id' => $scope->termpayment_id,
-            'guarantee_id' => $scope->guarantee_id,
-            'stakeholder_id' => $scope->stakeholder_id,
-            'status' => 'open',
-        ]);
-
-        $scopeExecuting = planning_scope::where('project_definition_id', $request->name_project)->get();
-
-        foreach ($scopeExecuting as $scope) {
-            executing_scope::create([
-                'technical_requirements' => $scope->technical_requirements,
-                'perfomance_requirements' => $scope->perfomance_requirements, // Specify a default value
-                'bussines_requirements' => $scope->bussines_requirements,
-                'regulatory_requirements' => $scope->regulatory_requirements,
-                'user_requirements' => $scope->user_requirements,
-                'system_requirements' => $scope->system_requirements,
-                'project_definition_id' => $scope->project_definition_id,
+        if ($request->status == 'On Progress' || $request->status == 'on progress') {
+            $scope = planning_project_definitions::find($id);
+            $scope->update([
+                'project_definition_id' => $request->name_project,
+                'status' => $request->status,
+                $request->except(['_token']),
             ]);
+
+            $iniating_project = Initiating_ProjectDefinition::find($request->name_project);
+            $iniating_project->update([
+                'status' => $request->status,
+            ]);
+
+            executing_project_definitions::create([
+                'project_definition_id' => $scope->project_definition_id,
+                'scope_id' => $scope->scope_id,
+                'schedule_id' => $scope->schedule_id,
+                'cost_projectincome_id' => $scope->cost_projectincome_id,
+                'cost_caseflow_id' => $scope->cost_caseflow_id,
+                'cost_listasumsition_id' => $scope->cost_listasumsition_id,
+                'quality_id' => $scope->quality_id,
+                'resource_id' => $scope->resource_id,
+                'reports_id' => $scope->reports_id,
+                'presentation_id' => $scope->presentation_id,
+                'projectanouncement_id' => $scope->projectanouncement_id,
+                'reviewmeeting_id' => $scope->reviewmeeting_id,
+                'teammorale_id' => $scope->teammorale_id,
+                'risk_id' => $scope->risk_id,
+                'costcontract_id' => $scope->costcontract_id,
+                'bebanbahan_id' => $scope->bebanbahan_id,
+                'bebansubkon_id' => $scope->bebansubkon_id,
+                'termpayment_id' => $scope->termpayment_id,
+                'guarantee_id' => $scope->guarantee_id,
+                'stakeholder_id' => $scope->stakeholder_id,
+                'status' => 'Open',
+            ]);
+
+            $scheduleExecuting = planning_schedule::where('project_definition_id', $request->name_project)->get();
+            $scopeExecuting = planning_scope::where('project_definition_id', $request->name_project)->get();
+
+            foreach ($scopeExecuting as $scope) {
+                executing_scope::create([
+                    'technical_requirements' => $scope->technical_requirements,
+                    'perfomance_requirements' => $scope->perfomance_requirements, // Specify a default value
+                    'bussines_requirements' => $scope->bussines_requirements,
+                    'regulatory_requirements' => $scope->regulatory_requirements,
+                    'user_requirements' => $scope->user_requirements,
+                    'system_requirements' => $scope->system_requirements,
+                    'project_definition_id' => $scope->project_definition_id,
+                ]);
+            }
+            foreach ($scheduleExecuting as $schedule) {
+                executing_schedule::create([
+                    'task' => $schedule->task,
+                    'start_date' => $schedule->start_date,
+                    'finish_date' => $schedule->finish_date,
+                    'description_task' => $schedule->description_task,
+                    'assign_to' => $schedule->assign_to,
+                    'project_definition_id' => $schedule->project_definition_id,
+                ]);
+            }
+            return redirect('/planning');
+        } else {
+            $scope = planning_project_definitions::find($id);
+            $scope->update([
+                'project_definition_id' => $request->name_project,
+                'status' => $request->status,
+                $request->except(['_token']),
+            ]);
+
+            $iniating_project = Initiating_ProjectDefinition::find($request->name_project);
+            $iniating_project->update([
+                'status' => $request->status,
+            ]);
+            return redirect('/planning');
         }
-
-
-        return redirect('/planning');
     }
 }

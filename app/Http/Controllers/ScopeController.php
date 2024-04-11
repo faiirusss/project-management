@@ -14,7 +14,7 @@ class ScopeController extends Controller
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
             // $projectDefinition = Initiating_ProjectDefinition::all();
-            $scope = planning_scope::all();
+            $scope = planning_scope::all()->sortBy('project_definition_id');
             return view('planning.scope.scope', ['scope' => $scope]);
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');

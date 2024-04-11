@@ -158,4 +158,9 @@ class Initiating_ProjectDefinition extends Model
     {
         return $this->hasMany(planning_project_definitions::class, 'project_definition_id', 'id');
     }
+
+    public function executingFinal()
+    {
+        return $this->hasMany(executing_project_definitions::class, 'project_definition_id', 'id');
+    }
 }

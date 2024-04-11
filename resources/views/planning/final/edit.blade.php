@@ -64,23 +64,25 @@
             @csrf
         <div class="row mb-2">
             <div class="col-md-3">
-                <label for="nameProject" class="form-label text-white">Name Project</label>
-                <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                    @foreach($planFinal as $item)
-                        @if ($item->projectDefinition) <!-- Memastikan projectDefinition tidak null -->
-                            <option value="{{ $planningFinal->project_definition_id }}" {{ $item->projectDefinition->id == $planningFinal->id ? 'selected' : '' }}>
-                                {{ $item->projectDefinition->name_project }}
-                            </option>
-                        @endif
-                    @endforeach
+                <label for="name_project" class="form-label text-white">Name Project</label>
+                <select class="form-control bg-dark text-white mb-3" name="name_project">
+                    <option value="{{$planningFinal->project_definition_id}}" selected>{{$planningFinal->projectDefinition['name_project']}}</option>
                 </select>
+
             </div>
             <div class="col-md-3">
                 <label for="status" class="form-label text-white">Status</label>
-                <select name="status" id="status" class="form-select mb-3 text-white" required>
-                    <option value="Open" @if($planningFinal->status == "Open") selected @endif>Open</option>
-                    <option value="Close" @if($planningFinal->status == "Close") selected @endif>Close</option>
+                @if($planningFinal->status == 'open' || $planningFinal->status == 'Open')
+                    <select name="status" id="status" class="form-select mb-3 text-white" required>
+                        <option value="Open" @if($planningFinal->status == "Open") selected @endif>Open</option>
+                        <option value="On Progress" @if($planningFinal->status == "On Progress") selected @endif>On Progress</option>
+                        <option value="Close" @if($planningFinal->status == "Close") selected @endif>Close</option>
+                    </select>
+                @elseif($planningFinal->status == 'On Progress' || $planningFinal->status == 'on progress')
+                <select name="status" id="status" class="form-select mb-3  text-white" required>
+                        <option value="On Progress" @if($planningFinal->status == "On Progress") selected @endif>On Progress</option>                    
                 </select>
+                @endif                
             </div>        
         </div>        
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class executing_procurement_bebanSubkon extends Model
+class executing_procurement_subkon extends Model
 {
     protected $fillable = [
         'procurement_subkon',

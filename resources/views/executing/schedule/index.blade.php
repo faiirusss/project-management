@@ -10,6 +10,7 @@
         white-space: nowrap;
     }
 </style>
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -86,7 +87,7 @@
                         <tbody>
                             @foreach ($executingSchedule as $u)
                             <tr class="text-white">
-                                <td><small>{{$u->name_project}}</small></td>
+                                <td><small>{{$u->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$u->task}}</small></td>
                                 <td><small>{{$u->start_date}}</small></td>
                                 <td><small>{{$u->finish_date}}</small></td>

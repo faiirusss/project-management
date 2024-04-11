@@ -21,7 +21,7 @@
     </a>
     <center>
     <div class="navbar-nav align-items-center ms-auto">
-            <a href="/scopeExecuting" class="nav-link">
+            <a href="/executing" class="nav-link">
                 <i class="fa fa-home"></i>
                 <span class="d-none d-lg-inline-flex"></span>
             </a>

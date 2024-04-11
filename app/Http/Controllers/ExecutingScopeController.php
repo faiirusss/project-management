@@ -26,8 +26,8 @@ class ExecutingScopeController extends Controller
     public function create()
     {
         $projectDefinition = Initiating_ProjectDefinition::all();
-        $finalPlanning = planning_project_definitions::all();
-        return view('executing.scope.create', compact('projectDefinition', 'finalPlanning'));
+        $finalExecuting = executing_project_definitions::all();
+        return view('executing.scope.create', compact('projectDefinition', 'finalExecuting'));
     }
 
     public function store(Request $request)

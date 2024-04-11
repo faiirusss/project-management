@@ -49,11 +49,7 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
-            <a href="/finalPlanning" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
-                <i class="fas fa-users-cog me-lg-2"></i>
-                <span class="d-none d-lg-inline-flex">Final Planning</span>
-            </a>
+            </a>             
         </div>
     </center>
 </nav>
@@ -71,7 +67,7 @@
                 <label for="nameProject" class="form-label text-white">Name Project</label>                
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                     @foreach($projectDefinition as $project)
-                        @if ($project->status == 'open')
+                        @if ($project->status == 'open' || $project->status == 'Open')
                             <option value="{{ $project->id }}">{{ $project->name_project }}</option>
                         @endif
                     @endforeach
