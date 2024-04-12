@@ -27,10 +27,10 @@ class ProjectIncomeStatementController extends Controller
     public function store(Request $request)
     {
         planning_cost_incomes::create([
-            'name_project' => $request->name_project,
             'cost_category' => $request->cost_category,
             'description' => $request->description,
             'total' => $request->total,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/cost');

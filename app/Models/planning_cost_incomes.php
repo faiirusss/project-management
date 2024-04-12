@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class planning_cost_incomes extends Model
 {
     protected $fillable = [
-        'name_project',
         'cost_category',
         'description',
         'total',
+        'project_definition_id',
     ];
 
     public function projectDefinition()

@@ -65,7 +65,7 @@
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                     @foreach($projectDefinition as $project)
-                    <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                    <option value="{{ $project->id}}" {{ $project->id == $quality->projectDefinition['id'] ? 'selected' : '' }}>{{$project->name_project}}</option>
                     @endforeach
                 </select>
             </div>
@@ -74,14 +74,14 @@
                 <input type="text" name="requirements" id="" value="{{$quality->requirements}}" class="form-control mb-3 text-white"  required>
             </div>   
             <div class="col-md-4">
-                <label for="" class="form-label text-white">Category</label>
+                <label for="" class="form-label text-white">Category</label>                
                 <select name="category" id="" class="form-select mb-3 text-white" required>
-                    <option value="Technical">Technical</option>
-                    <option value="Perfomance">Perfomance</option>
-                    <option value="Business">Business</option>
-                    <option value="Regulatory">Regulatory</option>
-                    <option value="User">User</option>
-                    <option value="System">System</option>
+                    <option value="Technical" {{ $quality->category == 'Technical' ? 'selected' : ''}}>Technical</option>
+                    <option value="Perfomance" {{ $quality->category == 'Performance' ? 'selected' : ''}}>Perfomance</option>
+                    <option value="Business" {{ $quality->category == 'Business' ? 'selected' : ''}}>Business</option>
+                    <option value="Regulatory" {{ $quality->category == 'Regulatory' ? 'selected' : ''}}>Regulatory</option>
+                    <option value="User" {{ $quality->category == 'User' ? 'selected' : ''}}>User</option>
+                    <option value="System" {{ $quality->category == 'System' ? 'selected' : ''}}>System</option>
                 </select>
             </div> 
         </div>   

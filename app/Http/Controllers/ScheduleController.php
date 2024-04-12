@@ -62,12 +62,12 @@ class ScheduleController extends Controller
     {
         $schedule = planning_schedule::find($id);
         $schedule->update([
-            'name_project' => $request->name_project,
             'task' => $request->task,
             'start_date' => $request->start_date,
             'finish_date' => $request->finish_date,
             'description_task' => $request->description_task,
             'assign_to' => $request->assign_to,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/schedule');

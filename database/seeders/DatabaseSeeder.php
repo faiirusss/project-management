@@ -167,16 +167,16 @@ class DatabaseSeeder extends Seeder
         // seeder planning => resources
         $resources1 = planning_resources::create([
             'name' => 'fairus',
-            'position' => 'Project Director',
+            'position' => 'project director',
             'Duration' => 5,
-            'Status' => 'KARTAP',
+            'Status' => 'kartap',
             'project_definition_id' => 1,
         ]);
         $resources2 = planning_resources::create([
             'name' => 'salimi',
-            'position' => 'Project Sponsor',
+            'position' => 'project sponsor',
             'Duration' => 10,
-            'Status' => 'KWT',
+            'Status' => 'kwt',
             'project_definition_id' => 2,
         ]);
 

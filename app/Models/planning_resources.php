@@ -9,10 +9,10 @@ class planning_resources extends Model
 {
     protected $fillable = [
         'name',
-        'name_project',
         'position',
         'duration',
         'status',
+        'project_definition_id',
     ];
 
     public function projectDefinition()

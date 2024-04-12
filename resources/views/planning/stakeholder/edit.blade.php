@@ -67,7 +67,7 @@
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                     @foreach($projectDefinition as $project)
-                    <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                        <option value="{{ $project->id }}" {{ $project->id == $stakeholder->projectDefinition['id'] ? 'selected' : '' }} >{{$project->name_project}}</option>
                     @endforeach
                 </select>
             </div>
@@ -84,17 +84,17 @@
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Power</label>
                 <select name="power" id="Risk_reponse_type" class="form-select mb-3 text-white" required>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
+                    <option value="High" {{ $stakeholder->power == 'High' ? 'selected' : '' }}>High</option>
+                    <option value="Medium" {{ $stakeholder->power == 'Medium' ? 'selected' : '' }}>Medium</option>
+                    <option value="Low" {{ $stakeholder->power == 'Low' ? 'selected' : '' }}>Low</option>
                 </select>
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Interest</label>
                 <select name="interest" id="Risk_reponse_type" class="form-select mb-3 text-white" required>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
+                    <option value="High" {{ $stakeholder->interest == 'High' ? 'selected' : '' }}>High</option>
+                    <option value="Medium" {{ $stakeholder->interest == 'High' ? 'selected' : '' }}>Medium</option>
+                    <option value="Low" {{ $stakeholder->interest == 'High' ? 'selected' : '' }}>Low</option>
                 </select>
             </div>
         </div> 
@@ -104,46 +104,46 @@
                 <div class="col-md-2">
                     <label for="" class="form-label text-white">Initiation</label>
                     <select name="initiation" id="" class="form-select mb-3 text-white" required>
-                        <option value="Responsible">Responsible</option>
-                        <option value="Consulted">Consulted</option>
-                        <option value="Accountable">Accountable</option>
-                        <option value="Informed">Informed</option>
+                        <option value="Responsible" {{ $stakeholder->initiation == 'Responsible' ? 'selected' : '' }}>Responsible</option>
+                        <option value="Consulted" {{ $stakeholder->initiation == 'Consulted' ? 'selected' : '' }}>Consulted</option>
+                        <option value="Accountable" {{ $stakeholder->initiation == 'Accountable' ? 'selected' : '' }}>Accountable</option>
+                        <option value="Informed" {{ $stakeholder->initiation == 'Informed' ? 'selected' : '' }}>Informed</option>
                     </select>
                 </div>
                 <div class="col-md-2">
                     <label for="" class="form-label text-white">Planning</label>
                     <select name="planning" id="" class="form-select mb-3 text-white" required>
-                        <option value="Responsible">Responsible</option>
-                        <option value="Consulted">Consulted</option>
-                        <option value="Accountable">Accountable</option>
-                        <option value="Informed">Informed</option>
+                        <option value="Responsible" {{ $stakeholder->planning == 'Responsible' ? 'selected' : '' }}>Responsible</option>
+                        <option value="Consulted" {{ $stakeholder->planning == 'Consulted' ? 'selected' : '' }}>Consulted</option>
+                        <option value="Accountable" {{ $stakeholder->planning == 'Accountable' ? 'selected' : '' }}>Accountable</option>
+                        <option value="Informed" {{ $stakeholder->planning == 'Informed' ? 'selected' : '' }}>Informed</option>
                     </select>
                 </div>
                 <div class="col-md-2">
                     <label for="" class="form-label text-white">Execution</label>
                     <select name="executing" id="" class="form-select mb-3 text-white" required>
-                        <option value="Responsible">Responsible</option>
-                        <option value="Consulted">Consulted</option>
-                        <option value="Accountable">Accountable</option>
-                        <option value="Informed">Informed</option>
+                        <option value="Responsible" {{ $stakeholder->executing == 'Responsible' ? 'selected' : '' }}>Responsible</option>
+                        <option value="Consulted" {{ $stakeholder->executing == 'Consulted' ? 'selected' : '' }}>Consulted</option>
+                        <option value="Accountable" {{ $stakeholder->executing == 'Accountable' ? 'selected' : '' }}>Accountable</option>
+                        <option value="Informed" {{ $stakeholder->executing == 'Informed' ? 'selected' : '' }}>Informed</option>
                     </select>
                 </div>
                 <div class="col-md-2">
                     <label for="" class="form-label text-white">Control</label>
                     <select name="control" id="" class="form-select mb-3 text-white" required>
-                        <option value="Responsible">Responsible</option>
-                        <option value="Consulted">Consulted</option>
-                        <option value="Accountable">Accountable</option>
-                        <option value="Informed">Informed</option>
+                        <option value="Responsible" {{ $stakeholder->control == 'Responsible' ? 'selected' : '' }}>Responsible</option>
+                        <option value="Consulted" {{ $stakeholder->control == 'Consulted' ? 'selected' : '' }}>Consulted</option>
+                        <option value="Accountable" {{ $stakeholder->control == 'Accountable' ? 'selected' : '' }}>Accountable</option>
+                        <option value="Informed" {{ $stakeholder->control == 'Informed' ? 'selected' : '' }}>Informed</option>
                     </select>
                 </div>
                 <div class="col-md-2">
                     <label for="" class="form-label text-white">Close</label>
                     <select name="close" id="" class="form-select mb-3 text-white" required>
-                        <option value="Responsible">Responsible</option>
-                        <option value="Consulted">Consulted</option>
-                        <option value="Accountable">Accountable</option>
-                        <option value="Informed">Informed</option>
+                        <option value="Responsible" {{ $stakeholder->close == 'Responsible' ? 'selected' : '' }}>Responsible</option>
+                        <option value="Consulted" {{ $stakeholder->close == 'Consulted' ? 'selected' : '' }}>Consulted</option>
+                        <option value="Accountable"{{ $stakeholder->close == 'Accountable' ? 'selected' : '' }}>Accountable</option>
+                        <option value="Informed" {{ $stakeholder->close == 'Informed' ? 'selected' : '' }}>Informed</option>
                     </select>
                 </div>
             </div>
@@ -151,9 +151,9 @@
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Engagement Level</label>
                 <select name="engagement_level" id="" class="form-select mb-3 text-white" required>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
+                    <option value="High" {{ $stakeholder->engagement_level == 'High' ? 'selected' : '' }}>High</option>
+                    <option value="Medium" {{ $stakeholder->engagement_level == 'Medium' ? 'selected' : '' }}>Medium</option>
+                    <option value="Low" {{ $stakeholder->engagement_level == 'Low' ? 'selected' : '' }}>Low</option>
                 </select>
             </div>      
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class planning_quality extends Model
 {
     protected $fillable = [
-        'name_project',
+        'project_definition_id',
         'requirements',
         'category',
     ];

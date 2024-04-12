@@ -62,13 +62,13 @@ class ScopeController extends Controller
     {
         $scope = planning_scope::find($id);
         $scope->update([
-            'name_project' => $request->name_project,
             'technical_requirements' => $request->technical_requirements,
             'perfomance_requirements' => $request->perfomance_requirements,
             'bussines_requirements' => $request->bussines_requirements,
             'regulatory_requirements' => $request->regulatory_requirements,
             'user_requirements' => $request->user_requirements,
             'system_requirements' => $request->system_requirements,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/scope');

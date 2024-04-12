@@ -31,9 +31,9 @@ class QualityController extends Controller
     public function store(Request $request)
     {
         planning_quality::create([
-            'name_project' => $request->name_project,
             'requirements' => $request->requirements,
             'category' => $request->category,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/quality')->with('success', 'Risk has been added successfully.');
@@ -51,16 +51,16 @@ class QualityController extends Controller
     {
         $quality = planning_quality::find($id);
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.quality.edit', compact('quality','projectDefinition'));
+        return view('planning.quality.edit', compact('quality', 'projectDefinition'));
     }
 
     public function update(Request $request, $id)
     {
         $quality = planning_quality::find($id);
         $quality->update([
-            'name_project' => $request->name_project,
             'requirements' => $request->requirements,
             'category' => $request->category,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/quality');

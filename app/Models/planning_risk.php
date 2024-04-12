@@ -11,7 +11,6 @@ class planning_risk extends Model
         'start_date',
         'description_ofrisk',
         'submitter',
-        'name_project',
         'probability_factor',
         'impact_factor',
         'exposure',

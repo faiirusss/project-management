@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class planning_stakeholder extends Model
 {
     protected $fillable = [
-        'name_project',
         'stakeholder',
         'role',
         'power',
@@ -19,6 +18,7 @@ class planning_stakeholder extends Model
         'control',
         'close',
         'engagement_level',
+        'project_definition_id',
     ];
 
     public function sluggable(): array

@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -55,7 +56,7 @@
 </nav>
 
 {{-- project income statement --}}
-<div class="container-fluid pt-4 px-4 mb-5">
+<div class="container-fluid pt-4 px-4 mb-2">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -95,7 +96,7 @@
 </div>
 
 {{-- case flow --}}
-<div class="container-fluid pt-4 px-4 mb-5">
+<div class="container-fluid pt-4 px-4 mb-2">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -133,7 +134,7 @@
 </div>
 
 {{-- list assumsition --}}
-<div class="container-fluid pt-4 px-4 mb-5">
+<div class="container-fluid pt-4 px-4 mb-2">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">

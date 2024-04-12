@@ -65,7 +65,7 @@
                             <label for="nameProject" class="form-label text-white">Name Project</label>
                             <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                                 @foreach($projectDefinition as $project)
-                                <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                                <option value="{{ $project->id}}" {{ $project->id == $scope->projectDefinition['id'] ? 'selected' : '' }}>{{$project->name_project}}</option>
                                 @endforeach
                             </select>
                         </div>

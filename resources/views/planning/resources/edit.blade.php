@@ -65,7 +65,7 @@
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                     @foreach($projectDefinition as $project)
-                    <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                    <option value="{{ $project->id}}" {{ $project->id == $resource->projectDefinition['id'] ? 'selected' : '' }} >{{$project->name_project}}</option>
                     @endforeach
                 </select>
             </div>
@@ -76,13 +76,13 @@
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Position</label>
                 <select name="position" id="" class="form-select mb-3 text-white" required>
-                    <option value="project_director">Project Director</option>
-                    <option value="project_sponsor">Project Sponsor</option>
-                    <option value="project_manager">Project Mananger</option>
-                    <option value="chief_engineer">Chief Engineer</option>
-                    <option value="engineer">Engineer</option>
-                    <option value="project_control">Project Control</option>
-                    <option value="project_admin">Project Admin</option>
+                    <option value="Project director" {{ $resource->position == 'Project Director' ? 'selected' : ''}}>Project Director</option>
+                    <option value="Project Sponsor" {{ $resource->position == 'Project Sponsor' ? 'selected' : ''}}>Project Sponsor</option>
+                    <option value="Project Manager" {{ $resource->position == 'Project Manager' ? 'selected' : ''}}>Project Mananger</option>
+                    <option value="Chief Engineer" {{ $resource->position == 'Chief Engineer' ? 'selected' : ''}}>Chief Engineer</option>
+                    <option value="Engineer" {{ $resource->position == 'Engineer' ? 'selected' : ''}}>Engineer</option>
+                    <option value="Project Control" {{ $resource->position == 'Project Control' ? 'selected' : ''}}>Project Control</option>
+                    <option value="Project Admin"  {{ $resource->position == 'Project Admin' ? 'selected' : ''}}>Project Admin</option>
                 </select>
             </div> 
         </div>   
@@ -94,8 +94,8 @@
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Status</label>
                 <select name="status" id="" class="form-select mb-3 text-white" required>
-                    <option value="Technical">KARTAP</option>
-                    <option value="Perfomance">KWT</option>
+                    <option value="Kartap" {{ $resource->status == 'Kartap' ? 'selected' : ''}} >KARTAP</option>
+                    <option value="Kwt" {{ $resource->status == 'Kwt' ? 'selected' : ''}} >KWT</option>
                 </select>
             </div> 
         </div>   

@@ -79,7 +79,6 @@
                                 <th><small>Entry Date</small></th>
                                 <th><small>Description Ofrisk</small></th>
                                 <th><small>Submitter</small></th>
-                                <th><small>Name Project</small></th>
                                 <th><small>Probability Factor</small></th>
                                 <th><small>Impact Factor</small></th>
                                 <th><small>Exposure</small></th>
@@ -98,7 +97,6 @@
                                 <td><small>{{$r->start_date}}</small></td>
                                 <td><small>{{$r->description_ofrisk}}</small></td>
                                 <td><small>{{$r->submitter}}</small></td>
-                                <td><small>{{$r->name_project}}</small></td>
                                 <td><small>{{$r->probability_factor}}</small></td>
                                 <td><small>{{$r->impact_factor}}</small></td>
                                 <td><small>{{$r->exposure}}</small></td>
