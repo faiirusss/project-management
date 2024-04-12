@@ -407,6 +407,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/cash/add', function () {
         return view('control.costMonitoring.cash');
     });
+    Route::get('/procurementMonitoring', function () {
+        return view('control.procurementControl.index');
+    });
 
 
     //Caseflow

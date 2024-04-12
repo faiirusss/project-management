@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'planning')
+@section('title', 'Planning')
 @section('content')
 <style>
     .table-responsive table {

@@ -9,24 +9,24 @@
         <i class="fa fa-bars"></i>
     </a>
 <center>
-    <div class="navbar-nav align-items-center ms-auto">
-            <a href="/procurementMonitoring" class="nav-link" >
+        <div class="navbar-nav align-items-center ms-auto">
+            <a href="/procurementMonitoring" class="nav-link {{ \Request::is('procurementMonitoring*','procurementMonitoring') ? 'active':''}}" >
                 <i class="fa fa-shopping-cart me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Procurement</span >
             </a>
-            <a href="/costMonitoring" class="nav-link" data-bs-toggle="dropdown">
+            <a href="/costMonitoring" class="nav-link {{ \Request::is('costMonitoring*','costMonitoring') ? 'active':''}}">
                 <i class="fas fa-coins me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Cost</span>
             </a>
-            <a href="/riskMonitoring" class="nav-link" data-bs-toggle="dropdown">
+            <a href="/riskMonitoring" class="nav-link {{ \Request::is('riskMonitoring*','riskMonitoring') ? 'active':''}}">
                 <i class="fa fa-exclamation-triangle me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Risk</span>
             </a>
-            <a href="/communicationMonitoring" class="nav-link" data-bs-toggle="dropdown">
+            <a href="/communicationMonitoring" class="nav-link {{ \Request::is('communicationMonitoring*','communicationMonitoring') ? 'active':''}}">
                 <i class="far fa-comments me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Communication</span>
             </a>
-    </div>
+         </div>
 </center>
 </nav>
 <div class="container-fluid pt-4 px-4">

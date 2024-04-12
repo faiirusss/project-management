@@ -44,7 +44,7 @@
         </div>        
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>
             <button type="reset" class="btn btn-sm btn-outline-danger m-2">Reset</button>
-            <a href="/cost" class="btn btn-sm btn-outline-warning m-2">Cancel</a>
+                
         </form>
     </div>
 </div>
