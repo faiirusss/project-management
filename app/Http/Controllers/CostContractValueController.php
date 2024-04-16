@@ -12,9 +12,9 @@ class CostContractValueController extends Controller
     public function index()
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
+
             $costContractValue = planning_procurement_contracts::all();
-            $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('planning.procurement.procurement', compact(['projectDefinition', 'costContractValue']));
+            return view('planning.procurement.procurement', compact(['costContractValue']));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }
@@ -30,9 +30,9 @@ class CostContractValueController extends Controller
     public function store(Request $request)
     {
         planning_procurement_contracts::create([
-            'name_project' => $request->name_project,
             'value' => $request->value,
             'contract_value' => $request->contract_value,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/procurement')->with('success', 'Risk has been added successfully.');
@@ -57,9 +57,9 @@ class CostContractValueController extends Controller
     {
         $procurement = planning_procurement_contracts::find($id);
         $procurement->update([
-            'name_project' => $request->name_project,
             'value' => $request->value,
             'contract_value' => $request->contract_value,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/procurement');

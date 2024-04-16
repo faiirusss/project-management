@@ -77,8 +77,8 @@
                 <label for="" class="form-label text-white">Cost Category</label>
                 <select name="cost_category" id="" class="form-select mb-3 text-white">
                     <option selected="true" disabled="disabled" hidden>Choose One</option>  
-                    <option value="direct cost">Direct Cost</option>
-                    <option value="indirect cost">Indirect Cost</option>
+                    <option value="Direct Cost">Direct Cost</option>
+                    <option value="Indirect Cost">Indirect Cost</option>
                 </select>
             </div>
             <div class="col-md-4">

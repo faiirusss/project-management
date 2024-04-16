@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_com_presentations;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class PresentationController extends Controller
 
     public function create()
     {
-        return view('planning.communication.presentation');
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.communication.presentation', compact('projectDefinition'));
     }
 
     public function store(Request $request)
@@ -28,6 +30,7 @@ class PresentationController extends Controller
             'frequency' => $request->frequency,
             'owner' => $request->owner,
             'audience' => $request->audience,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/communication');
@@ -42,8 +45,8 @@ class PresentationController extends Controller
     public function show($id)
     {
         $presentation = planning_com_presentations::find($id);
-
-        return view('planning.communication.editPresentation', compact('presentation'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.communication.editPresentation', compact('presentation', 'projectDefinition'));
     }
 
 
@@ -58,6 +61,7 @@ class PresentationController extends Controller
             'frequency' => $request->frequency,
             'owner' => $request->owner,
             'audience' => $request->audience,
+            'project_definition_id' => $request->name_project,
         ]);
         return redirect('/communication');
     }

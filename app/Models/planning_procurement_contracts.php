@@ -9,7 +9,7 @@ class planning_procurement_contracts extends Model
 {
     protected $fillable = [
         'value',
-        'name_project',
+        'project_definition_id',
         'contract_value',
     ];
 

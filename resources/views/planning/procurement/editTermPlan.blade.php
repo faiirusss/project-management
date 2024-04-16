@@ -53,6 +53,7 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-10">
@@ -65,7 +66,7 @@
                             <label for="nameProject" class="form-label text-white">Name Project</label>
                             <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                                 @foreach($projectDefinition as $project)
-                                <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                                <option value="{{ $project->id}}" {{ $project->id == $termplan->projectDefinition['id'] ? 'selected' : '' }}>{{$project->name_project}}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -65,7 +65,9 @@
                             <label for="nameProject" class="form-label text-white">Name Project</label>
                             <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                                 @foreach($projectDefinition as $project)
-                                <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                                    @if ($project->status == 'open' || $project->status == 'Open')
+                                        <option value="{{ $project->id }}">{{ $project->name_project }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -83,14 +85,14 @@
                         <div class="col-sm-10">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="radio"
-                                    id="available" value="available" checked>
+                                    id="available" value="Available" checked>
                                 <label class="form-check-label" for="available">
                                     Available
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="radio"
-                                    id="not_available" value="not_available">
+                                    id="not_available" value="Not Available">
                                 <label class="form-check-label" for="not_available">
                                     Not Available
                                 </label>

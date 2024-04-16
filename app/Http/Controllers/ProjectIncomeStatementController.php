@@ -12,9 +12,8 @@ class ProjectIncomeStatementController extends Controller
 {
     public function index()
     {
-        $projectDefinition = Initiating_ProjectDefinition::all();
-        $projectIncomeStatement = planning_cost_incomes::all();
-        return view('executing.costExecuting.indexCost', compact('projectIncomeStatement', 'projectDefinition'));
+        $projectIncomeStatement = planning_cost_incomes::all()->sortBy('project_definition_id');
+        return view('executing.costExecuting.indexCost', compact('projectIncomeStatement'));
     }
 
 
@@ -55,10 +54,10 @@ class ProjectIncomeStatementController extends Controller
 
         $projectIncomeStatements = planning_cost_incomes::find($id);
         $projectIncomeStatements->update([
-            'name_project' => $request->name_project,
             'cost_category' => $request->cost_category,
             'description' => $request->description,
             'total' => $request->total,
+            'project_definition_id' => $request->name_project,
         ]);
         return redirect('/cost');
     }

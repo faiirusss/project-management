@@ -54,11 +54,12 @@
     </center>
 </nav>
 
-<div class="container-fluid pt-4 px-4">
+<div class="container-fluid pt-4 px-4 mb-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-10">
             <div class="bg-secondary rounded h-100 p-4">
-                <h2 class="mb-4">Scope</h2>
+                <h2 class="mb-5">Scope</h2>
+
                 <form action="/scope/save" method="post">
                     @csrf
                     <div class="row mb-2">

@@ -28,7 +28,6 @@ class BebanSubkonController extends Controller
     public function store(Request $request)
     {
         planning_procurement_bebanSubkon::create([
-            'name_project' => $request->name_project,
             'procurement_subkon' => $request->procurement_subkon,
             'vendor_subkon' => $request->vendor_subkon,
             'description_service_subkon' => $request->description_service_subkon,
@@ -37,21 +36,22 @@ class BebanSubkonController extends Controller
             'total_subkon' => $request->total_subkon,
             'start_toOrder_subkon' => $request->start_toOrder_subkon,
             'finish_toOrder_subkon' => $request->finish_toOrder_subkon,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
 
-        executing_cost_bebanSubkon::create([
-            'name_project' => $request->name_project,
-            'procurement_subkon' => $request->procurement_subkon,
-            'vendor_subkon' => $request->vendor_subkon,
-            'description_service_subkon' => $request->description_service_subkon,
-            'volume_subkon' => $request->volume_subkon,
-            'units_subkon' => $request->units_subkon,
-            'total_subkon' => $request->total_subkon,
-            'start_toOrder_subkon' => $request->start_toOrder_subkon,
-            'finish_toOrder_subkon' => $request->finish_toOrder_subkon,
-            $request->except(['_token']),
-        ]);
+        // executing_cost_bebanSubkon::create([
+        //     'name_project' => $request->name_project,
+        //     'procurement_subkon' => $request->procurement_subkon,
+        //     'vendor_subkon' => $request->vendor_subkon,
+        //     'description_service_subkon' => $request->description_service_subkon,
+        //     'volume_subkon' => $request->volume_subkon,
+        //     'units_subkon' => $request->units_subkon,
+        //     'total_subkon' => $request->total_subkon,
+        //     'start_toOrder_subkon' => $request->start_toOrder_subkon,
+        //     'finish_toOrder_subkon' => $request->finish_toOrder_subkon,
+        //     $request->except(['_token']),
+        // ]);
         return redirect('/procurement')->with('success', 'Risk has been added successfully.');
     }
 
@@ -74,7 +74,6 @@ class BebanSubkonController extends Controller
     {
         $bebansubkon = planning_procurement_bebanSubkon::find($id);
         $bebansubkon->update([
-            'name_project' => $request->name_project,
             'procurement_subkon' => $request->procurement_subkon,
             'vendor_subkon' => $request->vendor_subkon,
             'description_service_subkon' => $request->description_service_subkon,
@@ -83,6 +82,7 @@ class BebanSubkonController extends Controller
             'total_subkon' => $request->total_subkon,
             'start_toOrder_subkon' => $request->start_toOrder_subkon,
             'finish_toOrder_subkon' => $request->finish_toOrder_subkon,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/procurement');

@@ -11,8 +11,7 @@ class listAssumsitionController extends Controller
     public function index()
     {
         $listAssumsition = planning_cost_listAssumsition::all();
-        $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.cost.listAssumsition', compact('listAssumsition','projectDefinition'));
+        return view('planning.cost.listAssumsition', compact('listAssumsition'));
     }
 
 
@@ -25,8 +24,8 @@ class listAssumsitionController extends Controller
     public function store(Request $request)
     {
         planning_cost_listAssumsition::create([
-            'name_project' => $request->name_project,
             'deskripsi' => $request->deskripsi,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/cost');
@@ -42,7 +41,7 @@ class listAssumsitionController extends Controller
     {
         $listAssumsition = planning_cost_listAssumsition::find($id);
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.cost.listAssumsition', compact('listAssumsition','projectDefinition'));
+        return view('planning.cost.editListAssumsition', compact('listAssumsition', 'projectDefinition'));
     }
 
 
@@ -51,8 +50,8 @@ class listAssumsitionController extends Controller
 
         $listAssumsition = planning_cost_listAssumsition::find($id);
         $listAssumsition->update([
-            'name_project' => $request->name_project,
             'deskripsi' => $request->deskripsi,
+            'project_definition_id' => $request->name_project,
         ]);
         return redirect('/cost ');
     }

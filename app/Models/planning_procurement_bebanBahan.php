@@ -9,7 +9,7 @@ class planning_procurement_bebanBahan extends Model
 {
     protected $fillable = [
         'procurement',
-        'name_project',
+        'project_definition_id',
         'vendor',
         'description_service',
         'volume',

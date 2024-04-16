@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class planning_procurement_guarantee extends Model
 {
     protected $fillable = [
-        'name_project',
+        'project_definition_id',
         'deskripsi',
         'persen',
         'radio',

@@ -14,6 +14,7 @@ class planning_com_reviews extends Model
         'frequency',
         'owner',
         'audience',
+        'project_definition_id'
     ];
 
     public function projectDefinition()

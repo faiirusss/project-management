@@ -94,7 +94,7 @@
 </div>
 
 
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -120,31 +120,31 @@
                                 <td><small>{{$row->name_project}}</small></td>
                                 <td>
                                     @foreach ($row->executingScope as $item)
-                                        - {{ $item['technical_requirements'] }}<br>
+                                        {{ $item['technical_requirements'] }}<br>
                                     @endforeach
                                 </td><td>                                    
                                     @foreach ($row->executingScope as $item)
-                                        - {{ $item['perfomance_requirements'] }}<br>
+                                        {{ $item['perfomance_requirements'] }}<br>
                                     @endforeach
                                 </td>                            
                                 <td>                                    
                                     @foreach ($row->executingScope as $item)
-                                        - {{ $item['bussines_requirements'] }}<br>
+                                        {{ $item['bussines_requirements'] }}<br>
                                     @endforeach
                                 </td>                            
                                 <td>                                    
                                     @foreach ($row->executingScope as $item)
-                                        - {{ $item['regulatory_requirements'] }}<br>
+                                        {{ $item['regulatory_requirements'] }}<br>
                                     @endforeach
                                 </td>                            
                                 <td>                                    
                                     @foreach ($row->executingScope as $item)
-                                        - {{ $item['user_requirements'] }}<br>
+                                        {{ $item['user_requirements'] }}<br>
                                     @endforeach
                                 </td>                            
                                 <td>                                    
                                     @foreach ($row->executingScope as $item)
-                                        - {{ $item['system_requirements'] }}<br>
+                                        {{ $item['system_requirements'] }}<br>
                                     @endforeach
                                 </td>                                
                             </tr>
@@ -155,9 +155,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -198,9 +198,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -235,9 +235,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -288,6 +288,6 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 @endsection

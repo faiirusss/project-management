@@ -11,8 +11,7 @@ class caseFlowController extends Controller
     public function index()
     {
         $caseflow = planning_cost_caseFlow::all();
-        $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.cost.caseFlow', compact('caseFlow', 'projectDefinition'));
+        return view('planning.cost.caseFlow', compact('caseFlow'));
     }
 
 
@@ -25,9 +24,9 @@ class caseFlowController extends Controller
     public function store(Request $request)
     {
         planning_cost_caseFlow::create([
-            'name_project' => $request->name_project,
             'waktu' => $request->waktu,
             'nilai_rupiah' => $request->nilai_rupiah,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/cost');
@@ -52,9 +51,9 @@ class caseFlowController extends Controller
 
         $caseflow = planning_cost_caseFlow::find($id);
         $caseflow->update([
-            'name_project' => $request->name_project,
             'waktu' => $request->waktu,
             'nilai_rupiah' => $request->nilai_rupiah,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/cost');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_com_announcements;
 use App\Models\planning_com_presentations;
 use App\Models\planning_com_reports;
@@ -23,10 +24,8 @@ class ReportsController extends Controller
 
     public function create()
     {
-        $reports = planning_com_reports::all();
-        $presentation = planning_com_presentations::all();
-        $projectAnouncement = planning_com_announcements::all();
-        return view('planning.communication.reports', compact('reports', 'presentation', 'projectAnouncement'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.communication.reports', compact('projectDefinition'));
     }
 
     public function store(Request $request)
@@ -38,6 +37,7 @@ class ReportsController extends Controller
             'frequency' => $request->frequency,
             'owner' => $request->owner,
             'audience' => $request->audience,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/communication');
@@ -52,8 +52,8 @@ class ReportsController extends Controller
     public function show($id)
     {
         $reports = planning_com_reports::find($id);
-
-        return view('planning.communication.editReport', compact('reports'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.communication.editReport', compact('reports', 'projectDefinition'));
     }
 
     public function update(Request $request, $id)
@@ -67,6 +67,7 @@ class ReportsController extends Controller
             'frequency' => $request->frequency,
             'owner' => $request->owner,
             'audience' => $request->audience,
+            'project_definition_id' => $request->name_project,
         ]);
         return redirect('/communication');
     }

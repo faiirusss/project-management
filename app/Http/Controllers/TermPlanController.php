@@ -30,10 +30,10 @@ class TermPlanController extends Controller
     {
         planning_procurement_termplans::create([
             'term_type' => $request->term_type,
-            'name_project' => $request->name_project,
             'value_term' => $request->value_term,
             'value_rp_term' => $request->value_rp_term,
             'month_plan' => $request->month_plan,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/procurement')->with('success', 'Risk has been added successfully.');
@@ -59,10 +59,10 @@ class TermPlanController extends Controller
         $termplan = planning_procurement_termplans::find($id);
         $termplan->update([
             'term_type' => $request->term_type,
-            'name_project' => $request->name_project,
             'value_term' => $request->value_term,
             'value_rp_term' => $request->value_rp_term,
             'month_plan' => $request->month_plan,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/procurement');

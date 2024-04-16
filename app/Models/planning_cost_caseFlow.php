@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class planning_cost_caseFlow extends Model
 {
     protected $fillable = [
-        'name_project',
+        'project_definition_id',
         'waktu',
         'nilai_rupiah',
     ];

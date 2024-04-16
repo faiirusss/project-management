@@ -1,6 +1,17 @@
 @extends('layouts.master')
 @section('title', 'Communication')
 @section('content')
+
+<style>
+    .table-responsive table {
+        overflow-x: scroll;
+    }
+
+    .table-striped td, .table-striped th {
+        white-space: nowrap;
+    }
+</style>
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -103,7 +114,7 @@
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h4 class="mb-4"><i class="	fas fa-chalkboard-teacher"></i>  Presentations</h4>
-                <a href="/reports/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <a href="/presentations/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br> 
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
@@ -130,8 +141,8 @@
                                     <td><small>{{$r->owner}}</small></td>
                                     <td><small>{{$r->audience}}</small></td>
                                     <td>
-                                        <a href="/reports/{{ $r->id }}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>
-                                        <a href="/reports/{{ $r->id }}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>
+                                        <a href="/presentations/{{ $r->id }}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>
+                                        <a href="/presentations/{{ $r->id }}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -2,10 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\executing_com_announcements;
+use App\Models\executing_com_presentations;
+use App\Models\executing_com_reports;
+use App\Models\executing_com_reviews;
+use App\Models\executing_com_tems;
+use App\Models\executing_cost_caseFlow;
+use App\Models\executing_cost_incomes;
+use App\Models\executing_cost_listAssumsition;
+use App\Models\executing_procurement_bahan;
+use App\Models\executing_procurement_contracts;
+use App\Models\executing_procurement_guarantee;
+use App\Models\executing_procurement_subkon;
+use App\Models\executing_procurement_termplans;
 use App\Models\executing_project_definitions;
 use App\Models\Executing_ProjectDefinition;
+use App\Models\executing_quality;
+use App\Models\executing_resources;
+use App\Models\executing_risk;
 use App\Models\executing_schedule;
 use App\Models\executing_scope;
+use App\Models\executing_stakeholder;
 use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_com_announcements;
 use App\Models\planning_com_presentations;
@@ -213,18 +230,23 @@ class PlanningProjectDefinitionController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->status == 'On Progress' || $request->status == 'on progress') {
+
             $scope = planning_project_definitions::find($id);
+            // update status pada final planning project definition
             $scope->update([
                 'project_definition_id' => $request->name_project,
                 'status' => $request->status,
                 $request->except(['_token']),
             ]);
 
+
             $iniating_project = Initiating_ProjectDefinition::find($request->name_project);
+            // update status pada initiating project definition
             $iniating_project->update([
                 'status' => $request->status,
             ]);
 
+            // input data kedalam table executing project definition
             executing_project_definitions::create([
                 'project_definition_id' => $scope->project_definition_id,
                 'scope_id' => $scope->scope_id,
@@ -249,8 +271,26 @@ class PlanningProjectDefinitionController extends Controller
                 'status' => 'Open',
             ]);
 
-            $scheduleExecuting = planning_schedule::where('project_definition_id', $request->name_project)->get();
+            // input data kedalam table executing 
             $scopeExecuting = planning_scope::where('project_definition_id', $request->name_project)->get();
+            $scheduleExecuting = planning_schedule::where('project_definition_id', $request->name_project)->get();
+            $qualityExecuting = planning_quality::where('project_definition_id', $request->name_project)->get();
+            $projectIncomeExecuting = planning_cost_incomes::where('project_definition_id', $request->name_project)->get();
+            $caseFlowExecuting = planning_cost_caseFlow::where('project_definition_id', $request->name_project)->get();
+            $listAsumsitionExecuting = planning_cost_listAssumsition::where('project_definition_id', $request->name_project)->get();
+            $resourceExecuting = planning_resources::where('project_definition_id', $request->name_project)->get();
+            $reportsExecuting = planning_com_reports::where('project_definition_id', $request->name_project)->get();
+            $presentationsExecuting = planning_com_presentations::where('project_definition_id', $request->name_project)->get();
+            $announcementsExecuting = planning_com_announcements::where('project_definition_id', $request->name_project)->get();
+            $reviewsExecuting = planning_com_reviews::where('project_definition_id', $request->name_project)->get();
+            $teamMoraleExecuting = planning_com_tems::where('project_definition_id', $request->name_project)->get();
+            $riskExecuting = planning_risk::where('project_definition_id', $request->name_project)->get();
+            $costContractExecuting = planning_procurement_contracts::where('project_definition_id', $request->name_project)->get();
+            $bebanBahanExecuting = planning_procurement_bebanBahan::where('project_definition_id', $request->name_project)->get();
+            $bebanSubkonExecuting = planning_procurement_bebanSubkon::where('project_definition_id', $request->name_project)->get();
+            $termPlanExecuting = planning_procurement_termplans::where('project_definition_id', $request->name_project)->get();
+            $guaranteExecuting = planning_procurement_guarantee::where('project_definition_id', $request->name_project)->get();
+            $stakeholderExecuting = planning_stakeholder::where('project_definition_id', $request->name_project)->get();
 
             foreach ($scopeExecuting as $scope) {
                 executing_scope::create([
@@ -273,8 +313,182 @@ class PlanningProjectDefinitionController extends Controller
                     'project_definition_id' => $schedule->project_definition_id,
                 ]);
             }
+            foreach ($qualityExecuting as $quality) {
+                executing_quality::create([
+                    'requirements' => $quality->requirements,
+                    'category' => $quality->category,
+                    'project_definition_id' => $schedule->project_definition_id,
+                ]);
+            }
+            foreach ($caseFlowExecuting as $caseFlow) {
+                executing_cost_caseFlow::create([
+                    'nilai_rupiah' => $caseFlow->nilai_rupiah,
+                    'waktu' => $caseFlow->waktu,
+                    'project_definition_id' => $caseFlow->project_definition_id,
+                ]);
+            }
+            foreach ($projectIncomeExecuting as $income) {
+                executing_cost_incomes::create([
+                    'cost_category' => $income->cost_category,
+                    'description' => $income->description,
+                    'total' => $income->total,
+                    'project_definition_id' => $income->project_definition_id,
+                ]);
+            }
+            foreach ($listAsumsitionExecuting as $asumsition) {
+                executing_cost_listAssumsition::create([
+                    'deskripsi' => $asumsition->deskripsi,
+                    'project_definition_id' => $asumsition->project_definition_id,
+                ]);
+            }
+            foreach ($resourceExecuting as $resource) {
+                executing_resources::create([
+                    'name' => $resource->name,
+                    'position' => $resource->position,
+                    'duration' => $resource->duration,
+                    'status' => $resource->status,
+                    'project_definition_id' => $resource->project_definition_id,
+                ]);
+            }
+            foreach ($reportsExecuting as $report) {
+                executing_com_reports::create([
+                    'deliverable' => $report->deliverable,
+                    'description' => $report->description,
+                    'delivery_method' => $report->delivery_method,
+                    'frequency' => $report->frequency,
+                    'owner' => $report->owner,
+                    'audience' => $report->audience,
+                    'project_definition_id' => $report->project_definition_id,
+                ]);
+            }
+            foreach ($teamMoraleExecuting as $morale) {
+                executing_com_tems::create([
+                    'deliverable' => $morale->deliverable,
+                    'description' => $morale->description,
+                    'delivery_method' => $morale->delivery_method,
+                    'frequency' => $morale->frequency,
+                    'owner' => $morale->owner,
+                    'audience' => $morale->audience,
+                    'project_definition_id' => $morale->project_definition_id,
+                ]);
+            }
+            foreach ($presentationsExecuting as $presentation) {
+                executing_com_presentations::create([
+                    'deliverable' => $presentation->deliverable,
+                    'description' => $presentation->description,
+                    'delivery_method' => $presentation->delivery_method,
+                    'frequency' => $presentation->frequency,
+                    'owner' => $presentation->owner,
+                    'audience' => $presentation->audience,
+                    'project_definition_id' => $presentation->project_definition_id,
+                ]);
+            }
+            foreach ($reviewsExecuting as $morale) {
+                executing_com_reviews::create([
+                    'deliverable' => $presentation->deliverable,
+                    'description' => $presentation->description,
+                    'delivery_method' => $presentation->delivery_method,
+                    'frequency' => $presentation->frequency,
+                    'owner' => $presentation->owner,
+                    'audience' => $presentation->audience,
+                    'project_definition_id' => $presentation->project_definition_id,
+                ]);
+            }
+            foreach ($announcementsExecuting as $annoouncement) {
+                executing_com_announcements::create([
+                    'deliverable' => $annoouncement->deliverable,
+                    'description' => $annoouncement->description,
+                    'delivery_method' => $annoouncement->delivery_method,
+                    'frequency' => $annoouncement->frequency,
+                    'owner' => $annoouncement->owner,
+                    'audience' => $annoouncement->audience,
+                    'project_definition_id' => $annoouncement->project_definition_id,
+                ]);
+            }
+            foreach ($riskExecuting as $risk) {
+                executing_risk::create([
+                    'start_date' => $risk->start_date,
+                    'description_ofrisk' => $risk->description_ofrisk,
+                    'submitter' => $risk->submitter,
+                    'propability_factor' => $risk->probability_factor,
+                    'impact_factor' => $risk->impact_factor,
+                    'exposure' => $risk->exposure,
+                    'risk_reponse_type' => $risk->risk_reponse_type,
+                    'risk_reponse_plan' => $risk->risk_reponse_plan,
+                    'assign_to' => $risk->assign_to,
+                    'status' => $risk->status,
+                    'due_date' => $risk->due_date,
+                    'project_definition_id' => $risk->project_definition_id,
+                ]);
+            }
+            foreach ($costContractExecuting as $contract) {
+                executing_procurement_contracts::create([
+                    'value' => $contract->value,
+                    'contract_value' => $contract->contract_value,
+                    'project_definition_id' => $contract->project_definition_id,
+                ]);
+            }
+            foreach ($bebanBahanExecuting as $bahan) {
+                executing_procurement_bahan::create([
+                    'procurement' => $bahan->procurement,
+                    'vendor' => $bahan->vendor,
+                    'description_service' => $bahan->description_service,
+                    'volume' => $bahan->volume,
+                    'units' => $bahan->units,
+                    'total' => $bahan->total,
+                    'start_toOrder' => $bahan->start_toOrder,
+                    'finish_toOrder' => $bahan->finish_toOrder,
+                    'project_definition_id' => $bahan->project_definition_id,
+                ]);
+            }
+            foreach ($bebanSubkonExecuting as $subkon) {
+                executing_procurement_subkon::create([
+                    'procurement_subkon' => $subkon->procurement_subkon,
+                    'vendor_subkon' => $subkon->vendor_subkon,
+                    'description_service_subkon' => $subkon->description_service_subkon,
+                    'volume_subkon' => $subkon->volume_subkon,
+                    'units_subkon' => $subkon->units_subkon,
+                    'total_subkon' => $subkon->total_subkon,
+                    'start_toOrder_subkon' => $subkon->start_toOrder_subkon,
+                    'finisih_toOrder_subkon' => $subkon->finisih_toOrder_subkon,
+                    'project_definition_id' => $subkon->project_definition_id,
+                ]);
+            }
+            foreach ($termPlanExecuting as $termPlan) {
+                executing_procurement_termplans::create([
+                    'term_type' => $termPlan->term_type,
+                    'value_term' => $termPlan->value_term,
+                    'value_rp_term' => $termPlan->value_rp_term,
+                    'month_plan' => $termPlan->month_plan,
+                    'project_definition_id' => $termPlan->project_definition_id,
+                ]);
+            }
+            foreach ($guaranteExecuting as $guarantee) {
+                executing_procurement_guarantee::create([
+                    'deskripsi' => $guarantee->deskripsi,
+                    'persen' => $guarantee->persen,
+                    'radio' => $guarantee->radio,
+                    'project_definition_id' => $guarantee->project_definition_id,
+                ]);
+            }
+            foreach ($stakeholderExecuting as $stakeholder) {
+                executing_stakeholder::create([
+                    'stakeholder' => $stakeholder->stakeholder,
+                    'role' => $stakeholder->role,
+                    'power' => $stakeholder->power,
+                    'interest' => $stakeholder->interest,
+                    'initiation' => $stakeholder->initiation,
+                    'planning' => $stakeholder->planning,
+                    'executing' => $stakeholder->executing,
+                    'control' => $stakeholder->control,
+                    'close' => $stakeholder->close,
+                    'engagement_level' => $stakeholder->engagement_level,
+                    'project_definition_id' => $stakeholder->project_definition_id,
+                ]);
+            }
             return redirect('/planning');
         } else {
+            // kondisi jika status yang dipilih ada selain on progress
             $scope = planning_project_definitions::find($id);
             $scope->update([
                 'project_definition_id' => $request->name_project,

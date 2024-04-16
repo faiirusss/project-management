@@ -27,11 +27,10 @@ class GuaranteeController extends Controller
     public function store(Request $request)
     {
         planning_procurement_guarantee::create([
-            'name_project' => $request->name_project,
             'deskripsi' => $request->deskripsi,
             'persen' => $request->persen,
             'radio' => $request->radio,
-
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/procurement')->with('success', 'Risk has been added successfully.');
@@ -56,11 +55,10 @@ class GuaranteeController extends Controller
     {
         $guarantee = planning_procurement_guarantee::find($id);
         $guarantee->update([
-            'name_project' => $request->name_project,
             'deskripsi' => $request->deskripsi,
             'persen' => $request->persen,
             'radio' => $request->radio,
-
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/procurement');

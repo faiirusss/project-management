@@ -53,6 +53,7 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-10">
@@ -65,13 +66,16 @@
                             <label for="nameProject" class="form-label text-white">Name Project</label>
                             <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                                 @foreach($projectDefinition as $project)
-                                <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                                @if ($project->status == 'open' || $project->status == 'Open')
+                                    <option value="{{ $project->id }}">{{ $project->name_project }}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Procurement</label>
                             <select name="procurement_subkon" id="" class="form-select mb-3 text-white" required>
+                                <option selected="true" disabled="disabled" hidden>Choose One</option>  
                                 <option value="IMPOR">IMPOR</option>
                                 <option value="LOKAL">LOKAL</option>
                             </select>
@@ -86,7 +90,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Volume</label>
-                            <input type="text" name="volume_subkon" id="" class="form-control mb-3 text-white"  required>
+                            <input type="number" name="volume_subkon" id="" class="form-control mb-3 text-white"  required>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Units</label>

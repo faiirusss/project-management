@@ -9,7 +9,7 @@ class planning_procurement_bebanSubkon extends Model
 {
     protected $fillable = [
         'procurement_subkon',
-        'name_project',
+        'project_definition_id',
         'vendor_subkon',
         'description_service_subkon',
         'volume_subkon',

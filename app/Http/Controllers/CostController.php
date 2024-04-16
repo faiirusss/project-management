@@ -19,3 +19,4 @@ class CostController extends Controller
         return view('planning.cost.index', compact('bebanBahan', 'projectIncomeStatement', 'caseflow', 'listAssumsition'));
     }
 }
+

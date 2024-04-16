@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_com_reviews;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class reviewMeetingController extends Controller
 
     public function create()
     {
-        return view('planning.communication.reviewMeeting');
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.communication.reviewMeeting', compact('projectDefinition'));
     }
 
     public function store(Request $request)
@@ -27,6 +29,7 @@ class reviewMeetingController extends Controller
             'frequency' => $request->frequency,
             'owner' => $request->owner,
             'audience' => $request->audience,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/communication');
@@ -41,8 +44,8 @@ class reviewMeetingController extends Controller
     public function show($id)
     {
         $reviewMeeting = planning_com_reviews::find($id);
-
-        return view('planning.communication.editReviewMeeting', compact('reviewMeeting'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.communication.editReviewMeeting', compact('reviewMeeting', 'projectDefinition'));
     }
 
     public function update(Request $request, $id)
@@ -56,6 +59,7 @@ class reviewMeetingController extends Controller
             'frequency' => $request->frequency,
             'owner' => $request->owner,
             'audience' => $request->audience,
+            'project_definition_id' => $request->name_project,
         ]);
         return redirect('/communication');
     }

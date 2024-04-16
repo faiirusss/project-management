@@ -108,7 +108,7 @@
                         <thead>
                             <tr class="text-white">
                                 <th><small>Name Project</small></th>
-                                <th><small>Bulan</small></th>
+                                <th><small>Tanggal</small></th>
                                 <th><small>Nilai Rupiah</small></th>
                                 <th><small>Action</small></th>
                             </tr>

@@ -29,6 +29,7 @@ class ScopeController extends Controller
 
     public function store(Request $request)
     {
+
         planning_scope::create([
             'technical_requirements' => $request->technical_requirements,
             'perfomance_requirements' => $request->perfomance_requirements,

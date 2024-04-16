@@ -66,16 +66,16 @@
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                     @foreach($projectDefinition as $project)
-                    <option value="{{ $project->id}}">{{$project->name_project}}</option>
+                    <option value="{{ $project->id}}" {{ $project->id == $projectIncomeStatement->projectDefinition['id'] ? 'selected' : '' }}>{{$project->name_project}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-md-4">
                 <label for="cost_category" class="form-label text-white">Cost Category</label>
-                <select name="cost_category" id="cost_category" class="form-control mb-3 text- bg-dark" readonly>
+                <select name="cost_category" id="cost_category" class="form-control mb-3 text-white bg-dark" readonly>
                     <option selected="true" disabled="disabled" hidden>Choose One</option>  
-                    <option value="direct cost" {{ $projectIncomeStatement->cost_category == 'direct cost' ? 'selected' : '' }}>Direct Cost</option>
-                    <option value="indirect cost" {{ $projectIncomeStatement->cost_category == 'indirect cost' ? 'selected' : '' }}>Indirect Cost</option>
+                    <option value="Direct Cost" {{ $projectIncomeStatement->cost_category == 'Direct Cost' ? 'selected' : '' }}>Direct Cost</option>
+                    <option value="Indirect Cost" {{ $projectIncomeStatement->cost_category == 'Indirect Cost' ? 'selected' : '' }}>Indirect Cost</option>
                 </select>
             </div>
             <div class="col-md-4">
