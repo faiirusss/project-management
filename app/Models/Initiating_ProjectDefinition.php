@@ -56,6 +56,10 @@ class Initiating_ProjectDefinition extends Model
     {
         return $this->hasMany(planning_schedule::class, 'project_definition_id', 'id');
     }
+    public function executingSchedule()
+    {
+        return $this->hasMany(executing_schedule::class, 'project_definition_id', 'id');
+    }
 
     // planning -> cost -> income statement
     public function planningIncomeStatement()
@@ -112,9 +116,14 @@ class Initiating_ProjectDefinition extends Model
     }
 
     // planning -> risk
-    public function risk()
+    public function planningRisk()
     {
-        return $this->hasOne(planning_risk::class);
+        return $this->hasMany(planning_risk::class, 'project_definition_id', 'id');
+    }
+
+    public function executingRisk()
+    {
+        return $this->hasMany(executing_risk::class, 'project_definition_id', 'id');
     }
 
     // planning -> procurement -> cost contract

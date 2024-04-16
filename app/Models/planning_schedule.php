@@ -16,6 +16,15 @@ class planning_schedule extends Model
         'project_definition_id'
     ];
 
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('id', 'like', '%' . $search . '%');
+            });
+        });
+    }
+
     public function projectDefinition()
     {
         return $this->belongsTo(Initiating_ProjectDefinition::class);

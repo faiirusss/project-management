@@ -56,28 +56,44 @@
 
 
 <div class="container-fluid pt-4 px-4">
-<div class="row g-4">
-<div class="col-sm-12 col-xl-10">
-    <div class="bg-secondary rounded h-100 p-4">
-        <form action="/finalPlanning/save" method="post">
-        @csrf
-        {{-- 1 --}}
-        <div class="row mb-2">                          
-            <div class="col-md-12">
-                <label for="nameProject" class="form-label text-white">Name Project</label>                
-                <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                    @foreach($projectDefinition as $project)
-                        @if ($project->status == 'open' || $project->status == 'Open')
-                            <option value="{{ $project->id }}">{{ $project->name_project }}</option>
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-10">
+            <div class="bg-secondary rounded h-100 p-4">
+                <form action="/finalPlanning/save" method="post">
+                @csrf
+                {{-- 1 --}}
+                <div class="row mb-2">                          
+                    <div class="col-md-12">
+                        <label for="nameProject" class="form-label text-white mb-3">Name Project</label>                                       
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         @endif
-                    @endforeach
-                </select>
-            </div>            
-        </div>   
-        <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>
-        <button type="reset" class="btn btn-sm btn-outline-danger m-2">Reset</button>
-        <a href="/planning" class="btn btn-sm btn-outline-warning m-2">Cancel</a>
-        </form>
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>                        
+                        @endif
+                        <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
+                            @foreach($projectDefinition as $project)
+                                @if ($project->status == 'open' || $project->status == 'Open')
+                                    <option value="{{ $project->id }}">{{ $project->name_project }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>            
+                </div>   
+                <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>
+                <button type="reset" class="btn btn-sm btn-outline-danger m-2">Reset</button>
+                <a href="/planning" class="btn btn-sm btn-outline-warning m-2">Cancel</a>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

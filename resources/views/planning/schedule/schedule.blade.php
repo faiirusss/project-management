@@ -1,6 +1,17 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+
+<style>
+    .table-responsive table {
+        overflow-x: scroll;
+    }
+
+    .table-striped td, .table-striped th {
+        white-space: nowrap;
+    }
+</style>
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -53,14 +64,32 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Schedule </h2>
-                <a href="/schedule/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <a href="/schedule/add" class="btn btn-sm btn-outline-success mb-4"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <div class="">
+                    <form action="/searchSchedule" method="GET">                    
+                        <div class="input-group">                        
+                            <div class="col me-2">
+                                <select class="form-control" name="search" id="search">
+                                <option value="">Select Project</option>
+                                @foreach ($projectDefinition as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name_project }}</option>
+                                @endforeach
+                            </select>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3">Find</button>
+                            </div>
+                        </div>  
+                    </form>
+                </div>
                 <br>
-                <div class="table-responsive">
+                <div class="">
                     <table class="table table-striped table-hover" >
                         <thead>
                             <tr class="text-white">

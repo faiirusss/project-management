@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Initiating_ProjectDefinition;
-use App\Models\Planning_ProjectDefinition;
 use App\Models\planning_schedule;
-use App\Models\schedule;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -14,10 +12,16 @@ class ScheduleController extends Controller
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
             $schedule = planning_schedule::all();
-            return view('planning.schedule.schedule', ['schedule' => $schedule]);
+            $projectDefinition = Initiating_ProjectDefinition::all();
+            return view('planning.schedule.schedule', compact('projectDefinition', 'schedule'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }
+    }
+
+    public function filter()
+    {
+        return view('planning.schedule.schedule', ['schedule' => planning_schedule::latest()->filter(request(['search']))->get()], ['projectDefinition' => Initiating_ProjectDefinition::all()]);
     }
 
     public function create()

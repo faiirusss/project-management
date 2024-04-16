@@ -75,12 +75,11 @@
                 @if($planningFinal->status == 'open' || $planningFinal->status == 'Open')
                     <select name="status" id="status" class="form-select mb-3 text-white" required>
                         <option value="Open" @if($planningFinal->status == "Open") selected @endif>Open</option>
-                        <option value="On Progress" @if($planningFinal->status == "On Progress") selected @endif>On Progress</option>
                         <option value="Close" @if($planningFinal->status == "Close") selected @endif>Close</option>
                     </select>
                 @elseif($planningFinal->status == 'On Progress' || $planningFinal->status == 'on progress')
                 <select name="status" id="status" class="form-select mb-3  text-white" required>
-                        <option value="On Progress" @if($planningFinal->status == "On Progress") selected @endif>On Progress</option>                    
+                        <option value="On Progress" @if($planningFinal->status == "Close" || $planningFinal->status == "close") selected @endif>Close</option>                    
                 </select>
                 @endif                
             </div>        

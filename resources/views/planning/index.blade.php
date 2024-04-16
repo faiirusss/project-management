@@ -101,6 +101,12 @@
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Data Project Planning</h2>
                 <a href="/finalPlanning/add" class="btn btn-sm btn-outline-success my-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <br>
                 <div class="">
                     <table class="table table-striped table-hover" >

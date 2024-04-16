@@ -43,6 +43,6 @@ class executing_schedule extends Model
 
     public function executingFinal()
     {
-        return $this->hasOne(executing_project_definitions::class);
+        return $this->hasMany(executing_project_definitions::class, 'schedule_id', 'id');
     }
 }

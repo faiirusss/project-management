@@ -270,6 +270,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //PLANNING => SCHEDULE   
     Route::get('/schedule', [ScheduleController::class, 'index',]);
+    Route::get('/searchSchedule', [ScheduleController::class, 'filter',]);
     Route::get('/schedule/add', [ScheduleController::class, 'create']);
     Route::post('/schedule/save', [ScheduleController::class, 'store']);
     Route::get('/schedule/{id}/delete', [ScheduleController::class, 'destroy']);

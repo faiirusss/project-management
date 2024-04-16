@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\executing_project_definitions;
 use App\Models\executing_scope;
 use App\Models\Initiating_ProjectDefinition;
-use App\Models\planning_project_definitions;
-use App\Models\Planning_ProjectDefinition;
 use Illuminate\Http\Request;
 
 class ExecutingScopeController extends Controller
