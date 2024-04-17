@@ -35,7 +35,7 @@
         <div class="row mb-3">
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Name Project</label>
-                <input type="text" name="name_project" id="" class="form-control mb-3 text-white" required>
+                <input type="text" name="name_project" id="" class="form-control mb-3 bg-dark text-white" required>
             </div>
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Code Project</label>

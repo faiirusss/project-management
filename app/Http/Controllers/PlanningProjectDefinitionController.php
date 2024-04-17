@@ -112,32 +112,18 @@ class PlanningProjectDefinitionController extends Controller
 
     public function store(Request $request)
     {
-        planning_project_definitions::create([
-            'project_definition_id' => $request->name_project,
-            'status' => 'Open'
-        ]);
 
-        // Lakukan query untuk mendapatkan scope berdasarkan project_definition_id
-        // $schedule_id = planning_schedule::where('project_definition_id', $request->name_project)->first();
-        // $risk_id = planning_risk::where('project_definition_id', $request->name_project)->first();
-        // $name_project = Initiating_ProjectDefinition::where('id', $request->name_project)->first();
+        $name_project = Initiating_ProjectDefinition::where('id', $request->name_project)->first();
 
-        // if ($schedule_id == null && $risk_id == null) {
-        //     return redirect('/finalPlanning/add')->with("error", "Data $name_project->name_project is empty!");
-        // } else {
-
-        // if (planning_project_definitions::where('project_definition_id', $request->name_project)->exists()) {
-        //     return redirect('/finalPlanning/add')->with("error", "$name_project->name_project already exists!");
-        // } else {
-        // $planningProjectDefinition = planning_project_definitions::where('project_definition_id', $request->name_project)->first();
-        // $planningProjectDefinition->update([
-        //     'project_definition_id' => $planningProjectDefinition->project_definition_id,
-        //     'schedule_id' => $schedule_id->id,
-        //     'risk_id' => $risk_id->id,
-        //     'status' => $planningProjectDefinition->status,
-        // ]);
-        return redirect('/planning')->with('success', 'Data has been added!');
-        // }
+        if (planning_project_definitions::where('project_definition_id', $request->name_project)->exists()) {
+            return redirect('/finalPlanning/add')->with("error", "$name_project->name_project already exists!");
+        } else {
+            planning_project_definitions::create([
+                'project_definition_id' => $request->name_project,
+                'status' => 'Open'
+            ]);
+            return redirect('/planning')->with('success', 'Data has been added!');
+        }
     }
 
     // $planningProject = new planning_project_definitions();
@@ -257,36 +243,66 @@ class PlanningProjectDefinitionController extends Controller
     {
         if ($request->status == 'close' || $request->status == 'Close') {
 
-            $scope = planning_project_definitions::find($id);
-            // update status pada final planning project definition
-            $scope->update([
-                'project_definition_id' => $request->name_project,
-                'status' => $request->status,
-                $request->except(['_token']),
-            ]);
+            $planning = planning_project_definitions::find($id);
+            $schedule_id = planning_schedule::where('project_definition_id', $request->name_project)->first();
+            $risk_id = planning_risk::where('project_definition_id', $request->name_project)->first();
+            $name_project = Initiating_ProjectDefinition::where('id', $request->name_project)->first();
 
-            // input data kedalam table executing project definition
+            if ($schedule_id == null && $risk_id == null) {
+                return redirect('/finalPlanning/add')->with("error", "Data $name_project->name_project is empty!");
+            } else {
+
+                // update status & insert data pada final planning project definition
+                $planning->update([
+                    'project_definition_id' => $request->name_project,
+                    'schedule_id' => $schedule_id->id,
+                    'risk_id' => $risk_id->id,
+                    'status' => $request->status,
+                    $request->except(['_token']),
+                ]);
+            }
+
+            // Lakukan query untuk mendapatkan scope berdasarkan project_definition_id
+
+
+            // if ($schedule_id == null && $risk_id == null) {
+            //     return redirect('/finalPlanning/add')->with("error", "Data $name_project->name_project is empty!");
+            // } else {
+
+            // if (planning_project_definitions::where('project_definition_id', $request->name_project)->exists()) {
+            //     return redirect('/finalPlanning/add')->with("error", "$name_project->name_project already exists!");
+            // } else {
+            // $planningProjectDefinition = planning_project_definitions::where('project_definition_id', $request->name_project)->first();
+            // $planningProjectDefinition->update([
+            //     'project_definition_id' => $planningProjectDefinition->project_definition_id,
+            //     'schedule_id' => $schedule_id->id,
+            //     'risk_id' => $risk_id->id,
+            //     'status' => $planningProjectDefinition->status,
+            // ]);
+            // }
+
+            // salin data kedalam table executing project definition
             executing_project_definitions::create([
-                'project_definition_id' => $scope->project_definition_id,
-                'scope_id' => $scope->scope_id,
-                'schedule_id' => $scope->schedule_id,
-                'cost_projectincome_id' => $scope->cost_projectincome_id,
-                'cost_caseflow_id' => $scope->cost_caseflow_id,
-                'cost_listasumsition_id' => $scope->cost_listasumsition_id,
-                'quality_id' => $scope->quality_id,
-                'resource_id' => $scope->resource_id,
-                'reports_id' => $scope->reports_id,
-                'presentation_id' => $scope->presentation_id,
-                'projectanouncement_id' => $scope->projectanouncement_id,
-                'reviewmeeting_id' => $scope->reviewmeeting_id,
-                'teammorale_id' => $scope->teammorale_id,
-                'risk_id' => $scope->risk_id,
-                'costcontract_id' => $scope->costcontract_id,
-                'bebanbahan_id' => $scope->bebanbahan_id,
-                'bebansubkon_id' => $scope->bebansubkon_id,
-                'termpayment_id' => $scope->termpayment_id,
-                'guarantee_id' => $scope->guarantee_id,
-                'stakeholder_id' => $scope->stakeholder_id,
+                'project_definition_id' => $planning->project_definition_id,
+                'scope_id' => $planning->scope_id,
+                'schedule_id' => $planning->schedule_id,
+                'cost_projectincome_id' => $planning->cost_projectincome_id,
+                'cost_caseflow_id' => $planning->cost_caseflow_id,
+                'cost_listasumsition_id' => $planning->cost_listasumsition_id,
+                'quality_id' => $planning->quality_id,
+                'resource_id' => $planning->resource_id,
+                'reports_id' => $planning->reports_id,
+                'presentation_id' => $planning->presentation_id,
+                'projectanouncement_id' => $planning->projectanouncement_id,
+                'reviewmeeting_id' => $planning->reviewmeeting_id,
+                'teammorale_id' => $planning->teammorale_id,
+                'risk_id' => $planning->risk_id,
+                'costcontract_id' => $planning->costcontract_id,
+                'bebanbahan_id' => $planning->bebanbahan_id,
+                'bebansubkon_id' => $planning->bebansubkon_id,
+                'termpayment_id' => $planning->termpayment_id,
+                'guarantee_id' => $planning->guarantee_id,
+                'stakeholder_id' => $planning->stakeholder_id,
                 'status' => 'Open',
             ]);
 

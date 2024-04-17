@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Initiating_ProjectDefinition;
+use App\Models\planning_project_definitions;
 use App\Models\planning_risk;
 use Illuminate\Http\Request;
 use App\Models\Risk;
@@ -23,8 +24,9 @@ class RiskController extends Controller
 
     public function create()
     {
+        $finalPlanning = planning_project_definitions::all();
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.risk.add', compact('projectDefinition'));
+        return view('planning.risk.add', compact('projectDefinition', 'finalPlanning'));
     }
 
     public function store(Request $request)

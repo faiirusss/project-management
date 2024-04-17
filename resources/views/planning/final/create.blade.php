@@ -87,7 +87,7 @@
                                     @endif
                                 @endforeach
                             @else
-                                <option value="">Data Not Found</option>
+                                <option value="">Empty Project</option>
                             @endif
                         </select>
                     </div>            
