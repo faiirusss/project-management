@@ -64,11 +64,15 @@
                 <div class="col-md-8">
                     <label for="nameProject" class="form-label text-white">Name Project</label>
                     <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                        @foreach($projectDefinition as $project)
-                            @if($project->status == 'open' || $project->status == 'Open')
-                                <option value="{{ $project->id}}">{{$project->name_project}}</option>
-                            @endif
-                        @endforeach
+                        @if (count($finalPlanning) > 0)
+                            @foreach($finalPlanning as $project)
+                                @if ($project->status == 'Open')
+                                    <option value="{{ $project->id }}">{{ $project->projectDefinition['name_project'] }}</option>
+                                @endif
+                            @endforeach
+                        @else
+                            <option value="">Data Not Found</option>
+                        @endif
                     </select>
                 </div>
                 <div class="col-md-4">

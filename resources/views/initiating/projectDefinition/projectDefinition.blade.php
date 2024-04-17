@@ -77,8 +77,8 @@
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Status</label>
                 <select name="status" class="form-select mb-3 text-white" name="status" aria-label=".form-select-sm example">
-                    <option value="open">Open</option>
-                    <option value="close">Closed</option>
+                    <option value="Open">Open</option>
+                    <option value="Close">Closed</option>
                 </select>
             </div>
             <div class="col-md-4">

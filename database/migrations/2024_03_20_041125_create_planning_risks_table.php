@@ -29,7 +29,7 @@ class CreatePlanningRisksTable extends Migration
             $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
 
-            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions')->onDelete('cascade');
         });
     }
 

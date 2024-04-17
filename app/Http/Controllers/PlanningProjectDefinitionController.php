@@ -112,82 +112,86 @@ class PlanningProjectDefinitionController extends Controller
 
     public function store(Request $request)
     {
+        planning_project_definitions::create([
+            'project_definition_id' => $request->name_project,
+            'status' => 'Open'
+        ]);
 
         // Lakukan query untuk mendapatkan scope berdasarkan project_definition_id
-        $schedule_id = planning_schedule::where('project_definition_id', $request->name_project)->first();
-        $risk_id = planning_risk::where('project_definition_id', $request->name_project)->first();
-        $name_project = Initiating_ProjectDefinition::where('id', $request->name_project)->first();
+        // $schedule_id = planning_schedule::where('project_definition_id', $request->name_project)->first();
+        // $risk_id = planning_risk::where('project_definition_id', $request->name_project)->first();
+        // $name_project = Initiating_ProjectDefinition::where('id', $request->name_project)->first();
 
-        if ($schedule_id == null && $risk_id == null) {
-            return redirect('/finalPlanning/add')->with("error", "Data $name_project->name_project is empty!");
-        } else {
+        // if ($schedule_id == null && $risk_id == null) {
+        //     return redirect('/finalPlanning/add')->with("error", "Data $name_project->name_project is empty!");
+        // } else {
 
-            if (planning_project_definitions::where('project_definition_id', $request->name_project)->exists()) {
-                return redirect('/finalPlanning/add')->with("error", "$name_project->name_project already exists!");
-            } else {
-                planning_project_definitions::create([
-                    'project_definition_id' => $request->name_project,
-                    'schedule_id' => $schedule_id->id,
-                    'risk_id' => $risk_id->id,
-                    'status' => 'Open',
-                ]);
-                return redirect('/planning')->with('success', 'Data has been added!');
-            }
-
-            // $planningProject = new planning_project_definitions();
-            // $planningProject->project_definition_id = $request->name_project;
-            // $planningProject->schedule_id = $schedule_id->id;
-            // $planningProject->risk_id = $risk_id->id;
-
-            // // Atur atribut status
-            // $planningProject->status = 'Open';
-
-            // // Atur atribut lainnya menggunakan data dari request
-            // $planningProject->fill($request->except(['_token']));
-
-            // // Simpan instance yang baru dibuat ke dalam database
-            // $planningProject->save();
-
-        }
-
-        // $scope = planning_scope::where('project_definition_id', $request->name_project)->first();
-        // $cost_projectincome_id = planning_cost_incomes::where('project_definition_id', $request->name_project)->first();
-        // $cost_caseflow_id = planning_cost_caseFlow::where('project_definition_id', $request->name_project)->first();
-        // $cost_listasumsition_id = planning_cost_listAssumsition::where('project_definition_id', $request->name_project)->first();
-        // $quality_id = planning_quality::where('project_definition_id', $request->name_project)->first();
-        // $resource_id = planning_resources::where('project_definition_id', $request->name_project)->first();
-        // $reports_id = planning_com_reports::where('project_definition_id', $request->name_project)->first();
-        // $presentation_id = planning_com_presentations::where('project_definition_id', $request->name_project)->first();
-        // $projectanouncement_id = planning_com_announcements::where('project_definition_id', $request->name_project)->first();
-        // $reviewmeeting_id = planning_com_reviews::where('project_definition_id', $request->name_project)->first();
-        // $teammorale_id = planning_com_tems::where('project_definition_id', $request->name_project)->first();
-        // $costcontract_id = planning_procurement_contracts::where('project_definition_id', $request->name_project)->first();
-        // $bebanbahan_id = planning_procurement_bebanBahan::where('project_definition_id', $request->name_project)->first();
-        // $bebansubkon_id = planning_procurement_bebanSubkon::where('project_definition_id', $request->name_project)->first();
-        // $termpayment_id = planning_procurement_termplans::where('project_definition_id', $request->name_project)->first();
-        // $guarantee_id = planning_procurement_guarantee::where('project_definition_id', $request->name_project)->first();
-        // $stakeholder_id = planning_stakeholder::where('project_definition_id', $request->name_project)->first();
-
-        // Buat instance baru dari model dan atur nilai attribut        
-
-        // $planningProject->scope_id = $scope->id;
-        // $planningProject->cost_projectincome_id = $cost_projectincome_id->id;
-        // $planningProject->cost_caseflow_id = $cost_caseflow_id->id;
-        // $planningProject->cost_listasumsition_id = $cost_listasumsition_id->id;
-        // $planningProject->quality_id = $quality_id->id;
-        // $planningProject->resource_id = $resource_id->id;
-        // $planningProject->reports_id = $reports_id->id;
-        // $planningProject->presentation_id = $presentation_id->id;
-        // $planningProject->projectanouncement_id = $projectanouncement_id->id;
-        // $planningProject->reviewmeeting_id = $reviewmeeting_id->id;
-        // $planningProject->teammorale_id = $teammorale_id->id;
-        // $planningProject->costcontract_id = $costcontract_id->id;
-        // $planningProject->bebanbahan_id = $bebanbahan_id->id;
-        // $planningProject->bebansubkon_id = $bebansubkon_id->id;
-        // $planningProject->termpayment_id = $termpayment_id->id;
-        // $planningProject->guarantee_id = $guarantee_id->id;
-        // $planningProject->stakeholder_id = $stakeholder_id->id;        
+        // if (planning_project_definitions::where('project_definition_id', $request->name_project)->exists()) {
+        //     return redirect('/finalPlanning/add')->with("error", "$name_project->name_project already exists!");
+        // } else {
+        // $planningProjectDefinition = planning_project_definitions::where('project_definition_id', $request->name_project)->first();
+        // $planningProjectDefinition->update([
+        //     'project_definition_id' => $planningProjectDefinition->project_definition_id,
+        //     'schedule_id' => $schedule_id->id,
+        //     'risk_id' => $risk_id->id,
+        //     'status' => $planningProjectDefinition->status,
+        // ]);
+        return redirect('/planning')->with('success', 'Data has been added!');
+        // }
     }
+
+    // $planningProject = new planning_project_definitions();
+    // $planningProject->project_definition_id = $request->name_project;
+    // $planningProject->schedule_id = $schedule_id->id;
+    // $planningProject->risk_id = $risk_id->id;
+
+    // // Atur atribut status
+    // $planningProject->status = 'Open';
+
+    // // Atur atribut lainnya menggunakan data dari request
+    // $planningProject->fill($request->except(['_token']));
+
+    // // Simpan instance yang baru dibuat ke dalam database
+    // $planningProject->save();
+
+
+    // $scope = planning_scope::where('project_definition_id', $request->name_project)->first();
+    // $cost_projectincome_id = planning_cost_incomes::where('project_definition_id', $request->name_project)->first();
+    // $cost_caseflow_id = planning_cost_caseFlow::where('project_definition_id', $request->name_project)->first();
+    // $cost_listasumsition_id = planning_cost_listAssumsition::where('project_definition_id', $request->name_project)->first();
+    // $quality_id = planning_quality::where('project_definition_id', $request->name_project)->first();
+    // $resource_id = planning_resources::where('project_definition_id', $request->name_project)->first();
+    // $reports_id = planning_com_reports::where('project_definition_id', $request->name_project)->first();
+    // $presentation_id = planning_com_presentations::where('project_definition_id', $request->name_project)->first();
+    // $projectanouncement_id = planning_com_announcements::where('project_definition_id', $request->name_project)->first();
+    // $reviewmeeting_id = planning_com_reviews::where('project_definition_id', $request->name_project)->first();
+    // $teammorale_id = planning_com_tems::where('project_definition_id', $request->name_project)->first();
+    // $costcontract_id = planning_procurement_contracts::where('project_definition_id', $request->name_project)->first();
+    // $bebanbahan_id = planning_procurement_bebanBahan::where('project_definition_id', $request->name_project)->first();
+    // $bebansubkon_id = planning_procurement_bebanSubkon::where('project_definition_id', $request->name_project)->first();
+    // $termpayment_id = planning_procurement_termplans::where('project_definition_id', $request->name_project)->first();
+    // $guarantee_id = planning_procurement_guarantee::where('project_definition_id', $request->name_project)->first();
+    // $stakeholder_id = planning_stakeholder::where('project_definition_id', $request->name_project)->first();
+
+    // Buat instance baru dari model dan atur nilai attribut        
+
+    // $planningProject->scope_id = $scope->id;
+    // $planningProject->cost_projectincome_id = $cost_projectincome_id->id;
+    // $planningProject->cost_caseflow_id = $cost_caseflow_id->id;
+    // $planningProject->cost_listasumsition_id = $cost_listasumsition_id->id;
+    // $planningProject->quality_id = $quality_id->id;
+    // $planningProject->resource_id = $resource_id->id;
+    // $planningProject->reports_id = $reports_id->id;
+    // $planningProject->presentation_id = $presentation_id->id;
+    // $planningProject->projectanouncement_id = $projectanouncement_id->id;
+    // $planningProject->reviewmeeting_id = $reviewmeeting_id->id;
+    // $planningProject->teammorale_id = $teammorale_id->id;
+    // $planningProject->costcontract_id = $costcontract_id->id;
+    // $planningProject->bebanbahan_id = $bebanbahan_id->id;
+    // $planningProject->bebansubkon_id = $bebansubkon_id->id;
+    // $planningProject->termpayment_id = $termpayment_id->id;
+    // $planningProject->guarantee_id = $guarantee_id->id;
+    // $planningProject->stakeholder_id = $stakeholder_id->id;        
 
 
 
@@ -259,13 +263,6 @@ class PlanningProjectDefinitionController extends Controller
                 'project_definition_id' => $request->name_project,
                 'status' => $request->status,
                 $request->except(['_token']),
-            ]);
-
-
-            $iniating_project = Initiating_ProjectDefinition::find($request->name_project);
-            // update status pada initiating project definition
-            $iniating_project->update([
-                'status' => $request->status,
             ]);
 
             // input data kedalam table executing project definition
@@ -516,11 +513,6 @@ class PlanningProjectDefinitionController extends Controller
                 'project_definition_id' => $request->name_project,
                 'status' => $request->status,
                 $request->except(['_token']),
-            ]);
-
-            $iniating_project = Initiating_ProjectDefinition::find($request->name_project);
-            $iniating_project->update([
-                'status' => $request->status,
             ]);
             return redirect('/planning');
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\executing_project_definitions;
 use App\Models\Initiating_ProjectDefinition;
 use App\Models\executing_risk;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class RiskExecutingController extends Controller
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
             $risksExecuting = executing_risk::all();
             $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('executing.riskExecuting.risk', compact('projectDefinition'));
+            return view('executing.riskExecuting.index', compact('projectDefinition', 'risksExecuting'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }
@@ -22,7 +23,9 @@ class RiskExecutingController extends Controller
     public function create()
     {
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('executing.riskExecuting.risk', compact('projectDefinition'));
+        $finalExecuting = executing_project_definitions::all();
+
+        return view('executing.riskExecuting.risk', compact('projectDefinition', 'finalExecuting'));
     }
 
     public function store(Request $request)
@@ -31,7 +34,6 @@ class RiskExecutingController extends Controller
             'start_date' => $request->start_date,
             'description_ofrisk' => $request->description_ofrisk,
             'submitter' => $request->submitter,
-            'name_project' => $request->name_project,
             'probability_factor' => $request->probability_factor,
             'impact_factor' => $request->impact_factor,
             'exposure' => $request->exposure,
@@ -41,10 +43,10 @@ class RiskExecutingController extends Controller
             'assigned_to' => $request->assigned_to,
             'status' => $request->status,
             'due_date' => $request->due_date,
-            'date_realitation' => $request->date_realitation,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
-        return redirect('/executing')->with('success', 'Risk has been added successfully.');
+        return redirect('/riskExecuting')->with('success', 'Risk has been added successfully.');
     }
 
 

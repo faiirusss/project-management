@@ -38,7 +38,7 @@
                 <i class="far fa-comments me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Communication</span>
             </a>
-            <a href="/risk" class="nav-link">
+            <a href="/riskExecuting" class="nav-link">
                 <i class="fa fa-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Risk</span>
             </a>
@@ -64,8 +64,10 @@
                 <div class="col-md-4">
                     <label for="name_project" class="form-label text-white">Name Project</label>
                     <select name="name_project" id="name_project" class="form-select mb-3 text-white" required>
-                        @foreach ($projectDefinition as $project)
-                            <option value="{{ $project->name_project }}">{{ $project->name_project }}</option>
+                        @foreach ($finalExecuting as $project)
+                            @if ($project->status == 'Open' || $project->status == 'open')
+                                <option value="{{ $project->id }}">{{ $project->projectDefinition['name_project'] }}</option>                                        
+                            @endif
                         @endforeach
                     </select>
                 </div>

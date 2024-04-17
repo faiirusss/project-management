@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Initiating_ProjectDefinition;
+use App\Models\planning_project_definitions;
 use App\Models\planning_schedule;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,9 @@ class ScheduleController extends Controller
 
     public function create()
     {
+        $finalPlanning = planning_project_definitions::all();
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.schedule.add', ['projectDefinition' => $projectDefinition]);
+        return view('planning.schedule.add', ['projectDefinition' => $projectDefinition], ['finalPlanning' => $finalPlanning]);
     }
 
     public function store(Request $request)

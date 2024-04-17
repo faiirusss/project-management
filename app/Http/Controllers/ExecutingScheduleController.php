@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\executing_project_definitions;
 use App\Models\executing_schedule;
 use App\Models\Initiating_ProjectDefinition;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class ExecutingScheduleController extends Controller
     public function index()
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
-            $executingSchedule = executing_schedule::all();
+            $executingSchedule = executing_schedule::all()->sortBy('project_definition_id');
             $projectDefinition = Initiating_ProjectDefinition::all();
 
             return view('executing.schedule.index', compact(['executingSchedule', 'projectDefinition']));
@@ -23,19 +24,20 @@ class ExecutingScheduleController extends Controller
     public function create()
     {
         $projectDefinition = Initiating_ProjectDefinition::all();
+        $finalExecuting = executing_project_definitions::all();
 
-        return view('executing.schedule.create', compact('projectDefinition'));
+        return view('executing.schedule.create', compact('projectDefinition', 'finalExecuting'));
     }
 
     public function store(Request $request)
     {
         executing_schedule::create([
-            'name_project' => $request->name_project,
             'task' => $request->task,
             'start_date' => $request->start_date,
             'finish_date' => $request->finish_date,
             'description_task' => $request->description_task,
             'assign_to' => $request->assign_to,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/scheduleExecuting')->with('success', 'Schedule data has been added successfully.');
@@ -52,19 +54,20 @@ class ExecutingScheduleController extends Controller
     public function show($id)
     {
         $executingSchedule = executing_schedule::find($id);
-        return view('executing.schedule.edit', compact('executingSchedule'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('executing.schedule.edit', compact('executingSchedule', 'projectDefinition'));
     }
 
     public function update(Request $request, $id)
     {
         $executingSchedule = executing_schedule::find($id);
         $executingSchedule->update([
-            'name_project' => $request->name_project,
             'task' => $request->task,
             'start_date' => $request->start_date,
             'finish_date' => $request->finish_date,
             'description_task' => $request->description_task,
             'assign_to' => $request->assign_to,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/scheduleExecuting');

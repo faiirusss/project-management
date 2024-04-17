@@ -18,7 +18,7 @@ class CreatePlanningProjectDefinitionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('project_definition_id');
             $table->unsignedBigInteger('scope_id')->nullable();
-            $table->unsignedBigInteger('schedule_id');
+            $table->unsignedBigInteger('schedule_id')->nullable();
             $table->unsignedBigInteger('cost_projectincome_id')->nullable();
             $table->unsignedBigInteger('cost_caseflow_id')->nullable();
             $table->unsignedBigInteger('cost_listasumsition_id')->nullable();
@@ -29,7 +29,7 @@ class CreatePlanningProjectDefinitionsTable extends Migration
             $table->unsignedBigInteger('projectanouncement_id')->nullable();
             $table->unsignedBigInteger('reviewmeeting_id')->nullable();
             $table->unsignedBigInteger('teammorale_id')->nullable();
-            $table->unsignedBigInteger('risk_id');
+            $table->unsignedBigInteger('risk_id')->nullable();
             $table->unsignedBigInteger('costcontract_id')->nullable();
             $table->unsignedBigInteger('bebanbahan_id')->nullable();
             $table->unsignedBigInteger('bebansubkon_id')->nullable();
@@ -39,7 +39,7 @@ class CreatePlanningProjectDefinitionsTable extends Migration
             $table->string('status');
             $table->timestamps();
 
-            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions')->onDelete('cascade');
             $table->foreign('scope_id')->references('id')->on('planning_scopes');
             $table->foreign('schedule_id')->references('id')->on('planning_schedules');
             $table->foreign('cost_projectincome_id')->references('id')->on('planning_cost_incomes');

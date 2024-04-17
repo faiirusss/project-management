@@ -63,9 +63,11 @@
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="nameProject" class="form-label text-white">Name Project</label>
-                <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                    @foreach($projectDefinition as $project)
-                    <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                <select name="name_project" id="name_project" class="form-select mb-3 text-white" required>
+                    @foreach ($finalExecuting as $project)
+                        @if ($project->status == 'Open' || $project->status == 'open')
+                            <option value="{{ $project->id }}">{{ $project->projectDefinition['name_project'] }}</option>                                        
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -132,7 +134,7 @@
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Exposure</label>
-                <input type="text" name="exposure" id="result" class="form-control mb-3" required readonly>
+                <input type="text" name="exposure" id="result" class="form-control mb-3 bg-dark text-white" required readonly>
             </div>
 
             <script>

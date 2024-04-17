@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Initiating_ProjectDefinition;
+use App\Models\planning_project_definitions;
 use Illuminate\Http\Request;
 
 class ProjectDefinitionController extends Controller
@@ -28,19 +29,17 @@ class ProjectDefinitionController extends Controller
 
     public function store(Request $request)
     {
-        Initiating_ProjectDefinition::create([
-            'name_project' => $request->name_project,
-            'code_project' => $request->code_project,
-            'contract_value' => $request->contract_value,
-            'bussines_line' => $request->bussines_line,
-            'date' => $request->date,
-            'status' => $request->status,
-            'source_ofFunds' => $request->source_ofFunds,
-            'schema_bussines' => $request->schema_bussines,
-            'contract_duration' => $request->contract_duration,
-            'warranty_period' => $request->warranty_period,
-            $request->except(['_token']),
-        ]);
+        // Simpan data ke tabel Initiating_ProjectDefinition
+        $projectDefinition = Initiating_ProjectDefinition::create($request->except(['_token']));
+
+        // Jika data berhasil disimpan, buat juga data di tabel planning_project_definitions
+        if ($projectDefinition) {
+            planning_project_definitions::create([
+                'project_definition_id' => $projectDefinition->id,
+                'status' => $request->status,
+            ]);
+        }
+
         return redirect('/initiating');
     }
 
