@@ -46,7 +46,7 @@ class RiskExecutingController extends Controller
             'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
-        return redirect('/riskExecuting')->with('success', 'Risk has been added successfully.');
+        return redirect('/riskExecuting')->with('success', 'Data has been added!.');
     }
 
 
@@ -54,14 +54,16 @@ class RiskExecutingController extends Controller
     {
         $risksExecuting = executing_risk::find($id);
         $risksExecuting->delete();
-        return redirect('/executing');
+        return redirect('/riskExecuting')->with('Delete', 'Data has been deleted!.');
     }
 
     public function show($id)
     {
         $risksExecuting = executing_risk::find($id);
+        $find = $risksExecuting->project_definition_id;
+        $executing = executing_project_definitions::find($find);
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('executing.riskExecuting.edit', compact('risksExecuting', 'projectDefinition'));
+        return view('executing.riskExecuting.edit', compact('risksExecuting', 'projectDefinition', 'executing'));
     }
 
     public function update(Request $request, $id)
@@ -84,6 +86,6 @@ class RiskExecutingController extends Controller
             'date_realitation' => $request->date_realitation,
             $request->except(['_token']),
         ]);
-        return redirect('/executing');
+        return redirect('/riskExecuting')->with('success', 'Data has been updated.');
     }
 }

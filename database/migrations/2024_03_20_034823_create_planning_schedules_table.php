@@ -20,6 +20,7 @@ class CreatePlanningSchedulesTable extends Migration
             $table->date('finish_date');
             $table->string('description_task');
             $table->string('assign_to');
+            $table->string('status_task');
             $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
 

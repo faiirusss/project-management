@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\executing_project_definitions;
 use App\Models\executing_quality;
 use App\Models\executing_risk;
 use App\Models\executing_schedule;
@@ -17,8 +18,8 @@ class ExecutingController extends Controller
         if (Auth()->User()->roles == 'superadmin') {
             $executingSchedule = executing_schedule::all();
             $executingRisk = executing_risk::all();
-            $projectDefinition = Initiating_ProjectDefinition::all()->sortDesc();
-            return view('executing.index', compact('executingRisk', 'executingSchedule', 'projectDefinition'));
+            $executingProjectDefinition = executing_project_definitions::all()->sortDesc();
+            return view('executing.index', compact('executingRisk', 'executingSchedule', 'executingProjectDefinition'));
         } elseif (Auth()->User()->roles == 'adminExecuting') {
             return view('executing.index');
         } else {

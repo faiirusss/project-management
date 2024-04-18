@@ -77,7 +77,7 @@
                             <div class="col me-2">
                                 <select class="form-control" name="search" id="search">
                                 <option value="">Select Project</option>
-                                @foreach ($projectDefinition as $item)
+                                @foreach ($executingProjectDefinition as $item)
                                     <option value="{{ $item->name_project }}">{{ $item->name_project }}</option>
                                 @endforeach
                             </select>
@@ -93,8 +93,53 @@
     </div>
 </div>
 
+{{-- info project planning --}}
+<div class="container-fluid pt-4 px-4 mb-4">
+    <div class="row g-10">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h2 class="mb-4">Data Project Executing</h2>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                <br>
+                <div class="">
+                    <table class="table table-striped table-hover" >
+                        <thead>
+                            <tr class="text-white">
+                                <td>No</td>
+                                <th>Project Name</th>
+                                <th>Status</th>
+                                <th>Updated at</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($executingProjectDefinition as $row)
+                            <tr class="text-white">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $row->projectDefinition['name_project'] }}</td>
+                                <td>{{ $row->status }}</td>
+                                <td>{{ \Carbon\Carbon::parse($row->updated_at)->diffForHumans() }}</td>
+                                <td>
+                                    <a href="/finalExecuting/{{$row->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
+                                    <a href="/finalExecuting/{{$row->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- schedule --}}
-<div class="container-fluid pt-4 px-4 mb-4  ">
+{{-- <div class="container-fluid pt-4 px-4 mb-4  ">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -154,10 +199,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 {{-- risk --}}
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -252,7 +297,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 {{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">

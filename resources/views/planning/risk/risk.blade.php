@@ -64,12 +64,40 @@
     </center>
 </nav>
 
-<div class="container-fluid pt-4 px-4">
+<div class="container-fluid pt-4 px-4 mb-3">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Risk</h2>
-                <a href="/risk/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <a href="/risk/add" class="btn btn-sm btn-outline-success mb-4"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+
+                {{-- filter data --}}
+                <div class="">
+                    <form action="/risk" method="GET">                    
+                        <div class="input-group">                        
+                            <div class="col me-2">
+                                <select class="form-control" name="search" id="search" value>
+                                    <option value="">Select Project</option>
+                                    @foreach ($projectDefinition as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name_project }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3 btn-sm">Find</button>
+                            </div>
+                        </div>  
+                    </form>
+                </div>
+                {{-- end filter data --}}
+
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 <br>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" >

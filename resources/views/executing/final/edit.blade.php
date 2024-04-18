@@ -63,43 +63,17 @@
 <div class="row g-4">
 <div class="col-sm-12 col-xl-10">
     <div class="bg-secondary rounded h-100 p-4">
-        <h2 class="mb-4">Edit Final Executing</h2>
+        <h2 class="mb-4">Edit Final Planning</h2>
         <form action="/finalExecuting/{{ $executingFinal->id }}/update" method="post">
             @csrf
         <div class="row mb-2">
             <div class="col-md-3">
-                <label for="nameProject" class="form-label text-white">Name Project</label>
-                <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                    @foreach($projectDefinition as $project)
-                        @if ($project->status == 'open')
-                            <option value="{{ $project->id }}" {{ $project->id == $executingFinal->id ? 'selected' : '' }}>
-                                {{ $project->name_project }}
-                            </option>
-                        @endif
-                    @endforeach
+                <label for="name_project" class="form-label text-white">Name Project</label>
+                <select class="form-control bg-dark text-white mb-3" name="name_project">
+                    <option value="{{$executingFinal->project_definition_id}}" selected>{{$executingFinal->projectDefinition['name_project']}}</option>
                 </select>
 
-            </div>   
-            <div class="col-md-3">
-                <label for="executing_scope_id" class="form-label text-white">Scope</label>
-                <select name="executing_scope_id" id="executing_scope_id" class="form-select mb-3 text-white" required>
-                    @foreach ($scope as $row)
-                        <option value="{{ $row->id }}" {{ $row->id == $executingFinal->id ? 'selected' : '' }}>
-                            {{ $row->projectDefinition['name_project'] }}
-                        </option>
-                    @endforeach
-                </select>
             </div>
-            <div class="col-md-3">
-                <label for="executing_schedule_id" class="form-label text-white">Schedule</label>
-                <select name="executing_schedule_id" id="executing_schedule_id" class="form-select mb-3 text-white" required>
-                    @foreach ($schedule as $item)
-                        <option value="{{ $item->id }}" {{ $item->id == $executingFinal->id ? 'selected' : '' }}>
-                            {{ $item->projectDefinition['name_project'] }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>  
             <div class="col-md-3">
                 <label for="status" class="form-label text-white">Status</label>
                 <select name="status" id="status" class="form-select mb-3 text-white" required>
@@ -108,67 +82,9 @@
                 </select>
             </div>        
         </div>        
-        {{-- <div class="bg-light rounded p-4">
-            <h3 class="mb-4">Project Shapes</h3>
-            <div class="row mb-2">
-                <div class="col-md-2">
-                    <label for="" class="form-label text-white">Initiation</label>
-                    <select name="initiation" id="" class="form-select mb-3 text-white" required>
-                        <option value="Responsible">Responsible</option>
-                        <option value="Consulted">Consulted</option>
-                        <option value="Accountable">Accountable</option>
-                        <option value="Informed">Informed</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label for="" class="form-label text-white">Planning</label>
-                    <select name="planning" id="" class="form-select mb-3 text-white" required>
-                        <option value="Responsible">Responsible</option>
-                        <option value="Consulted">Consulted</option>
-                        <option value="Accountable">Accountable</option>
-                        <option value="Informed">Informed</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label for="" class="form-label text-white">Execution</label>
-                    <select name="executing" id="" class="form-select mb-3 text-white" required>
-                        <option value="Responsible">Responsible</option>
-                        <option value="Consulted">Consulted</option>
-                        <option value="Accountable">Accountable</option>
-                        <option value="Informed">Informed</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label for="" class="form-label text-white">Control</label>
-                    <select name="control" id="" class="form-select mb-3 text-white" required>
-                        <option value="Responsible">Responsible</option>
-                        <option value="Consulted">Consulted</option>
-                        <option value="Accountable">Accountable</option>
-                        <option value="Informed">Informed</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label for="" class="form-label text-white">Close</label>
-                    <select name="close" id="" class="form-select mb-3 text-white" required>
-                        <option value="Responsible">Responsible</option>
-                        <option value="Consulted">Consulted</option>
-                        <option value="Accountable">Accountable</option>
-                        <option value="Informed">Informed</option>
-                    </select>
-                </div>
-            </div>
-        </div> <br> --}}
-            {{-- <div class="col-md-6">
-                <label for="" class="form-label text-white">Engagement Level</label>
-                <select name="engagement_level" id="" class="form-select mb-3 text-white" required>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
-                </select>
-            </div>       --}}
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>
             <button type="reset" class="btn btn-sm btn-outline-danger m-2">Reset</button>
-            <a href="/finalExecuting" class="btn btn-sm btn-outline-warning">Cancel</a>
+            <a href="/executing" class="btn btn-sm btn-outline-warning">Cancel</a>
         </form>
     </div>
 </div>

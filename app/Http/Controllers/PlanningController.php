@@ -17,22 +17,20 @@ use Illuminate\Http\Request;
 
 class PlanningController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (Auth()->User()->roles == 'superadmin' || Auth()->User()->roles == 'adminPlanning') {
-            $risks = planning_risk::all();
-            $scope = planning_scope::all();
-            $stakeholder = planning_stakeholder::all();
-            $quality = planning_quality::all();
-            $procurement = planning_procurement_contracts::all();
-            $bebanbarang = planning_procurement_bebanBahan::all();
-            $bebansubkon = planning_procurement_bebanSubkon::all();
-            $termPlan = planning_procurement_termplans::all();
-            $quality = planning_quality::all();
-            $guarantee = planning_procurement_guarantee::all();
+
             $projectDefinition = Initiating_ProjectDefinition::all();
+            $projectDefinitionFilter = new Initiating_ProjectDefinition();
+
+            if (request()->get('search')) {
+                $projectDefinitionFilter = $projectDefinitionFilter->where('id', 'like', '%' . request()->get('search') . '%');
+            }
+            $projectDefinitionFilter = $projectDefinitionFilter->get();
+
             $finalPlanning = planning_project_definitions::all();
-            return view('planning.index', compact('finalPlanning', 'risks', 'scope', 'stakeholder', 'quality', 'procurement', 'bebanbarang', 'bebansubkon', 'termPlan', 'quality', 'guarantee', 'projectDefinition'));
+            return view('planning.index', compact('finalPlanning', 'request', 'projectDefinitionFilter', 'projectDefinition'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }

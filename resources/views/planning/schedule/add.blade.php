@@ -53,6 +53,7 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
 <div class="row g-4">
 <div class="col-sm-12 col-xl-10">
@@ -73,7 +74,7 @@
                                     <option value="{{ $project->id }}">{{ $project->projectDefinition['name_project'] }}</option>
                                 @endforeach
                             @else
-                                <option value="">Project not available</option>
+                                <option value="" readonly>Project not available</option>
                             @endif
                             @else
                                 <option value="">Empty Project</option>

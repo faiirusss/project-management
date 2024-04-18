@@ -63,7 +63,7 @@
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="nameProject" class="form-label text-white">Name Project</label>
-                <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
+                <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required readonly>
                     @foreach($projectDefinition as $project)
                     <option value="{{ $project->id}}" {{ $project->id == $risks->projectDefinition['id'] ? 'selected' : '' }}>{{$project->name_project}}</option>
                     @endforeach

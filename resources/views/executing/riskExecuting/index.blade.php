@@ -70,6 +70,18 @@
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Risk</h2>
                 <a href="/riskExecuting/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @elseif(session('Delete'))
+                    <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+                        {{ session('Delete') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <br>
                 <div class="table-responsive">
                     <table class="table table-striped table-condensed">

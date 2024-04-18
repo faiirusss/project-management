@@ -7,16 +7,24 @@ use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_project_definitions;
 use App\Models\planning_risk;
 use Illuminate\Http\Request;
-use App\Models\Risk;
-use App\Models\ProjectDefinition;
 
 class RiskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
-            $risks = planning_risk::all()->sortBy('project_definition_id');
-            return view('planning.risk.risk', compact('risks'));
+
+            $risks = new planning_risk();
+
+            if ($request->search) {
+                $risks = $risks->where('project_definition_id', 'LIKE', '%' . $request->search . '%');
+            }
+
+            $risks = $risks->get();
+
+            $projectDefinition = Initiating_ProjectDefinition::all();
+
+            return view('planning.risk.risk', compact('risks', 'projectDefinition', 'request'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }

@@ -9,12 +9,21 @@ use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
-            $schedule = planning_schedule::all();
+
+
+            $schedule = new planning_schedule;
+
+            if ($request->get('search')) {
+                $schedule = $schedule->where('project_definition_id', 'LIKE', '%' . $request->get('search') . '%');
+            }
+
+            $schedule = $schedule->get();
+
             $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('planning.schedule.schedule', compact('projectDefinition', 'schedule'));
+            return view('planning.schedule.schedule', compact('projectDefinition', 'schedule', 'request'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }

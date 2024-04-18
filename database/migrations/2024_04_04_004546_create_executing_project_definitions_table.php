@@ -38,7 +38,7 @@ class CreateExecutingProjectDefinitionsTable extends Migration
             $table->string('status');
             $table->timestamps();
 
-            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions')->onDelete('cascade');
             $table->foreign('scope_id')->references('id')->on('planning_scopes');
             $table->foreign('schedule_id')->references('id')->on('planning_schedules');
             $table->foreign('cost_projectincome_id')->references('id')->on('planning_cost_incomes');

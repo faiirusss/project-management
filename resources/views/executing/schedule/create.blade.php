@@ -53,6 +53,7 @@
     </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
 <div class="row g-4">
 <div class="col-sm-12 col-xl-10">
@@ -61,30 +62,29 @@
         <form action="/scheduleExecuting/save" method="post">
             @csrf
             <div class="row mb-2">
-                <div class="col-md-4">
-                    <label for="name_project" class="form-label text-white">Name Project</label>
-                    <select name="name_project" id="name_project" class="form-select mb-3 text-white" required>
-                        @foreach ($finalExecuting as $project)
-                            @if ($project->status == 'Open' || $project->status == 'open')
-                                <option value="{{ $project->id }}">{{ $project->projectDefinition['name_project'] }}</option>                                        
+                <div class="col-md-8">
+                    <label for="nameProject" class="form-label text-white">Name Project</label>
+                    <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
+                        @if ($finalExecuting->isNotEmpty())
+                            @php
+                                $openProjects = $finalExecuting->where('status', 'Open');
+                            @endphp
+                            @if ($openProjects->isNotEmpty())
+                                @foreach($openProjects as $project)
+                                    <option value="{{ $project->id }}">{{ $project->projectDefinition['name_project'] }}</option>
+                                @endforeach
+                            @else
+                                <option value="" readonly>Project not available</option>
                             @endif
-                        @endforeach
+                            @else
+                                <option value="">Empty Project</option>
+                        @endif
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label for="" class="form-label text-white">Task</label>
                     <input type="text" name="task" id="" class="form-control mb-3 text-white"  required>
                 </div>
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Start Date</label>
-                    <input type="date" name="start_date" id="" class="form-control mb-3 text-white"  required>
-                </div>
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Finish Date</label>
-                    <input type="date" name="finish_date" id="" class="form-control mb-3 text-white"  required>
-                </div> 
-            </div>     
-            <div class="row mb-2">
                 <div class="col-md-8">
                     <label for="" class="form-label text-white">Description Task</label>
                     <input type="text" name="description_task" id="" class="form-control mb-3 text-white"  required>
@@ -92,6 +92,17 @@
                 <div class="col-md-4">
                     <label for="" class="form-label text-white">Assign to</label>
                     <input type="text" name="assign_to" id="" class="form-control mb-3 text-white"  required>
+                </div> 
+                
+            </div>     
+            <div class="row mb-2">                
+                <div class="col-md-6">
+                    <label for="" class="form-label text-white">Start Date</label>
+                    <input type="date" name="start_date" id="" class="form-control mb-3 text-white"  required>
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label text-white">Finish Date</label>
+                    <input type="date" name="finish_date" id="" class="form-control mb-3 text-white"  required>
                 </div> 
             </div>    
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>

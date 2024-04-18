@@ -72,18 +72,18 @@
                 <h2 class="mb-4">Filter Project Name</h2>
                 <br>
                 <div class="">
-                    <form action="/findPlanning" method="GET">                    
+                    <form action="/planning" method="GET">                    
                         <div class="input-group mb-3">                        
                             <div class="col me-2">
-                                <select class="form-control" name="search" id="search">
+                                <select class="form-control" name="search" id="search" style="height: 100%">
                                 <option value="">Select Project</option>
                                 @foreach ($projectDefinition as $item)
-                                    <option value="{{ $item->name_project }}">{{ $item->name_project }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->name_project }}</option>
                                 @endforeach
                             </select>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mb-3">Find</button>
+                                <button type="submit" class="btn btn-primary mb-3 btn-sm">Find</button>
                             </div>
                         </div>  
                     </form>
@@ -139,6 +139,171 @@
         </div>
     </div>
 </div>
+
+{{-- schedule --}}
+@if($request->get('search'))
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-10">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h2 class="mb-4">Schedule</h2>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" >
+                        <thead>
+                            <tr class="text-white">
+                                <th><small>Project Name</small></th>
+                                <th><small>Task</small></th>
+                                <th><small>Start Date</small></th>
+                                <th><small>Finish Date</small></th>
+                                <th><small>Description Task</small></th>
+                                <th><small>Assign to</small></th>
+                                <th><small>Action</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($projectDefinitionFilter as $r)
+                            <tr class="text-white">
+                                <td>{{ $r->name_project }}</td>
+                                <td>
+                                    @foreach ($r->planningSchedule as $item)
+                                        {{ $item['task'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningSchedule as $item)
+                                        {{ $item['start_date'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningSchedule as $item)
+                                        {{ $item['finish_date'] }}<br>
+                                    @endforeach
+                                </td>                              
+                                <td>
+                                    @foreach ($r->planningSchedule as $item)
+                                        {{ $item['description_task'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningSchedule as $item)
+                                        {{ $item['assign_to'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    <a href="/schedule/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
+                                    <a href="/schedule/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
+@if($request->get('search'))
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-10">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h2 class="mb-4">Risk</h2>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" >
+                        <thead>
+                            <tr class="text-white">
+                                <th><small>Project Name</small></th>
+                                <th><small>Start Date</small></th>
+                                <th><small>Description of Risk</small></th>
+                                <th><small>Submitter</small></th>
+                                <th><small>Probability Factor</small></th>
+                                <th><small>Impact Factor</small></th>
+                                <th><small>Exposure</small></th>
+                                <th><small>Risk response type</small></th>
+                                <th><small>Risk response plan</small></th>
+                                <th><small>Assigned to</small></th>
+                                <th><small>Status</small></th>
+                                <th><small>Due date</small></th>
+                                <th><small>Action</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($projectDefinitionFilter as $r)
+                            <tr class="text-white">
+                                <td>{{ $r->name_project }}</td>                                 
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['start_date'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['description_ofrisk'] }}<br>
+                                    @endforeach
+                                </td>                              
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['submitter'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['probability_factor'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['impact_factor'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['exposure'] }}<br>
+                                    @endforeach
+                                </td>                                 
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['Risk_reponse_type'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['Risk_reponse_plan'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['assigned_to'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['status'] }}<br>
+                                    @endforeach
+                                </td> 
+                                <td>
+                                    @foreach ($r->planningRisk as $item)
+                                        {{ $item['due_date'] }}<br>
+                                    @endforeach
+                                </td>                                 
+                                <td>
+                                    <a href="/schedule/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
+                                    <a href="/schedule/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 
 {{-- scope --}}
 {{-- <div class="container-fluid pt-4 px-4">
@@ -234,7 +399,7 @@
                             <tr class="text-white">
                                 <td>{{ $r->name_project }}</td>
                                 <td>
-                                    @foreach ($r->planningSchedule as $item)
+                                    @foreach ($r->planningRisk as $item)
                                         - {{ $item['task'] }}<br>
                                     @endforeach
                                 </td> 

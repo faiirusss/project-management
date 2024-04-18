@@ -20,10 +20,11 @@ class CreateExecutingSchedulesTable extends Migration
             $table->date('finish_date');
             $table->string('description_task');
             $table->string('assign_to');
+            $table->string('status_task');
             $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
 
-            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions')->onUpdate('cascade');
         });
     }
 
