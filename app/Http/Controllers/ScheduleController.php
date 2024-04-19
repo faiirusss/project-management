@@ -49,6 +49,7 @@ class ScheduleController extends Controller
             'finish_date' => $request->finish_date,
             'description_task' => $request->description_task,
             'assign_to' => $request->assign_to,
+            'status_task' => $request->status_task,
             'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
@@ -82,6 +83,7 @@ class ScheduleController extends Controller
             'finish_date' => $request->finish_date,
             'description_task' => $request->description_task,
             'assign_to' => $request->assign_to,
+            'status_task' => $request->status_task,
             'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);

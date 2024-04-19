@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -96,6 +97,7 @@
         </div>
     </div>
 </div>
-</nav>  
+</nav>
+
 @endsection
 

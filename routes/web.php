@@ -39,6 +39,7 @@ use App\Http\Controllers\BebanSubkonExecutingController;
 use App\Http\Controllers\CommunicationExecutingController;
 use App\Http\Controllers\CostContractValue;
 use App\Http\Controllers\CostContractValueController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExecutingQualityController;
 use App\Http\Controllers\ExecutingScheduleController;
 use App\Http\Controllers\ExecutingScopeController;
@@ -495,9 +496,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/closing', [ClosingController::class, 'index']);
 
-    Route::get('/dashboard', function () {
-        return view('home.dashboard');
-    });
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::get('/report', [ReportController::class, 'index']);
     Route::get('/report-pdf', [ReportController::class, 'getDataFromURL'])->name('print.pdf');

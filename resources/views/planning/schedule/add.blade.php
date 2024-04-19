@@ -93,6 +93,14 @@
                     <label for="" class="form-label text-white">Assign to</label>
                     <input type="text" name="assign_to" id="" class="form-control mb-3 text-white"  required>
                 </div> 
+                <div class="col-md-12">
+                    <label for="status_task" class="form-label text-white">Status Task</label>
+                    <select name="status_task" id="status_task" class="form-select mb-3 text-white" onchange="calculateResult()" required>
+                        <option selected="true" disabled="disabled" hidden>Choose One</option>  
+                        <option value="Open">Open</option>
+                        <option value="Close">Close</option>
+                    </select>
+                </div>
                 
             </div>     
             <div class="row mb-2">                

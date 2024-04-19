@@ -13,6 +13,7 @@ class planning_schedule extends Model
         'finish_date',
         'description_task',
         'assign_to',
+        'status_task',
         'project_definition_id'
     ];
 
