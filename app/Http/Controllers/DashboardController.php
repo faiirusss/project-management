@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Events\NewNotification;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Models\planning_schedule;
 use App\Models\Initiating_ProjectDefinition;
 
@@ -20,10 +19,15 @@ class DashboardController extends Controller
 
                 $date = $value->finish_date;
                 $tanggalData = Carbon::createFromFormat('Y-m-d', $date);
-                $tanggalSekarang = getdate();
-                dd($tanggalSekarang);
 
+                // get tanggal dari table database
+                $hariFromData = $tanggalData->day;
 
+                // get tanggal sekarang
+                $dateNow = Carbon::now();
+                $nowDay = $dateNow->day;
+
+                // Inisialisasi data notifikasi
                 $dataSend = [
                     'task' => $value->task,
                     'start_date' => $value->start_date,
@@ -32,11 +36,18 @@ class DashboardController extends Controller
                     'assign_to' => $value->assign_to,
                     'status_task' => $value->status_task,
                     'project_definition_id' => $value->project_definition_id,
-                    'message' => 'New Schedule Added',
+                    'message' => '',
                 ];
-            }
 
-            event(new NewNotification($dataSend));
+                if ($hariFromData == $nowDay) {
+                    $dataSend['message'] = 'CEPAT SELESAIKAN, HARI INI TERAKHIR!';
+                } else if ($hariFromData - $nowDay == 1) {
+                    $dataSend['message'] = 'WAKTU TERSISA 1 HARI';
+                }
+
+                // Mengirim notifikasi berdasarkan data yang telah disiapkan
+                event(new NewNotification($dataSend));
+            }
 
             $projectDefinition = Initiating_ProjectDefinition::all();
 

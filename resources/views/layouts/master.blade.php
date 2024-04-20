@@ -112,24 +112,7 @@
     <script src="{{asset('assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    {{-- pusher --}}
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    {{-- toastify --}}
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script>
-
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('61490fc8eb06d9c359c6', {
-        cluster: 'ap1'
-        });
-
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
-            notif($data)
-        });
-    </script>
+    
 
     <!-- Template Javascript -->
     <script src="{{asset('assets/js/main.js')}}"></script>
@@ -147,18 +130,7 @@
         });
     </script>
 
-    <script>
-        function notif(data)
-        {
-            Toastify({
-                text: data.message.message,
-                className: "info",
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
-                }
-            }).showToast();
-        }
-    </script>
+    
 </body>
 
 </html>
