@@ -21,17 +21,14 @@ class ScheduleController extends Controller
             }
 
             $schedule = $schedule->get();
+            $ajax = response()->json($schedule);
+
 
             $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('planning.schedule.schedule', compact('projectDefinition', 'schedule', 'request'));
+            return view('planning.schedule.schedule', compact('projectDefinition', 'schedule', 'request', 'ajax'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }
-    }
-
-    public function filter()
-    {
-        return view('planning.schedule.schedule', ['schedule' => planning_schedule::latest()->filter(request(['search']))->get()], ['projectDefinition' => Initiating_ProjectDefinition::all()]);
     }
 
     public function create()

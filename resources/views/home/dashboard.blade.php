@@ -1,4 +1,5 @@
-@extends('layouts.master')
+@extends('layouts.master')    
+
 @section('title', 'Dashboard')
 @section('content')
 
@@ -61,73 +62,101 @@
             <a href="#" class="dropdown-item text-center">See all message</a>
         </div>
     </div>
+
     <div class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            <i class="fa fa-bell me-lg-2"></i>
-            <span class="d-none d-lg-inline-flex">Notification</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-            <a href="#" class="dropdown-item">
-                <h6 class="fw-normal mb-0">Profile updated</h6>
-                <small>15 minutes ago</small>
-            </a>
-            <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item">
-                <h6 class="fw-normal mb-0">New user added</h6>
-                <small>15 minutes ago</small>
-            </a>
-            <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item">
-                <h6 class="fw-normal mb-0">Password changed</h6>
-                <small>15 minutes ago</small>
-            </a>
-            <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item text-center">See all notifications</a>
-        </div>
-    </div>
-    <div class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            <img class="rounded-circle me-lg-2" src="{{asset('assets/img/user.jpg')}}" alt="" style="width: 40px; height: 40px;">
-            <span class="d-none d-lg-inline-flex">{{Auth()->User()->name}}</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-            <a href="#" class="dropdown-item">My Profile</a>
-            <a href="#" class="dropdown-item">Settings</a>
-            <a href="#" class="dropdown-item">Log Out</a>
-        </div>
+    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        <i class="fa fa-bell me-lg-2"></i>
+        <span class="d-none d-lg-inline-flex">Notification</span>
+    </a>
+    <div id="dropdown-menu" class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">                                    
     </div>
 </div>
+<div class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+        <img class="rounded-circle me-lg-2" src="{{asset('assets/img/user.jpg')}}" alt="" style="width: 40px; height: 40px;">
+        <span class="d-none d-lg-inline-flex">{{Auth()->User()->name}}</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+        <a href="#" class="dropdown-item">My Profile</a>
+        <a href="#" class="dropdown-item">Settings</a>
+        <a href="#" class="dropdown-item">Log Out</a>
+    </div>
+</div>
+</div>
 </nav>
+{{-- // setTimeout(function() {
+//     $('#notification').empty(); 
+// }, 24 * 60 * 60 * 1000);  --}}
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script>
+    let notifications = <?php echo json_encode($notifications); ?>;
+    console.log(notifications);
+    $(document).ready(function() {
+        notifications.forEach(function(notification) {
+            let finishDate = new Date(notification.finish_date);
+            let currentDate = new Date();
 
-{{-- pusher --}}
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    {{-- toastify --}}
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script>
+            let timeDiff = finishDate.getDate() - currentDate.getDate();
+            let timeDiffInMinutes = Math.floor(timeDiff / (1000 * 60));
+            console.log(timeDiffInMinutes);
+            let notificationMessage = '';
 
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+            if (timeDiffInMinutes < 1) {
+                // Jika waktu kurang dari 1 menit
+                notificationMessage = 'Baru saja';
+            } else if (timeDiffInMinutes === 1) {
+                // Jika waktu tepat 1 menit yang lalu
+                notificationMessage = '1 menit yang lalu';
+            } else {
+                // Jika waktu lebih dari 1 menit
+                notificationMessage = timeDiffInMinutes + ' menit yang lalu';
+            }
 
-        var pusher = new Pusher('61490fc8eb06d9c359c6', {
-        cluster: 'ap1'
+            if (timeDiff === 0) {
+                let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
+                let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text('Cepat Selesaikan, Hari ini terakhir!');
+                let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task : ' + notification.task);
+                let newNotificationTime = $('<small>').text(notificationMessage);
+
+                // Menggabungkan elemen-elemen baru
+                newNotificationItem.append(newNotificationTitle);
+                newNotificationItem.append(newNotificationMessage);
+                newNotificationItem.append(newNotificationTime);
+
+                // Menggabungkan elemen-elemen baru
+                newNotificationItem.append(newNotificationTitle);
+                newNotificationItem.append(newNotificationTime);
+
+                // Menambahkan elemen baru ke dalam dropdown-menu
+                $('#dropdown-menu').append(newNotificationItem);
+
+                // Menambahkan garis pemisah setelah elemen baru
+                $('#dropdown-menu').append('<hr class="dropdown-divider">');
+            } else if (timeDiff === 1) {
+                let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
+                let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text('Waktu terisa 1 hari');
+                let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task : ' + notification.task);
+                let newNotificationTime = $('<small>').text(notificationMessage);
+
+                // Menggabungkan elemen-elemen baru
+                newNotificationItem.append(newNotificationTitle);
+                newNotificationItem.append(newNotificationMessage);
+                newNotificationItem.append(newNotificationTime);
+
+                // Menambahkan elemen baru ke dalam dropdown-menu
+                newNotificationItem.append(newNotificationTitle);
+                newNotificationItem.append(newNotificationTime);
+
+                $('#dropdown-menu').append(newNotificationItem);
+
+                // Menambahkan garis pemisah setelah elemen baru
+                $('#dropdown-menu').append('<hr class="dropdown-divider">');
+            }             
         });
 
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
-            notif($data)
-        });
-    </script>
-    <script>
-        function notif(data)
-        {
-            Toastify({
-                text: data.message.message,
-                className: "info",
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
-                }
-            }).showToast();
-        }
-    </script>
+    });
+</script>
+    
 @endsection
+
 

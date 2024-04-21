@@ -497,6 +497,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/closing', [ClosingController::class, 'index']);
 
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    // Route::post('/dashboard', [DashboardController::class, 'processAjax']);
+
 
     Route::get('/report', [ReportController::class, 'index']);
     Route::get('/report-pdf', [ReportController::class, 'getDataFromURL'])->name('print.pdf');

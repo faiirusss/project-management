@@ -2,8 +2,6 @@
 @section('title', 'Dashboard')
 @section('content')
 
-
-
 <style>
     .table-responsive table {
         overflow-x: scroll;
@@ -12,7 +10,26 @@
     .table-striped td, .table-striped th {
         white-space: nowrap;
     }
+
+    .status-task-open{
+        border: 2px solid #15593b;
+        background-color: #1F4735;
+        color: #fff;
+        padding: 4px 12px 4px 12px;
+        border-radius: 9999px;
+    }
+    .status-task-close{
+        border: 2px solid #FF5733;
+        background-color: #dc3545; /* Warna merah */
+        color: #fff;
+        padding: 4px 12px;
+        border-radius: 9999px;
+    }
+
+
 </style>
+
+
 
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
@@ -105,19 +122,21 @@
                                 <th><small>Finish Date</small></th>
                                 <th><small>Description Task</small></th>
                                 <th><small>Assign To</small></th>
+                                <th><small>Status task</small></th>
                                 <th><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($schedule as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
-                                <td><small>{{$r->task}}</small></td>
-                                <td><small>{{$r->start_date}}</small></td>
-                                <td><small>{{$r->finish_date}}</small></td>
-                                <td><small>{{$r->description_task}}</small></td>
-                                <td><small>{{$r->assign_to}}</small></td>
-                                <td>
+                                <td valign="middle"><small>{{$r->projectDefinition['name_project']}}</small></td>
+                                <td valign="middle"><small>{{$r->task}}</small></td>
+                                <td valign="middle"><small>{{$r->start_date}}</small></td>
+                                <td valign="middle"><small>{{$r->finish_date}}</small></td>
+                                <td valign="middle"><small>{{$r->description_task}}</small></td>
+                                <td valign="middle"><small>{{$r->assign_to}}</small></td>
+                                <td data-id="{{$r->id}}" valign="middle"><small>{{$r->status_task}}</small></td>
+                                <td valign="middle">
                                     <a href="/schedule/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
                                     <a href="/schedule/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
                                 </td>
@@ -130,6 +149,32 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        var ajaxData = <?php echo json_encode($ajax); ?>; // Mengonversi data PHP menjadi objek JavaScript
+        var datas = ajaxData.original;
+
+        // Looping melalui setiap objek dalam array datas
+        datas.forEach(function(item) {
+            // Mendapatkan nilai dari setiap properti objek
+            var id = item.id;
+            var status_task = item.status_task;
+
+            // Memilih elemen <td> yang sesuai dengan id
+            var tdStatus = $("td[data-id='" + id + "']");
+
+            // Menentukan gaya berdasarkan status_task
+            if (status_task === 'Open') {
+                tdStatus.find('small').addClass('status-task-open');
+            } else if (status_task === 'Close') {
+                tdStatus.find('small').addClass('status-task-close');
+            }
+        });
+    });
+
+</script>
 
 
 @endsection
