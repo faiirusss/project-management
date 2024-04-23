@@ -3,6 +3,25 @@
 @section('title', 'Dashboard')
 @section('content')
 
+<style>
+    #dropdown-menu {
+        max-height: 250px;
+        overflow-y: hidden;
+    }
+    .auto-overflow {
+        overflow-y: auto;
+    }
+    #all-notif {
+        background-color: #4F46E5;
+        color: white;
+        text-align: center;
+        width: 90%;
+        margin: auto;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -68,7 +87,10 @@
         <i class="fa fa-bell me-lg-2"></i>
         <span class="d-none d-lg-inline-flex">Notification</span>
     </a>
-    <div id="dropdown-menu" class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">                                    
+    <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">                                    
+        <div id="dropdown-menu" class="mt-2"></div>
+        <hr>
+        <div id="all-notif">See all notification</div>
     </div>
 </div>
 <div class="nav-item dropdown">
@@ -84,21 +106,19 @@
 </div>
 </div>
 </nav>
-{{-- // setTimeout(function() {
-//     $('#notification').empty(); 
-// }, 24 * 60 * 60 * 1000);  --}}
+
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script>
     let notifications = <?php echo json_encode($notifications); ?>;
-    console.log(notifications);
     $(document).ready(function() {
         notifications.forEach(function(notification) {
             let finishDate = new Date(notification.finish_date);
             let currentDate = new Date();
+            let status_task = notification.status_task;
+            let id = notification.id;
 
             let timeDiff = finishDate.getDate() - currentDate.getDate();
             let timeDiffInMinutes = Math.floor(timeDiff / (1000 * 60));
-            console.log(timeDiffInMinutes);
             let notificationMessage = '';
 
             if (timeDiffInMinutes < 1) {
@@ -112,49 +132,85 @@
                 notificationMessage = timeDiffInMinutes + ' menit yang lalu';
             }
 
-            if (timeDiff === 0) {
-                let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
-                let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text('Cepat Selesaikan, Hari ini terakhir!');
-                let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task : ' + notification.task);
-                let newNotificationTime = $('<small>').text(notificationMessage);
+            if (status_task === 'Open') {
+                if (timeDiff === 0) {
+                    let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
+                    let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text('Finish quickly, Today is the last day!');
+                    let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task : ' + notification.task);
+                    let newNotificationTime = $('<small>').text(notificationMessage);
 
-                // Menggabungkan elemen-elemen baru
-                newNotificationItem.append(newNotificationTitle);
-                newNotificationItem.append(newNotificationMessage);
-                newNotificationItem.append(newNotificationTime);
+                    // Menggabungkan elemen-elemen baru
+                    newNotificationItem.append(newNotificationTitle);
+                    newNotificationItem.append(newNotificationMessage);
+                    newNotificationItem.append(newNotificationTime);
 
-                // Menggabungkan elemen-elemen baru
-                newNotificationItem.append(newNotificationTitle);
-                newNotificationItem.append(newNotificationTime);
+                    // Menggabungkan elemen-elemen baru
+                    newNotificationItem.append(newNotificationTitle);
+                    newNotificationItem.append(newNotificationTime);
 
-                // Menambahkan elemen baru ke dalam dropdown-menu
-                $('#dropdown-menu').append(newNotificationItem);
+                    // Menambahkan elemen baru ke dalam dropdown-menu
+                    $('#dropdown-menu').append(newNotificationItem);
 
-                // Menambahkan garis pemisah setelah elemen baru
-                $('#dropdown-menu').append('<hr class="dropdown-divider">');
-            } else if (timeDiff === 1) {
-                let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
-                let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text('Waktu terisa 1 hari');
-                let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task : ' + notification.task);
-                let newNotificationTime = $('<small>').text(notificationMessage);
+                    // Menambahkan garis pemisah setelah elemen baru
+                    $('#dropdown-menu').append('<hr class="dropdown-divider">');                                        
 
-                // Menggabungkan elemen-elemen baru
-                newNotificationItem.append(newNotificationTitle);
-                newNotificationItem.append(newNotificationMessage);
-                newNotificationItem.append(newNotificationTime);
+                } else if (timeDiff === 1) {
+                    let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
+                    let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text('1 Day Remaining!');
+                    let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task : ' + notification.task);
+                    let newNotificationTime = $('<small>').text(notificationMessage);
 
-                // Menambahkan elemen baru ke dalam dropdown-menu
-                newNotificationItem.append(newNotificationTitle);
-                newNotificationItem.append(newNotificationTime);
+                    // Menggabungkan elemen-elemen baru
+                    newNotificationItem.append(newNotificationTitle);
+                    newNotificationItem.append(newNotificationMessage);
+                    newNotificationItem.append(newNotificationTime);
 
-                $('#dropdown-menu').append(newNotificationItem);
+                    // Menambahkan elemen baru ke dalam dropdown-menu
+                    newNotificationItem.append(newNotificationTitle);
+                    newNotificationItem.append(newNotificationTime);
 
-                // Menambahkan garis pemisah setelah elemen baru
-                $('#dropdown-menu').append('<hr class="dropdown-divider">');
-            }             
+                    $('#dropdown-menu').append(newNotificationItem);
+
+                    // Menambahkan garis pemisah setelah elemen baru
+                    $('#dropdown-menu').append('<hr class="dropdown-divider">');
+
+                } else if (currentDate.getDate() > finishDate.getDate()) {
+                    let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
+                    let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text("Please bro, you're late!");
+                    let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task : ' + notification.task);
+                    let newNotificationTime = $('<small>').text(notificationMessage);
+
+                    // Menggabungkan elemen-elemen baru
+                    newNotificationItem.append(newNotificationTitle);
+                    newNotificationItem.append(newNotificationMessage);
+                    newNotificationItem.append(newNotificationTime);
+
+                    // Menambahkan elemen baru ke dalam dropdown-menu
+                    newNotificationItem.append(newNotificationTitle);
+                    newNotificationItem.append(newNotificationTime);
+
+                    $('#dropdown-menu').append(newNotificationItem);
+
+                    // Menambahkan garis pemisah setelah elemen baru
+                    $('#dropdown-menu').append('<hr class="dropdown-divider">');
+                }  
+            }              
         });
 
+        $('#all-notif').click(function() {
+            var $dropdownMenu = $('#dropdown-menu');
+            if ($dropdownMenu.css('overflow-y') === 'auto') {
+                $dropdownMenu.css('overflow-y', 'hidden');
+            } else {
+                $dropdownMenu.css('overflow-y', 'auto');
+            }
+        });
+
+        
+
+
     });
+
 </script>
     
 @endsection

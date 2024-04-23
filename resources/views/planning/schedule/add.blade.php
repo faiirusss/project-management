@@ -98,10 +98,9 @@
                     <select name="status_task" id="status_task" class="form-select mb-3 text-white" onchange="calculateResult()" required>
                         <option selected="true" disabled="disabled" hidden>Choose One</option>  
                         <option value="Open">Open</option>
-                        <option value="Close">Close</option>
+                        <option value="Close">Closed</option>
                     </select>
                 </div>
-                
             </div>     
             <div class="row mb-2">                
                 <div class="col-md-6">

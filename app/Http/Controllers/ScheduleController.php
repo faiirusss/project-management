@@ -15,14 +15,14 @@ class ScheduleController extends Controller
 
 
             $schedule = new planning_schedule;
-
+            
             if ($request->get('search')) {
                 $schedule = $schedule->where('project_definition_id', 'LIKE', '%' . $request->get('search') . '%');
             }
-
+            
             $schedule = $schedule->get();
-            $ajax = response()->json($schedule);
 
+            $ajax = response()->json($schedule);
 
             $projectDefinition = Initiating_ProjectDefinition::all();
             return view('planning.schedule.schedule', compact('projectDefinition', 'schedule', 'request', 'ajax'));
