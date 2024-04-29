@@ -9,13 +9,21 @@ use Illuminate\Http\Request;
 
 class ExecutingScheduleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
-            $executingSchedule = executing_schedule::all()->sortBy('project_definition_id');
+            $executingSchedule = new executing_schedule();
+
+            if($request->get('search'))
+            {
+                $executingSchedule = $executingSchedule->where('project_definition_id', 'LIKE', '%' . $request->get('search') . '%');
+            }
+            $executingSchedule = $executingSchedule->get();
+            $ajax = response()->json($executingSchedule);
+
             $projectDefinition = Initiating_ProjectDefinition::all();
 
-            return view('executing.schedule.index', compact(['executingSchedule', 'projectDefinition']));
+            return view('executing.schedule.index', compact(['executingSchedule', 'projectDefinition', 'request', 'ajax']));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }
@@ -68,6 +76,7 @@ class ExecutingScheduleController extends Controller
             'description_task' => $request->description_task,
             'assign_to' => $request->assign_to,
             'project_definition_id' => $request->name_project,
+            'status_task' => $request->status_task,
             $request->except(['_token']),
         ]);
         return redirect('/scheduleExecuting');

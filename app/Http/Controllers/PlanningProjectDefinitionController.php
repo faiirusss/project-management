@@ -180,8 +180,6 @@ class PlanningProjectDefinitionController extends Controller
     // $planningProject->guarantee_id = $guarantee_id->id;
     // $planningProject->stakeholder_id = $stakeholder_id->id;        
 
-
-
     public function destroy($id)
     {
         $scope = planning_project_definitions::find($id);
@@ -242,7 +240,7 @@ class PlanningProjectDefinitionController extends Controller
 
     public function update(Request $request, $id)
     {
-        if ($request->status == 'close' || $request->status == 'Close') {
+        if ($request->status == 'close' || $request->status == 'Close') { // saat ada request berupa pengubahan status dari open menjadi close
 
             $planning = planning_project_definitions::find($id);
             $schedule_id = planning_schedule::where('project_definition_id', $request->name_project)->first();
@@ -296,6 +294,7 @@ class PlanningProjectDefinitionController extends Controller
                     'finish_date' => $schedule->finish_date,
                     'description_task' => $schedule->description_task,
                     'assign_to' => $schedule->assign_to,
+                    'status_task' => 'Open',
                     'project_definition_id' => $schedule->project_definition_id,
                 ]);
             }
@@ -311,7 +310,7 @@ class PlanningProjectDefinitionController extends Controller
                     'Risk_reponse_type' => $risk->Risk_reponse_type,
                     'Risk_reponse_plan' => $risk->Risk_reponse_plan,
                     'assigned_to' => $risk->assigned_to,
-                    'status' => $risk->status,
+                    'status' => 'Open',
                     'due_date' => $risk->due_date,
                     'project_definition_id' => $risk->project_definition_id,
                 ]);
