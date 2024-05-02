@@ -65,7 +65,9 @@
                 <div class="col-md-8">
                     <label for="nameProject" class="form-label text-white">Name Project</label>
                     <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                        <option value="{{ $executing->id}}" selected>{{$project->name_project}}</option>
+                        @foreach ($finalExecuting as $item)
+                            <option value="{{ $item->id}}" {{ $item->id == $executingSchedule->projectDefinition['id'] ? 'selected' : '' }}>{{$item->projectDefinition['name_project']}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-md-4">

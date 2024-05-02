@@ -7,7 +7,7 @@ use App\Models\planning_project_definitions;
 use App\Models\planning_schedule;
 use Illuminate\Http\Request;
 
-class ScheduleController extends Controller
+class  ScheduleController extends Controller
 {
     public function index(Request $request)
     {
@@ -48,9 +48,6 @@ class ScheduleController extends Controller
             'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
-
-
-
         return redirect('/schedule')->with('success', 'Risk has been added successfully.');
     }
 
@@ -59,14 +56,15 @@ class ScheduleController extends Controller
     {
         $schedule = planning_schedule::find($id);
         $schedule->delete();
-        return redirect('/schedule');
+        return redirect('/schedule')->with('success', 'Risk has been deleted successfully.');
     }
 
     public function show($id)
     {
         $schedule = planning_schedule::find($id);
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.schedule.edit', compact('schedule', 'projectDefinition'));
+        $finalPlanning = planning_project_definitions::all();
+        return view('planning.schedule.edit', compact('schedule', 'projectDefinition', 'finalPlanning'));
     }
 
     public function update(Request $request, $id)

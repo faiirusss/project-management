@@ -62,8 +62,8 @@ class ExecutingScheduleController extends Controller
     public function show($id)
     {
         $executingSchedule = executing_schedule::find($id);
-        $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('executing.schedule.edit', compact('executingSchedule', 'projectDefinition'));
+        $finalExecuting = executing_project_definitions::all();
+        return view('executing.schedule.edit', compact('executingSchedule', 'finalExecuting'));
     }
 
     public function update(Request $request, $id)

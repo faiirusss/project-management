@@ -90,7 +90,12 @@
     <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">                                    
         <div id="dropdown-menu" class="mt-2"></div>
         <hr>
-        <div id="all-notif">See all notification</div>
+        {{-- @if ()
+            
+        @endif --}}
+        @if (count($notifications) > 0)
+            <div id="all-notif">See all notification</div>
+        @endif
     </div>
 </div>
 <div class="nav-item dropdown">
@@ -110,7 +115,17 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script>
     let notifications = <?php echo json_encode($notifications); ?>;
+
     $(document).ready(function() {
+        
+        if (notifications.length === 0) {
+            let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
+            let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text("No notification today!");
+            newNotificationItem.append(newNotificationTitle);
+            $('#dropdown-menu').append(newNotificationItem);
+
+        }
+
         notifications.forEach(function(notification) {
             let finishDate = new Date(notification.finish_date);
             let currentDate = new Date();
@@ -194,7 +209,12 @@
                     // Menambahkan garis pemisah setelah elemen baru
                     $('#dropdown-menu').append('<hr class="dropdown-divider">');
                 }  
-            }              
+            } else if (notifications.length === 0) {
+                let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
+                let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text("No notification today!");
+                newNotificationItem.append(newNotificationTitle);
+                $('#dropdown-menu').append(newNotificationItem);
+            }             
         });
 
         $('#all-notif').click(function() {

@@ -68,10 +68,8 @@ class RiskExecutingController extends Controller
     public function show($id)
     {
         $risksExecuting = executing_risk::find($id);
-        $find = $risksExecuting->project_definition_id;
-        $finalExecuting = executing_project_definitions::find($find);
-        $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('executing.riskExecuting.edit', compact('risksExecuting', 'projectDefinition', 'finalExecuting'));
+        $finalExecuting = executing_project_definitions::all();
+        return view('executing.riskExecuting.edit', compact('risksExecuting', 'finalExecuting'));
     }
 
     public function update(Request $request, $id)
@@ -81,17 +79,15 @@ class RiskExecutingController extends Controller
             'start_date' => $request->start_date,
             'description_ofrisk' => $request->description_ofrisk,
             'submitter' => $request->submitter,
-            'name_project' => $request->name_project,
             'probability_factor' => $request->probability_factor,
             'impact_factor' => $request->impact_factor,
             'exposure' => $request->exposure,
             'Risk_reponse_type' => $request->Risk_reponse_type,
             'Risk_reponse_plan' => $request->Risk_reponse_plan,
-            'impact_description' => $request->impact_description,
             'assigned_to' => $request->assigned_to,
             'status' => $request->status,
             'due_date' => $request->due_date,
-            'date_realitation' => $request->date_realitation,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/riskExecuting')->with('success', 'Data has been updated.');

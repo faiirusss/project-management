@@ -64,20 +64,9 @@
             <div class="col-md-6">
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                    @if ($finalExecuting->isNotEmpty())
-                        @php
-                            $openProjects = $finalExecuting->where('status', 'Open');
-                        @endphp
-                        @if ($openProjects->isNotEmpty())
-                            @foreach($openProjects as $project)
-                                <option value="{{ $project->id }}">{{ $project->projectDefinition['name_project'] }}</option>
-                            @endforeach
-                        @else
-                            <option value="">Project not available</option>
-                        @endif
-                    @else
-                        <option value="">Empty Project</option>
-                    @endif<option value="{{$executing->project_definition_id}}" selected>{{$executing->projectDefinition['name_project']}}</option>
+                   @foreach ($finalExecuting as $item)
+                        <option value="{{ $item->id}}" {{ $item->id == $risksExecuting->projectDefinition['id'] ? 'selected' : '' }}>{{$item->projectDefinition['name_project']}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-md-6">
@@ -171,8 +160,7 @@
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Status</label>
                 <select name="status" id="" value="{{$risksExecuting->status}}" class="form-select mb-3 text-white" required>
-                    <option value="Planned">Planned</option>
-                    <option value="in_process">In Process</option>
+                    <option value="Open">Open</option>
                     <option value="Closed">Closed</option>
                 </select>
             </div>

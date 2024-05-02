@@ -111,7 +111,7 @@
                 {{-- end filter data --}}
 
                 <br>
-                <div class="table-responsive">
+                <div class="">
                     <table class="table table-striped table-condensed">
                         <thead>
                             <tr class="text-white">

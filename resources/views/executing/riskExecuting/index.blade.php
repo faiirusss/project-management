@@ -147,22 +147,22 @@
                             @php
                                 $today = getDate(strtotime(date('Y-m-d')))[0];
                                 $tanggal = date("Y-m-d H:i:s", $today); 
-                                $finish = getDate(strtotime($u->finish_date))[0];
+                                $finish = getDate(strtotime($u->due_date))[0];
                                 $date = date("Y-m-d H:i:s", $finish);
                             @endphp
                             <tr class="text-white">
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->projectDefinition['name_project']}}</small></td>
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->start_date}}</small></td>
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->description_ofrisk}}</small></td>
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->submitter}}</small></td>
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->probability_factor}}</small></td>
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->impact_factor}}</small></td>
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->exposure}}</small></td>
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->Risk_reponse_type}}</small></td>
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->Risk_reponse_plan}}</small></td>
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->assigned_to}}</small></td>
-                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->due_date}}</small></td>
-                                <td data-id="{{$u->id}}" class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->status}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->projectDefinition['name_project']}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->start_date}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->description_ofrisk}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->submitter}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->probability_factor}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->impact_factor}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->exposure}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->Risk_reponse_type}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->Risk_reponse_plan}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->assigned_to}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->due_date}}</small></td>
+                                <td data-id="{{$u->id}}" class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->status}}</small></td>
                                 <td><small>
                                     <a href="/riskExecuting/{{$u->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>   
                                     <a href="/riskExecuting/{{$u->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   

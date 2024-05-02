@@ -69,7 +69,8 @@ class RiskController extends Controller
     {
         $risks = planning_risk::find($id);
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.risk.edit', compact('risks', 'projectDefinition'));
+        $finalPlanning = planning_project_definitions::all();
+        return view('planning.risk.edit', compact('risks', 'projectDefinition', 'finalPlanning'));
     }
 
     public function update(Request $request, $id)
