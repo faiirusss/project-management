@@ -115,7 +115,7 @@
             let finishDate = new Date(notification.finish_date);
             let currentDate = new Date();
             let status_task = notification.status_task;
-            let id = notification.id;
+            let id = notification.id;            
 
             let timeDiff = finishDate.getDate() - currentDate.getDate();
             let timeDiffInMinutes = Math.floor(timeDiff / (1000 * 60));
@@ -136,7 +136,7 @@
                 if (timeDiff === 0) {
                     let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
                     let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text('Finish quickly, Today is the last day!');
-                    let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task : ' + notification.task);
+                    let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task to: ' + notification.assign_to);
                     let newNotificationTime = $('<small>').text(notificationMessage);
 
                     // Menggabungkan elemen-elemen baru
@@ -154,10 +154,10 @@
                     // Menambahkan garis pemisah setelah elemen baru
                     $('#dropdown-menu').append('<hr class="dropdown-divider">');                                        
 
-                } else if (timeDiff === 1) {
+                } else if (currentDate < finishDate) {
                     let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
                     let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text('1 Day Remaining!');
-                    let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task : ' + notification.task);
+                    let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task to : ' + notification.assign_to);
                     let newNotificationTime = $('<small>').text(notificationMessage);
 
                     // Menggabungkan elemen-elemen baru
@@ -174,10 +174,10 @@
                     // Menambahkan garis pemisah setelah elemen baru
                     $('#dropdown-menu').append('<hr class="dropdown-divider">');
 
-                } else if (currentDate.getDate() > finishDate.getDate()) {
+                } else if (currentDate > finishDate) {
                     let newNotificationItem = $('<a>').addClass('dropdown-item pt-2').attr('href', '#');
                     let newNotificationTitle = $('<h6>').addClass('fw-normal mb-0 task-title').text("Please bro, you're late!");
-                    let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task : ' + notification.task);
+                    let newNotificationMessage = $('<h6>').addClass('fw-normal mb-0 notification').text('Task to : ' + notification.assign_to);
                     let newNotificationTime = $('<small>').text(notificationMessage);
 
                     // Menggabungkan elemen-elemen baru

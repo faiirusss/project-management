@@ -88,7 +88,9 @@
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Schedule</h2>
-                <a href="/scheduleExecuting/add" class="btn btn-sm btn-outline-success mb-4"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <a href="/scheduleExecuting/add" class="btn btn-sm btn-outline-success mb-4
+                
+                "><i class="fa fa-plus me-2"></i>Add Data</a><br>
 
                 {{-- filter data --}}
                 <div class="">
@@ -106,7 +108,7 @@
                                 <button type="submit" class="btn btn-primary mb-3 btn-sm">Find</button>
                             </div>
                         </div>  
-                    </form>
+                    </form> 
                 </div>
                 {{-- end filter data --}}
 
@@ -116,7 +118,6 @@
                         <thead>
                             <tr class="text-white">
                                 <th valign="top"><small>Project Name</small></th>
-                                <th valign="top"><small>Task</small></th>
                                 <th valign="top"><small>Start Date</small></th>
                                 <th valign="top"><small>Finish Date</small></th>
                                 <th valign="top"><small>Description</small></th>
@@ -127,14 +128,20 @@
                         </thead>
                         <tbody>
                             @foreach ($executingSchedule as $u)
+
+                            @php
+                                $today = getDate(strtotime(date('Y-m-d')))[0];
+                                $tanggal = date("Y-m-d H:i:s", $today); 
+                                $finish = getDate(strtotime($u->finish_date))[0];
+                                $date = date("Y-m-d H:i:s", $finish);
+                            @endphp
                             <tr class="text-white">
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($u->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->projectDefinition['name_project']}}</small></td>
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($u->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->task}}</small></td>
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($u->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{date("d-m-Y", strtotime($u->start_date))}}</small></td>
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($u->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{date("d-m-Y", strtotime($u->finish_date))}}</small></td>
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($u->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->description_task}}</small></td>
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($u->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->assign_to}}</small></td>
-                                <td data-id="{{$u->id}}" class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($u->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->status_task}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->projectDefinition['name_project']}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{date("d-m-Y", strtotime($u->start_date))}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{date("d-m-Y", strtotime($u->finish_date))}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->description_task}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->assign_to}}</small></td>
+                                <td data-id="{{$u->id}}" class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}" valign="middle"><small>{{$u->status_task}}</small></td>
                                 <td><small>
                                     <a href="/scheduleExecuting/{{$u->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>   
                                     <a href="/scheduleExecuting/{{$u->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   

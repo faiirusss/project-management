@@ -70,25 +70,13 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="" class="form-label text-white">Task</label>
-                    <input type="text" name="task" id="" value="{{$schedule->task}}" class="form-control mb-3 text-white"  required>
+                    <label for="" class="form-label text-white">Assign to</label>
+                    <input type="text" name="assign_to" id="" value="{{$schedule->assign_to}}" class="form-control mb-3 text-white"  required>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <label for="" class="form-label text-white">Description Task</label>
                     <input type="text" name="description_task" id="" value="{{$schedule->description_task}}" class="form-control mb-3 text-white"  required>
                 </div> 
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Assign to</label>
-                    <input type="text" name="assign_to" id="" value="{{$schedule->assign_to}}" class="form-control mb-3 text-white"  required>
-                </div> 
-                <div class="col-md-12">
-                    <label for="status_task" class="form-label text-white">Status Task</label>
-                    <select name="status_task" id="status_task" class="form-select mb-3 text-white" onchange="calculateResult()" required>
-                        <option selected="true" disabled="disabled" hidden>Choose One</option>  
-                        <option value="Open" {{ $schedule->status_task == 'Open' ? 'selected' : ''}}>Open</option>
-                        <option value="Closed" {{ $schedule->status_task == 'Closed' ? 'selected' : ''}}>Closed</option>
-                    </select>
-                </div>
             </div>     
             <div class="row mb-2">
                 <div class="col-md-6">

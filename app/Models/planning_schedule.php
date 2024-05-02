@@ -8,12 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class planning_schedule extends Model
 {
     protected $fillable = [
-        'task',
         'start_date',
         'finish_date',
         'description_task',
         'assign_to',
-        'status_task',
         'project_definition_id'
     ];
 

@@ -9,25 +9,6 @@
 
     .table-striped td, .table-striped th {
         white-space: nowrap;
-    }
-
-    .overdue-task {
-        color: #dc3545;
-    }
-
-    .status-task-open{
-        border: 2px solid #15593b;
-        background-color: #1F4735;
-        color: #fff;
-        padding: 4px 12px 4px 12px;
-        border-radius: 9999px;
-    }
-    .status-task-close{
-        border: 2px solid #FF5733;
-        background-color: #dc3545; /* Warna merah */
-        color: #fff;
-        padding: 4px 12px;
-        border-radius: 9999px;
     }       
 </style>
 
@@ -119,25 +100,21 @@
                         <thead>
                             <tr class="text-white">
                                 <th><small>Name Project</small></th>
-                                <th><small>Task</small></th>
                                 <th><small>Start Date</small></th>
                                 <th><small>Finish Date</small></th>
                                 <th><small>Description Task</small></th>
                                 <th><small>Assign To</small></th>
-                                <th><small>Status task</small></th>
                                 <th><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($schedule as $r)
                             <tr class="text-white">
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($r->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{$r->projectDefinition['name_project']}}</small></td>
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($r->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{$r->task}}</small></td>
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($r->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{date("d-m-Y", strtotime($r->start_date))}}</small></td>
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($r->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{date("d-m-Y", strtotime($r->finish_date))}}</small></td>
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($r->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{$r->description_task}}</small></td>
-                                <td class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($r->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{$r->assign_to}}</small></td>
-                                <td data-id="{{$r->id}}" class="schedule {{getDate(strtotime(date('Y-m-d')))['mday'] > getDate(strtotime($r->finish_date))['mday'] ? 'overdue-task' : ''}}" valign="middle"><small>{{$r->status_task}}</small></td>
+                                <td valign="middle"><small>{{$r->projectDefinition['name_project']}}</small></td>
+                                <td valign="middle"><small>{{date("d-m-Y", strtotime($r->start_date))}}</small></td>
+                                <td valign="middle"><small>{{date("d-m-Y", strtotime($r->finish_date))}}</small></td>
+                                <td valign="middle"><small>{{$r->description_task}}</small></td>
+                                <td valign="middle"><small>{{$r->assign_to}}</small></td>
                                 <td valign="middle">
                                     <a href="/schedule/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
                                     <a href="/schedule/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
@@ -151,30 +128,6 @@
         </div>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function() {
-    let ajaxData = <?php echo json_encode($ajax); ?>; // Mengonversi data PHP menjadi objek JavaScript
-    let datas = ajaxData.original;
-
-    // Looping melalui setiap objek dalam array datas
-    datas.forEach(function(item) {
-        // Mendapatkan nilai dari setiap properti objek
-        let id = item.id;
-        let status_task = item.status_task;
-        // Memilih elemen <td> yang sesuai dengan id        
-        let tdStatus = $("td[data-id='" + id + "']");                
-
-        // Menentukan gaya berdasarkan status_task
-        if (status_task === 'Open') {
-            tdStatus.find('small').addClass('status-task-open');
-        } else if (status_task === 'Closed') {
-            tdStatus.find('small').addClass('status-task-close');
-        }
-    });
-});
-</script>
 
 
 @endsection

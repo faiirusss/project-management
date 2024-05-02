@@ -61,9 +61,9 @@ class RiskExecutingController extends Controller
     {
         $risksExecuting = executing_risk::find($id);
         $find = $risksExecuting->project_definition_id;
-        $executing = executing_project_definitions::find($find);
+        $finalExecuting = executing_project_definitions::find($find);
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('executing.riskExecuting.edit', compact('risksExecuting', 'projectDefinition', 'executing'));
+        return view('executing.riskExecuting.edit', compact('risksExecuting', 'projectDefinition', 'finalExecuting'));
     }
 
     public function update(Request $request, $id)

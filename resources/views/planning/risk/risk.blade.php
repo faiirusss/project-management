@@ -113,7 +113,6 @@
                                 <th><small>Risk Response Type</small></th>
                                 <th><small>Risk Reponse Plan</small></th>
                                 <th><small>Assigned To</small></th>
-                                <th><small>Status</small></th>
                                 <th><small>Due Date</small></th>
                                 <th><small>Action</small></th>
                             </tr>
@@ -131,7 +130,6 @@
                                 <td><small>{{$r->Risk_reponse_type}}</small></td>
                                 <td><small>{{$r->Risk_reponse_plan}}</small></td>
                                 <td><small>{{$r->assigned_to}}</small></td>
-                                <td><small>{{$r->status}}</small></td>
                                 <td><small>{{$r->due_date}}</small></td>
                                 <td>
                                     <a href="/risk/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      

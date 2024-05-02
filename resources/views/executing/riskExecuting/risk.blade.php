@@ -178,8 +178,7 @@
                 <label for="" class="form-label text-white">Status</label>
                 <select name="status" id="" class="form-select mb-3 text-white" required>
                     <option selected="true" disabled="disabled" hidden>Choose One</option>  
-                    <option value="Planned">Planned</option>
-                    <option value="In Process">In Process</option>
+                    <option value="Planned">Open</option>
                     <option value="Closed">Closed</option>
                 </select>
             </div>

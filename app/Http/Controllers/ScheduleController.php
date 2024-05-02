@@ -41,12 +41,10 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         planning_schedule::create([
-            'task' => $request->task,
             'start_date' => $request->start_date,
             'finish_date' => $request->finish_date,
             'description_task' => $request->description_task,
             'assign_to' => $request->assign_to,
-            'status_task' => $request->status_task,
             'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
@@ -75,12 +73,10 @@ class ScheduleController extends Controller
     {
         $schedule = planning_schedule::find($id);
         $schedule->update([
-            'task' => $request->task,
             'start_date' => $request->start_date,
             'finish_date' => $request->finish_date,
             'description_task' => $request->description_task,
             'assign_to' => $request->assign_to,
-            'status_task' => $request->status_task,
             'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);

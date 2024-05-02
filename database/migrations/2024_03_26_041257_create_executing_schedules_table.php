@@ -15,7 +15,6 @@ class CreateExecutingSchedulesTable extends Migration
     {
         Schema::create('executing_schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('task');
             $table->date('start_date');
             $table->date('finish_date');
             $table->string('description_task');

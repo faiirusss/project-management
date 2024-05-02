@@ -289,7 +289,6 @@ class PlanningProjectDefinitionController extends Controller
 
             foreach ($scheduleExecuting as $schedule) {
                 executing_schedule::firstOrCreate([
-                    'task' => $schedule->task,
                     'start_date' => $schedule->start_date,
                     'finish_date' => $schedule->finish_date,
                     'description_task' => $schedule->description_task,

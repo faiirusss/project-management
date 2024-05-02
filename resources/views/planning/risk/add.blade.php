@@ -62,7 +62,7 @@
         <form action="/risk/save" method="post">
             @csrf
         <div class="row mb-2">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                     @if ($finalPlanning->isNotEmpty())
@@ -81,10 +81,7 @@
                     @endif
                 </select>
             </div>
-            <div class="col-md-6">
-                <label for="start_date" class="form-label text-white">Entry Date</label>
-                <input type="date" name="start_date" id="" class="form-control mb-3 text-white"  required>
-            </div>
+
         </div>   
         <div class="row mb-2">
             <div class="col-md-6">
@@ -175,13 +172,8 @@
         </div>
         <div class="row mb-2">
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Status</label>
-                <select name="status" id="" class="form-select mb-3 text-white" required>
-                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
-                    <option value="Planned">Planned</option>
-                    <option value="In Process">In Process</option>
-                    <option value="Closed">Closed</option>
-                </select>
+                <label for="start_date" class="form-label text-white">Entry Date</label>
+                <input type="date" name="start_date" id="" class="form-control mb-3 text-white"  required>
             </div>
             <div class="col-md-6">
                 <label for="due_date" class="form-label text-white">Due Date</label>

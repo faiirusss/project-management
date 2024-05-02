@@ -24,7 +24,6 @@ class CreatePlanningRisksTable extends Migration
             $table->string('Risk_reponse_type');
             $table->string('Risk_reponse_plan');
             $table->string('assigned_to');
-            $table->string('status');
             $table->date('due_date');
             $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();

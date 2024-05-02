@@ -40,11 +40,11 @@ class ExecutingScheduleController extends Controller
     public function store(Request $request)
     {
         executing_schedule::create([
-            'task' => $request->task,
             'start_date' => $request->start_date,
             'finish_date' => $request->finish_date,
             'description_task' => $request->description_task,
             'assign_to' => $request->assign_to,
+            'status_task' => 'Open',
             'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
@@ -70,7 +70,6 @@ class ExecutingScheduleController extends Controller
     {
         $executingSchedule = executing_schedule::find($id);
         $executingSchedule->update([
-            'task' => $request->task,
             'start_date' => $request->start_date,
             'finish_date' => $request->finish_date,
             'description_task' => $request->description_task,

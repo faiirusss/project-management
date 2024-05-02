@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\executing_schedule;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\planning_schedule;
@@ -13,7 +14,7 @@ class DashboardController extends Controller
     {
         if (Auth::user()->roles == 'superadmin' || Auth::user()->roles == 'adminPlanning') {
             $notifications = [];
-            $schedules = planning_schedule::get();
+            $schedules = executing_schedule::get();
 
             foreach ($schedules as $schedule) {
                 $finishDate = Carbon::createFromFormat('Y-m-d', $schedule->finish_date);
@@ -28,7 +29,6 @@ class DashboardController extends Controller
                 }
 
                 $dataSend = [
-                    'task' => $schedule->task,
                     'start_date' => $schedule->start_date,
                     'finish_date' => $schedule->finish_date,
                     'description_task' => $schedule->description_task,

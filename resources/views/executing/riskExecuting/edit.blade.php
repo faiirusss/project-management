@@ -64,7 +64,20 @@
             <div class="col-md-6">
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                    <option value="{{$executing->project_definition_id}}" selected>{{$executing->projectDefinition['name_project']}}</option>
+                    @if ($finalExecuting->isNotEmpty())
+                        @php
+                            $openProjects = $finalExecuting->where('status', 'Open');
+                        @endphp
+                        @if ($openProjects->isNotEmpty())
+                            @foreach($openProjects as $project)
+                                <option value="{{ $project->id }}">{{ $project->projectDefinition['name_project'] }}</option>
+                            @endforeach
+                        @else
+                            <option value="">Project not available</option>
+                        @endif
+                    @else
+                        <option value="">Empty Project</option>
+                    @endif<option value="{{$executing->project_definition_id}}" selected>{{$executing->projectDefinition['name_project']}}</option>
                 </select>
             </div>
             <div class="col-md-6">

@@ -61,18 +61,14 @@
         <form action="/risk/{{ $risks->id }}/update" method="post">
             @csrf
         <div class="row mb-2">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required readonly>
                     @foreach($projectDefinition as $project)
                     <option value="{{ $project->id}}" {{ $project->id == $risks->projectDefinition['id'] ? 'selected' : '' }}>{{$project->name_project}}</option>
                     @endforeach
                 </select>
-            </div>
-            <div class="col-md-6">
-                <label for="" class="form-label text-white">Entry Date</label>
-                <input type="date" name="start_date" id="" value="{{$risks->start_date}}" class="form-control mb-3 text-white"  required>
-            </div>
+            </div>            
         </div>   
         <div class="row mb-2">
             <div class="col-md-6">
@@ -158,13 +154,9 @@
         </div>
         <div class="row mb-2">
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Status</label>
-                <select name="status" id="" value="{{$risks->status}}" class="form-select mb-3 text-white" required>
-                    <option value="Planned" {{ $risks->status == 'Planned' ? 'selected' : '' }}>Planned</option>
-                    <option value="In Process" {{ $risks->status == 'In Process' ? 'selected' : '' }}>In Process</option>
-                    <option value="Closed" {{ $risks->status == 'Closed' ? 'selected' : '' }}>Closed</option>
-                </select>
-            </div>
+                <label for="" class="form-label text-white">Entry Date</label>
+                <input type="date" name="start_date" id="" value="{{$risks->start_date}}" class="form-control mb-3 text-white"  required>
+            </div>  
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Due Date</label>
                 <input type="date" name="due_date" id="" value="{{$risks->due_date}}" class="form-control mb-3 text-white" required>

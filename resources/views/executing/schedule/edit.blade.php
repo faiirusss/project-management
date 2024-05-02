@@ -65,24 +65,18 @@
                 <div class="col-md-8">
                     <label for="nameProject" class="form-label text-white">Name Project</label>
                     <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                        @foreach($projectDefinition as $project)
-                            <option value="{{ $project->id}}" {{ $project->id == $executingSchedule->projectDefinition['id'] ? 'selected' : '' }}>{{$project->name_project}}</option>
-                        @endforeach
+                        <option value="{{ $executing->id}}" selected>{{$project->name_project}}</option>
                     </select>
                 </div>
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Task</label>
-                    <input type="text" name="task" id="" value="{{$executingSchedule->task}}" class="form-control mb-3 text-white"  required>
-                </div>
-                <div class="col-md-8">
-                    <label for="" class="form-label text-white">Description Task</label>
-                    <input type="text" name="description_task" id="" value="{{$executingSchedule->description_task}}" class="form-control mb-3 text-white"  required>
-                </div> 
                 <div class="col-md-4">
                     <label for="" class="form-label text-white">Assign to</label>
                     <input type="text" name="assign_to" id="" value="{{$executingSchedule->assign_to}}" class="form-control mb-3 text-white"  required>
                 </div> 
-                <div class="col-md-12">                    
+                <div class="col-md-8">
+                    <label for="" class="form-label text-white">Description Task</label>
+                    <input type="text" name="description_task" id="" value="{{$executingSchedule->description_task}}" class="form-control mb-3 text-white"  required>
+                </div>                 
+                <div class="col-md-4">                    
                     <label for="status_task" class="form-label text-white">Status Task</label>
                     <select name="status_task" id="status_task" class="form-select mb-3 text-white" onchange="calculateResult()" required>
                         <option selected="true" disabled="disabled" hidden>Choose One</option>  

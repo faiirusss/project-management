@@ -81,26 +81,14 @@
                         @endif
                     </select>
                 </div>
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Task</label>
-                    <input type="text" name="task" id="" class="form-control mb-3 text-white"  required>
-                </div>
-                <div class="col-md-8">
-                    <label for="" class="form-label text-white">Description Task</label>
-                    <input type="text" name="description_task" id="" class="form-control mb-3 text-white"  required>
-                </div> 
-                <div class="col-md-4">
+                 <div class="col-md-4">
                     <label for="" class="form-label text-white">Assign to</label>
                     <input type="text" name="assign_to" id="" class="form-control mb-3 text-white"  required>
                 </div> 
                 <div class="col-md-12">
-                    <label for="status_task" class="form-label text-white">Status Task</label>
-                    <select name="status_task" id="status_task" class="form-select mb-3 text-white" onchange="calculateResult()" required>
-                        <option selected="true" disabled="disabled" hidden>Choose One</option>  
-                        <option value="Open">Open</option>
-                        <option value="Close">Closed</option>
-                    </select>
-                </div>
+                    <label for="" class="form-label text-white">Description Task</label>
+                    <input type="text" name="description_task" id="" class="form-control mb-3 text-white"  required>
+                </div>                 
             </div>     
             <div class="row mb-2">                
                 <div class="col-md-6">

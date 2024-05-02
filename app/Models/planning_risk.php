@@ -17,7 +17,6 @@ class planning_risk extends Model
         'Risk_reponse_type',
         'Risk_reponse_plan',
         'assigned_to',
-        'status',
         'due_date',
         'project_definition_id'
     ];

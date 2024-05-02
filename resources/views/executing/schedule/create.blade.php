@@ -14,27 +14,27 @@
                 <i class="fa fa-home"></i>
                 <span class="d-none d-lg-inline-flex"></span>
             </a>
-            <a href="/scope" class="nav-link" >
+            <a href="/scopeExecuting" class="nav-link" >
                 <i class="fas fa-crosshairs me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Scope</span >
             </a>
-            <a href="/schedule" class="nav-link">
+            <a href="/scheduleExecuting" class="nav-link">
                 <i class="far fa-calendar-alt me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Schedule</span>
             </a>
-            <a href="/cost" class="nav-link">
+            <a href="/costExecuting" class="nav-link">
                 <i class="	fas fa-coins me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Cost</span>
             </a>
-            <a href="/quality" class="nav-link">
+            <a href="/qualityExecuting" class="nav-link">
                 <i class="fas fa-award me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Quality</span>
             </a>
-            <a href="/resources" class="nav-link">
+            <a href="/resourcesExecuting" class="nav-link">
                 <i class="fa fa-cogs me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Resources</span>
             </a>
-            <a href="/communication" class="nav-link">
+            <a href="/communicationExecuting" class="nav-link">
                 <i class="far fa-comments me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Communication</span>
             </a>
@@ -42,11 +42,11 @@
                 <i class="fa fa-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Risk</span>
             </a>
-            <a href="/procurement" class="nav-link">
+            <a href="/procurementExecuting" class="nav-link">
                 <i class="fas fa-shopping-cart me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Procurement</span>
             </a>
-            <a href="/stakeholder" class="nav-link">
+            <a href="/stakeholderExecuting" class="nav-link">
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
             </a> 
@@ -80,20 +80,15 @@
                                 <option value="">Empty Project</option>
                         @endif
                     </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Task</label>
-                    <input type="text" name="task" id="" class="form-control mb-3 text-white"  required>
-                </div>
-                <div class="col-md-8">
+                </div>    
+                 <div class="col-md-4">
+                    <label for="" class="form-label text-white">Assign to</label>
+                    <input type="text" name="assign_to" id="" class="form-control mb-3 text-white"  required>
+                </div>             
+                <div class="col-md-12">
                     <label for="" class="form-label text-white">Description Task</label>
                     <input type="text" name="description_task" id="" class="form-control mb-3 text-white"  required>
                 </div> 
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Assign to</label>
-                    <input type="text" name="assign_to" id="" class="form-control mb-3 text-white"  required>
-                </div> 
-                
             </div>     
             <div class="row mb-2">                
                 <div class="col-md-6">
