@@ -88,13 +88,11 @@
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Schedule</h2>
-                <a href="/scheduleExecuting/add" class="btn btn-sm btn-outline-success mb-4
-                
-                "><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <a href="/scheduleExecuting/add" class="btn btn-sm btn-outline-success mb-4"><i class="fa fa-plus me-2"></i>Add Data</a><br>
 
                 {{-- filter data --}}
                 <div class="">
-                    <form action="/schedule" method="GET">                    
+                    <form action="/scheduleExecuting" method="GET">                    
                         <div class="input-group">                        
                             <div class="col me-2">
                                 <select class="form-control" name="search" id="search" value>

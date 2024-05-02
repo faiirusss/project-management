@@ -9,12 +9,20 @@ use Illuminate\Http\Request;
 
 class RiskExecutingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
-            $risksExecuting = executing_risk::all();
+            $risksExecuting = new executing_risk();
+
+            if($request->get('search')) {
+                $risksExecuting = $risksExecuting->where('project_definition_id', 'LIKE', '%' . $request->search . '%');
+            }
+
+            $risksExecuting = $risksExecuting->get();
+            $ajax = response()->json($risksExecuting);
+
             $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('executing.riskExecuting.index', compact('projectDefinition', 'risksExecuting'));
+            return view('executing.riskExecuting.index', compact('projectDefinition', 'risksExecuting', 'request', 'ajax'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }

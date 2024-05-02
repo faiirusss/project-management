@@ -9,6 +9,26 @@
     .table-striped td, .table-striped th {
         white-space: nowrap;
     }
+
+    .overdue-task {
+        color: #dc3545;
+    }
+
+    .status-task-open{
+        border: 2px solid #115555;
+        background-color: #1f4735;
+        color: #fff;
+        padding: 4px 12px 4px 12px;
+        border-radius: 9999px;
+    }
+
+    .status-task-close {
+        border: 2px solid #ff5733;
+        background-color: #dc3545;
+        color: #fff;
+        padding: 4px 12px;
+        border-radius: 9999px;
+    }
 </style>
 
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
@@ -69,7 +89,27 @@
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Risk</h2>
-                <a href="/riskExecuting/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <a href="/riskExecuting/add" class="btn btn-sm btn-outline-success mb-4"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+
+                {{-- filter data --}}
+                <div class="">
+                    <form action="/riskExecuting" method="GET">                    
+                        <div class="input-group">                        
+                            <div class="col me-2">
+                                <select class="form-control" name="search" id="search" value>
+                                    <option value="">Select Project</option>
+                                    @foreach ($projectDefinition as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name_project }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3 btn-sm">Find</button>
+                            </div>
+                        </div>  
+                    </form> 
+                </div>
+                {{-- end filter data --}}
 
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
@@ -97,26 +137,32 @@
                                 <th valign="top"><small>Risk response type</small></th>
                                 <th valign="top"><small>Risk respone plan</small></th>
                                 <th valign="top"><small>Assigned to</small></th>
-                                <th valign="top"><small>Status</small></th>
                                 <th valign="top"><small>Due date</small></th>
+                                <th valign="top"><small>Status</small></th>
                                 <th valign="top"><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($risksExecuting as $u)
+                            @php
+                                $today = getDate(strtotime(date('Y-m-d')))[0];
+                                $tanggal = date("Y-m-d H:i:s", $today); 
+                                $finish = getDate(strtotime($u->finish_date))[0];
+                                $date = date("Y-m-d H:i:s", $finish);
+                            @endphp
                             <tr class="text-white">
-                                <td><small>{{$u->projectDefinition['name_project']}}</small></td>
-                                <td><small>{{$u->start_date}}</small></td>
-                                <td><small>{{$u->description_ofrisk}}</small></td>
-                                <td><small>{{$u->submitter}}</small></td>
-                                <td><small>{{$u->probability_factor}}</small></td>
-                                <td><small>{{$u->impact_factor}}</small></td>
-                                <td><small>{{$u->exposure}}</small></td>
-                                <td><small>{{$u->Risk_reponse_type}}</small></td>
-                                <td><small>{{$u->Risk_reponse_plan}}</small></td>
-                                <td><small>{{$u->assigned_to}}</small></td>
-                                <td><small>{{$u->status}}</small></td>
-                                <td><small>{{$u->due_date}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->projectDefinition['name_project']}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->start_date}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->description_ofrisk}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->submitter}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->probability_factor}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->impact_factor}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->exposure}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->Risk_reponse_type}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->Risk_reponse_plan}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->assigned_to}}</small></td>
+                                <td class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->due_date}}</small></td>
+                                <td data-id="{{$u->id}}" class="schedule {{$tanggal > $date ? 'overdue-task' : ''}}"><small>{{$u->status}}</small></td>
                                 <td><small>
                                     <a href="/riskExecuting/{{$u->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>   
                                     <a href="/riskExecuting/{{$u->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
@@ -130,6 +176,30 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+    let ajaxData = <?php echo json_encode($ajax); ?>; // Mengonversi data PHP menjadi objek JavaScript
+    let datas = ajaxData.original;
+
+    // Looping melalui setiap objek dalam array datas
+    datas.forEach(function(item) {
+        // Mendapatkan nilai dari setiap properti objek
+        let id = item.id;
+        let status_task = item.status;
+        // Memilih elemen <td> yang sesuai dengan id        
+        let tdStatus = $("td[data-id='" + id + "']");                
+
+        // Menentukan gaya berdasarkan status_task
+        if (status_task === 'Open') {
+            tdStatus.find('small').addClass('status-task-open');
+        } else if (status_task === 'Closed') {
+            tdStatus.find('small').addClass('status-task-close');
+        }
+    });
+});
+</script>
 @endsection
 
 
