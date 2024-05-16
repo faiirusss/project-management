@@ -1,6 +1,16 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+
+<style>
+    .table-responsive table {
+        overflow-x: scroll;
+    }
+
+    .table-striped td, .table-striped th {
+        white-space: nowrap;
+    }
+</style>
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -49,32 +59,60 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
+            </a>             
         </div>
     </center>
 </nav>
-<div class="container-fluid pt-4 px-4">
+
+<div class="container-fluid pt-4 px-4 mb-3">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Risk</h2>
-                <a href="/risk/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <a href="/risk/add" class="btn btn-sm btn-outline-success mb-4"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+
+                {{-- filter data --}}
+                <div class="">
+                    <form action="/risk" method="GET">                    
+                        <div class="input-group">                        
+                            <div class="col me-2">
+                                <select class="form-control" name="search" id="search" value>
+                                    <option value="">Select Project</option>
+                                    @foreach ($projectDefinition as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name_project }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3 btn-sm">Find</button>
+                            </div>
+                        </div>  
+                    </form>
+                </div>
+                {{-- end filter data --}}
+
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 <br>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" >
                         <thead>
                             <tr class="text-white">
+                                <th><small>Name Project</small></th>
                                 <th><small>Entry Date</small></th>
                                 <th><small>Description Ofrisk</small></th>
                                 <th><small>Submitter</small></th>
-                                <th><small>Name Project</small></th>
                                 <th><small>Probability Factor</small></th>
                                 <th><small>Impact Factor</small></th>
                                 <th><small>Exposure</small></th>
                                 <th><small>Risk Response Type</small></th>
                                 <th><small>Risk Reponse Plan</small></th>
                                 <th><small>Assigned To</small></th>
-                                <th><small>Status</small></th>
                                 <th><small>Due Date</small></th>
                                 <th><small>Action</small></th>
                             </tr>
@@ -82,17 +120,16 @@
                         <tbody>
                             @foreach ($risks as $r)
                             <tr class="text-white">
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->start_date}}</small></td>
                                 <td><small>{{$r->description_ofrisk}}</small></td>
                                 <td><small>{{$r->submitter}}</small></td>
-                                <td><small>{{$r->name_project}}</small></td>
                                 <td><small>{{$r->probability_factor}}</small></td>
                                 <td><small>{{$r->impact_factor}}</small></td>
                                 <td><small>{{$r->exposure}}</small></td>
                                 <td><small>{{$r->Risk_reponse_type}}</small></td>
                                 <td><small>{{$r->Risk_reponse_plan}}</small></td>
                                 <td><small>{{$r->assigned_to}}</small></td>
-                                <td><small>{{$r->status}}</small></td>
                                 <td><small>{{$r->due_date}}</small></td>
                                 <td>
                                     <a href="/risk/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      

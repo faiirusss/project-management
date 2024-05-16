@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class planning_quality extends Model
 {
     protected $fillable = [
-        'name_project',
+        'project_definition_id',
         'requirements',
         'category',
     ];
@@ -28,5 +28,15 @@ class planning_quality extends Model
                 $query->where('name_project', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->hasOne(planning_project_definitions::class);
     }
 }

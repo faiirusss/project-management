@@ -49,7 +49,7 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
+            </a>             
         </div>
     </center>
 </nav>
@@ -65,7 +65,9 @@
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                     @foreach($projectDefinition as $project)
-                    <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                    @if ($project->status == 'open' || $project->status == 'Open')
+                        <option value="{{ $project->id }}">{{ $project->name_project }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
@@ -76,13 +78,14 @@
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Position</label>
                 <select name="position" id="" class="form-select mb-3 text-white" required>
-                    <option value="project_director">Project Director</option>
-                    <option value="project_sponsor">Project Sponsor</option>
-                    <option value="project_manager">Project Mananger</option>
-                    <option value="chief_engineer">Chief Engineer</option>
-                    <option value="engineer">Engineer</option>
-                    <option value="project_control">Project Control</option>
-                    <option value="project_admin">Project Admin</option>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
+                    <option value="Project Director">Project Director</option>
+                    <option value="Project Sponsor">Project Sponsor</option>
+                    <option value="Project Manager">Project Mananger</option>
+                    <option value="Chief Engineer">Chief Engineer</option>
+                    <option value="Engineer">Engineer</option>
+                    <option value="Project Control">Project Control</option>
+                    <option value="Project Admin">Project Admin</option>
                 </select>
             </div> 
         </div>   
@@ -94,8 +97,9 @@
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Status</label>
                 <select name="status" id="" class="form-select mb-3 text-white" required>
-                    <option value="Technical">KARTAP</option>
-                    <option value="Perfomance">KWT</option>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
+                    <option value="Kartap">KARTAP</option>
+                    <option value="Kwt">KWT</option>
                 </select>
             </div> 
         </div>   

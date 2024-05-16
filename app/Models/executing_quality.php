@@ -32,4 +32,14 @@ class executing_quality extends Model
             });
         });
     }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function executingFinal()
+    {
+        return $this->hasOne(executing_project_definitions::class);
+    }
 }

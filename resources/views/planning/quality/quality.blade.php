@@ -49,10 +49,11 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
+            </a>             
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -73,7 +74,7 @@
                         <tbody>
                             @foreach ($quality as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>    
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>    
                                 <td><small>{{$r->requirements}}</small></td>
                                 <td><small>{{$r->category}}</small></td>
                                 <td>

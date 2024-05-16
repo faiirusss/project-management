@@ -26,9 +26,13 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Template Stylesheet -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 
 <body>
@@ -97,7 +101,7 @@
     </div>
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{asset('assets/lib/chart/chart.min.js')}}"></script>
     <script src="{{asset('assets/lib/easing/easing.min.js')}}"></script>
@@ -106,7 +110,8 @@
     <script src="{{asset('assets/lib/tempusdominus/js/moment.min.js')}}"></script>
     <script src="{{asset('assets/lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
     <script src="{{asset('assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <!-- Template Javascript -->
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('datatable/datatables.min.js')}}"></script>
@@ -115,6 +120,15 @@
             $('#example').DataTable();
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#search').select2();
+            
+        });
+    </script>
+
+    
 </body>
 
 </html>

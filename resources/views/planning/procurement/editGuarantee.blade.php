@@ -53,6 +53,7 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-10">
@@ -62,7 +63,15 @@
                     @csrf
                     <div class="row mb-2">
                         <div class="col-md-6">
-                            <label for="" class="form-label text-white">Term Type</label>
+                            <label for="nameProject" class="form-label text-white">Name Project</label>
+                            <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
+                                @foreach($projectDefinition as $project)
+                                <option value="{{ $project->id}}" {{ $project->id == $guarantee->projectDefinition['id'] ? 'selected' : '' }}>{{$project->name_project}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                             <label for="" class="form-label text-white">Term Type</label>
                             <input type="text" name="deskripsi" id="" value="{{$guarantee->deskripsi}}" class="form-control mb-3 text-white"  required>
                         </div>
                         <div class="col-md-6">
@@ -74,15 +83,13 @@
                         <legend class="col-form-label col-sm-2 pt-0 text-white">Guarantee/Bond</legend>
                         <div class="col-sm-10">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="radio"
-                                    id="available" value="available" checked>
+                                <input class="form-check-input" type="radio" name="radio" id="available" value="Available" {{ $guarantee->radio == 'Available' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="available">
                                     Available
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="radio"
-                                    id="not_available" value="not_available">
+                                <input class="form-check-input" type="radio" name="radio" id="not_available" value="Not Available" {{ $guarantee->radio == 'Not Available' ? 'checked' : '' }}>
                                 <label class="form-check-label" for="not_available">
                                     Not Available
                                 </label>

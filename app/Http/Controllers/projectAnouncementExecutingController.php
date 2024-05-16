@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\executing_communication_project_announcements;
+use App\Models\executing_com_announcements;
 use Illuminate\Http\Request;
 
 class projectAnouncementExecutingController extends Controller
 {
     public function index()
     {
-        $projectAnouncementExecuting = executing_communication_project_announcements::all();
+        $projectAnouncementExecuting = executing_com_announcements::all();
         return view('executing.communicationExecuting.index', compact('projectAnouncementExecuting'));
     }
 
@@ -20,7 +20,7 @@ class projectAnouncementExecutingController extends Controller
 
     public function store(Request $request)
     {
-        executing_communication_project_announcements::create([
+        executing_com_announcements::create([
             'deliverable' => $request->deliverable,
             'description' => $request->description,
             'delivery_method' => $request->delivery_method,
@@ -35,13 +35,13 @@ class projectAnouncementExecutingController extends Controller
 
     public function destroy($id)
     {
-        $projectAnouncementExecuting = executing_communication_project_announcements::find($id);
+        $projectAnouncementExecuting = executing_com_announcements::find($id);
         $projectAnouncementExecuting->delete();
         return redirect('/communicationExecuting');
     }
     public function show($id)
     {
-        $projectAnouncementExecuting = executing_communication_project_announcements::find($id);
+        $projectAnouncementExecuting = executing_com_announcements::find($id);
 
         return view('executing.communicationExecuting.editProjectAnouncement', compact('projectAnouncementExecuting'));
     }
@@ -49,7 +49,7 @@ class projectAnouncementExecutingController extends Controller
     public function update(Request $request, $id)
     {
 
-        $projectAnouncementExecuting = executing_communication_project_announcements::find($id);
+        $projectAnouncementExecuting = executing_com_announcements::find($id);
         $projectAnouncementExecuting->update([
             'deliverable' => $request->deliverable,
             'description' => $request->description,

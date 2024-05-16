@@ -3,9 +3,6 @@
 use App\Http\Controllers\caseFlowController;
 use App\Http\Controllers\GuaranteeController;
 use App\Http\Controllers\listAssumsitionController;
-use App\Models\Cost;
-use App\Models\BebanBahanCost;
-use App\Models\BebanBahanExecuting;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CostController;
 use App\Http\Controllers\RiskController;
@@ -40,10 +37,14 @@ use App\Http\Controllers\projectAnouncementController;
 use App\Http\Controllers\BebanBahanExecutingController;
 use App\Http\Controllers\BebanSubkonExecutingController;
 use App\Http\Controllers\CommunicationExecutingController;
+use App\Http\Controllers\CostContractValue;
+use App\Http\Controllers\CostContractValueController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExecutingQualityController;
 use App\Http\Controllers\ExecutingScheduleController;
 use App\Http\Controllers\ExecutingScopeController;
 use App\Http\Controllers\ExecutingStakeholderController;
+use App\Http\Controllers\PlanningProjectDefinitionController;
 use App\Http\Controllers\PresentationExecutingController;
 use App\Http\Controllers\ProcurementExecutingController;
 use App\Http\Controllers\projectAnouncementExecutingController;
@@ -54,6 +55,15 @@ use App\Http\Controllers\reviewMeetingExecutingController;
 use App\Http\Controllers\RiskExecutingController;
 use App\Http\Controllers\teamMoraleExecutingController;
 use App\Http\Controllers\TermOfPaymentExecuting;
+use App\Http\Controllers\ExecutingProjectDefinitionController;
+use App\Http\Controllers\ExecutingContractController;
+use App\Http\Controllers\ExecutingGuaranteeController;
+use App\Http\Controllers\ExecutingTermplanController;
+use App\Http\Controllers\ExecutingCaseFlowController;
+use App\Http\Controllers\ExecutinglistAssumsitionController;
+use App\Http\Controllers\ExecutingProjectIncomeStatementController;
+use App\Http\Controllers\ExecutinglistIncomeStatementController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +80,9 @@ use App\Http\Controllers\TermOfPaymentExecuting;
 Route::get('/', [LoginController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/PostLogin', [LoginController::class, 'login']);
+
+Route::get('/register', [RegisterController::class, 'register']);
+Route::post('/register/save', [RegisterController::class, 'store']);
 
 // setting -> USER MANAGEMENT
 Route::get('/user', [UserController::class, 'index']);
@@ -137,6 +150,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/scope/{id}/edit', [ScopeController::class, 'show']);
     Route::post('/scope/{id}/update', [ScopeController::class, 'update']);
 
+    //Caseflow
+    Route::get('/caseflow', [caseFlowController::class, 'index']);
+    Route::get('/caseflow/create', [caseFlowController::class, 'create']);
+    Route::post('/caseflow/store', [caseFlowController::class, 'store']);
+    Route::get('/caseflow/{id}/delete', [caseFlowController::class, 'destroy']);
+    Route::get('/caseflow/{id}/edit', [caseFlowController::class, 'show']);
+    Route::post('/caseflow/{id}/update', [caseFlowController::class, 'update']);
+    //list Assumsition
+    Route::get('/listAssumsition', [listAssumsitionController::class, 'index']);
+    Route::get('/listAssumsition/create', [listAssumsitionController::class, 'create']);
+    Route::post('/listAssumsition/store', [listAssumsitionController::class, 'store']);
+    Route::get('/listAssumsition/{id}/delete', [listAssumsitionController::class, 'destroy']);
+    Route::get('/listAssumsition/{id}/edit', [listAssumsitionController::class, 'show']);
+    Route::post('/listAssumsition/{id}/update', [listAssumsitionController::class, 'update']);
+
     //PLANNING => RESOURCES
     Route::get('/resources', [ResourcesController::class, 'index']);
     Route::get('/resources/add', [ResourcesController::class, 'create']);
@@ -163,11 +191,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     //PLANNING => PROCUREMENT
     Route::get('/procurement', [ProcurementController::class, 'index']);
-    Route::get('/procurement/add', [ProcurementController::class, 'create']);
-    Route::post('/procurement/save', [ProcurementController::class, 'store']);
-    Route::get('/procurement/{id}/delete', [ProcurementController::class, 'destroy']);
-    Route::get('/procurement/{id}/edit', [ProcurementController::class, 'show']);
-    Route::post('/procurement/{id}/update', [ProcurementController::class, 'update']);
+
+    Route::get('/costContractValue/add', [CostContractValueController::class, 'create']);
+    Route::post('/costContractValue/save', [CostContractValueController::class, 'store']);
+    Route::get('/costContractValue/{id}/delete', [CostContractValueController::class, 'destroy']);
+    Route::get('/costContractValue/{id}/edit', [CostContractValueController::class, 'show']);
+    Route::post('/costContractValue/{id}/update', [CostContractValueController::class, 'update']);
 
     // PLANNING => PROCUREMENT => BEBAN BAHAN
     Route::get('/bebanbarang', [BebanBarangController::class, 'index']);
@@ -252,6 +281,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/schedule/{id}/update', [ScheduleController::class, 'update']);
     Route::get('/schedule/{id}/edit', [ScheduleController::class, 'show']);
 
+    Route::get('/finalPlanning', [PlanningProjectDefinitionController::class, 'index']);
+    Route::get('/finalPlanning/add', [PlanningProjectDefinitionController::class, 'create']);
+    Route::post('/finalPlanning/save', [PlanningProjectDefinitionController::class, 'store']);
+    Route::get('/finalPlanning/{id}/delete', [PlanningProjectDefinitionController::class, 'destroy']);
+    Route::post('/finalPlanning/{id}/update', [PlanningProjectDefinitionController::class, 'update']);
+    Route::get('/finalPlanning/{id}/edit', [PlanningProjectDefinitionController::class, 'show']);
 
     // EXECUTING
     Route::get('/executing', [ExecutingController::class, 'index']);
@@ -372,6 +407,28 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/bebansubkonExecuting/{id}/edit', [BebanSubkonExecutingController::class, 'show']);
     Route::post('/bebansubkonExecuting/{id}/update', [BebanSubkonExecutingController::class, 'update']);
 
+    Route::get('/costContractValueExecuting/add', [ExecutingContractController::class, 'create']);
+    Route::post('/costContractValueExecuting/save', [ExecutingContractController::class, 'store']);
+    Route::get('/costContractValueExecuting/{id}/delete', [ExecutingContractController::class, 'destroy']);
+    Route::get('/costContractValueExecuting/{id}/edit', [ExecutingContractController::class, 'show']);
+    Route::post('/costContractValueExecuting/{id}/update', [ExecutingContractController::class, 'update']);
+
+    //PLANNING => PROCUREMENT => TERM OF PLAN
+    Route::get('/termplanExecuting', [ExecutingTermPlanController::class, 'index']);
+    Route::get('/termplanExecuting/add', [ExecutingTermPlanController::class, 'create']);
+    Route::post('/termplanExecuting/save', [ExecutingTermPlanController::class, 'store']);
+    Route::get('/termplanExecuting/{id}/delete', [ExecutingTermPlanController::class, 'destroy']);
+    Route::get('/termplanExecuting/{id}/edit', [ExecutingTermPlanController::class, 'show']);
+    Route::post('/termplanExecuting/{id}/update', [ExecutingTermPlanController::class, 'update']);
+
+    //PLANNING => PROCUREMENT => QUARANTEE . BOND
+    Route::get('/guaranteeExecuting', [ExecutingGuaranteeController::class, 'index']);
+    Route::get('/guaranteeExecuting/add', [ExecutingGuaranteeController::class, 'create']);
+    Route::post('/guaranteeExecuting/save', [ExecutingGuaranteeController::class, 'store']);
+    Route::get('/guaranteeExecuting/{id}/delete', [ExecutingGuaranteeController::class, 'destroy']);
+    Route::get('/guaranteeExecuting/{id}/edit', [ExecutingGuaranteeController::class, 'show']);
+    Route::post('/guaranteeExecuting/{id}/update', [ExecutingGuaranteeController::class, 'update']);
+
     // tagihan
     Route::get('/tagihanExecuting', [TagihanExecutingController::class, 'index']);
     Route::get('/tagihanExecuting/add', [TagihanExecutingController::class, 'create']);
@@ -379,6 +436,29 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tagihanExecuting/{id}/delete', [TagihanExecutingController::class, 'destroy']);
     Route::get('/tagihanExecuting/{id}/edit', [TagihanExecutingController::class, 'show']);
     Route::post('/tagihanExecuting/{id}/update', [TagihanExecutingController::class, 'update']);
+
+    //Caseflow
+    Route::get('/caseflowExecuting', [ExecutingCaseFlowController::class, 'index']);
+    Route::get('/caseflowExecuting/create', [ExecutingCaseFlowController::class, 'create']);
+    Route::post('/caseflowExecuting/store', [ExecutingCaseFlowController::class, 'store']);
+    Route::get('/caseflowExecuting/{id}/delete', [ExecutingCaseFlowController::class, 'destroy']);
+    Route::get('/caseflowExecuting/{id}/edit', [ExecutingCaseFlowController::class, 'show']);
+    Route::post('/caseflowExecuting/{id}/update', [ExecutingCaseFlowController::class, 'update']);
+
+    //list Assumsition
+    Route::get('/listAssumsitionExecuting', [ExecutinglistAssumsitionController::class, 'index']);
+    Route::get('/listAssumsitionExecuting/create', [ExecutinglistAssumsitionController::class, 'create']);
+    Route::post('/listAssumsitionExecuting/store', [ExecutinglistAssumsitionController::class, 'store']);
+    Route::get('/listAssumsitionExecuting/{id}/delete', [ExecutinglistAssumsitionController::class, 'destroy']);
+    Route::get('/listAssumsitionExecuting/{id}/edit', [ExecutinglistAssumsitionController::class, 'show']);
+    Route::post('/listAssumsitionExecuting/{id}/update', [ExecutinglistAssumsitionController::class, 'update']);
+
+    Route::get('/projectIncomeStatementExecuting', [ExecutingProjectIncomeStatementController::class, 'index']);
+    Route::get('/projectIncomeStatementExecuting/add', [ExecutingProjectIncomeStatementController::class, 'create']);
+    Route::post('/projectIncomeStatementExecuting/save', [ExecutingProjectIncomeStatementController::class, 'store']);
+    Route::get('/projectIncomeStatementExecuting/{id}/delete', [ExecutingProjectIncomeStatementController::class, 'destroy']);
+    Route::get('/projectIncomeStatementExecuting/{id}/edit', [ExecutingProjectIncomeStatementController::class, 'show']);
+    Route::post('/projectIncomeStatementExecuting/{id}/update', [ExecutingProjectIncomeStatementController::class, 'update']);
 
     //project Income Statement Executing
     Route::get('/projectIncomeStatement', [ProjectIncomeStatementController::class, 'index']);
@@ -396,6 +476,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/termOfPayment/{id}/edit', [TermOfPaymentExecuting::class, 'show']);
     Route::post('/termOfPayment/{id}/update', [TermOfPaymentExecuting::class, 'update']);
 
+    //Final Executing
+    Route::get('/finalExecuting', [ExecutingProjectDefinitionController::class, 'index']);
+    Route::get('/finalExecuting/add', [ExecutingProjectDefinitionController::class, 'create']);
+    Route::post('/finalExecuting/save', [ExecutingProjectDefinitionController::class, 'store']);
+    Route::get('/finalExecuting/{id}/delete', [ExecutingProjectDefinitionController::class, 'destroy']);
+    Route::post('/finalExecuting/{id}/update', [ExecutingProjectDefinitionController::class, 'update']);
+    Route::get('/finalExecuting/{id}/edit', [ExecutingProjectDefinitionController::class, 'show']);
+
     //control and monitoring
     Route::get('/controlAndMonitoring', [ControlMonitoringController::class, 'index']);
     Route::get('/domesticVendorPayments/add', function () {
@@ -409,26 +497,12 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 
-    //Caseflow
-    Route::get('/caseflow', [caseFlowController::class, 'index']);
-    Route::get('/caseflow/create', [caseFlowController::class, 'create']);
-    Route::post('/caseflow/store', [caseFlowController::class, 'store']);
-    Route::get('/caseflow/{id}/delete', [caseFlowController::class, 'destroy']);
-    Route::get('/caseflow/{id}/edit', [caseFlowController::class, 'show']);
-    Route::post('/caseflow/{id}/update', [caseFlowController::class, 'update']);
-    //list Assumsition
-    Route::get('/listAssumsition', [listAssumsitionController::class, 'index']);
-    Route::get('/listAssumsition/create', [listAssumsitionController::class, 'create']);
-    Route::post('/listAssumsition/store', [listAssumsitionController::class, 'store']);
-    Route::get('/listAssumsition/{id}/delete', [listAssumsitionController::class, 'destroy']);
-    Route::get('/listAssumsition/{id}/edit', [listAssumsitionController::class, 'show']);
-    Route::post('/listAssumsition/{id}/update', [listAssumsitionController::class, 'update']);
 
     Route::get('/closing', [ClosingController::class, 'index']);
 
-    Route::get('/dashboard', function () {
-        return view('home.dashboard');
-    });
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    // Route::post('/dashboard', [DashboardController::class, 'processAjax']);
+
 
     Route::get('/report', [ReportController::class, 'index']);
     Route::get('/report-pdf', [ReportController::class, 'getDataFromURL'])->name('print.pdf');

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\executing_communication_review_and_meetings;
+use App\Models\executing_com_reviews;
 use Illuminate\Http\Request;
 
 class reviewMeetingExecutingController extends Controller
 {
     public function index()
     {
-        $reviewMeetingExecuting = executing_communication_review_and_meetings::all();
+        $reviewMeetingExecuting = executing_com_reviews::all();
         return view('executing.communicationExecuting.index', compact('reviewMeetingExecuting'));
     }
 
@@ -20,7 +20,7 @@ class reviewMeetingExecutingController extends Controller
 
     public function store(Request $request)
     {
-        executing_communication_review_and_meetings::create([
+        executing_com_reviews::create([
             'deliverable' => $request->deliverable,
             'description' => $request->description,
             'delivery_method' => $request->delivery_method,
@@ -35,13 +35,13 @@ class reviewMeetingExecutingController extends Controller
 
     public function destroy($id)
     {
-        $reviewMeetingExecuting = executing_communication_review_and_meetings::find($id);
+        $reviewMeetingExecuting = executing_com_reviews::find($id);
         $reviewMeetingExecuting->delete();
         return redirect('/communicationExecuting');
     }
     public function show($id)
     {
-        $reviewMeetingExecuting = executing_communication_review_and_meetings::find($id);
+        $reviewMeetingExecuting = executing_com_reviews::find($id);
 
         return view('executing.communicationExecuting.editReviewMeeting', compact('reviewMeetingExecuting'));
     }
@@ -49,7 +49,7 @@ class reviewMeetingExecutingController extends Controller
     public function update(Request $request, $id)
     {
 
-        $reviewMeetingExecuting = executing_communication_review_and_meetings::find($id);
+        $reviewMeetingExecuting = executing_com_reviews::find($id);
         $reviewMeetingExecuting->update([
             'deliverable' => $request->deliverable,
             'description' => $request->description,

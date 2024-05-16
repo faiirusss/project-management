@@ -58,30 +58,30 @@
 <div class="col-sm-12 col-xl-10">
     <div class="bg-secondary rounded h-100 p-4">
         <h2 class="mb-4">Risk</h2>
-        <form action="/riskExecuting/{{ $risks->id }}/update" method="post">
+        <form action="/riskExecuting/{{ $risksExecuting->id }}/update" method="post">
             @csrf
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                    @foreach($projectDefinition as $project)
-                    <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                   @foreach ($finalExecuting as $item)
+                        <option value="{{ $item->id}}" {{ $item->id == $risksExecuting->projectDefinition['id'] ? 'selected' : '' }}>{{$item->projectDefinition['name_project']}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Entry Date</label>
-                <input type="date" name="start_date" id="" value="{{$risks->start_date}}" class="form-control mb-3 text-white"  required>
+                <input type="date" name="start_date" id="" value="{{$risksExecuting->start_date}}" class="form-control mb-3 text-white"  required>
             </div>
         </div>   
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Description Ofrisk</label>
-                <input type="text" name="description_ofrisk" id="" value="{{$risks->description_ofrisk}}" class="form-control mb-3 text-white" required>
+                <input type="text" name="description_ofrisk" id="" value="{{$risksExecuting->description_ofrisk}}" class="form-control mb-3 text-white" required>
             </div> 
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Submitter</label>
-                <select name="submitter" id="" value="{{$risks->submitter}}" class="form-select mb-3 text-white" required>
+                <select name="submitter" id="" value="{{$risksExecuting->submitter}}" class="form-select mb-3 text-white" required>
                     <option value="Project Excecution">Project Excecution</option>
                     <option value="Project Planning">Project Planning</option>
                     <option value="Project Management Office">Project Management Office</option>
@@ -95,7 +95,7 @@
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Risk Response Type</label>
-                <select name="Risk_reponse_type" id="Risk_reponse_type" value="{{$risks->Risk_reponse_type}}" class="form-select mb-3 text-white" required>
+                <select name="Risk_reponse_type" id="Risk_reponse_type" value="{{$risksExecuting->Risk_reponse_type}}" class="form-select mb-3 text-white" required>
                     <option value="Accept">Accept</option>
                     <option value="Mitigate">Mitigate</option>
                     <option value="Transfer">Transfer</option>
@@ -104,13 +104,13 @@
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Risk Reponse Plan</label>
-                <input type="" name="Risk_reponse_plan" id="" value="{{$risks->Risk_reponse_plan}}" class="form-control mb-3 text-white" required>
+                <input type="" name="Risk_reponse_plan" id="" value="{{$risksExecuting->Risk_reponse_plan}}" class="form-control mb-3 text-white" required>
             </div>
         </div>
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Probability Factor</label>
-                <select name="probability_factor" id="probability" value="{{$risks->probability_factor}}" class="form-select mb-3 text-white" onchange="calculateResult()" required>
+                <select name="probability_factor" id="probability" value="{{$risksExecuting->probability_factor}}" class="form-select mb-3 text-white" onchange="calculateResult()" required>
                     <option value="1">Very Low - 1</option>
                     <option value="2">Low - 2</option>
                     <option value="3">Moderate - 3</option>
@@ -120,7 +120,7 @@
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Impact Factor</label>
-                <select name="impact_factor" id="impact" value="{{$risks->impact_factor}}" class="form-select mb-3 text-white" onchange="calculateResult()" required>
+                <select name="impact_factor" id="impact" value="{{$risksExecuting->impact_factor}}" class="form-select mb-3 text-white" onchange="calculateResult()" required>
                     <option value="1">Very Low - 1</option>
                     <option value="2">Low - 2</option>
                     <option value="3">Moderate - 3</option>
@@ -132,7 +132,7 @@
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Exposure</label>
-                <input type="text" name="exposure" id="result" value="{{$risks->exposure}}" class="form-control mb-3" required readonly>
+                <input type="text" name="exposure" id="result" value="{{$risksExecuting->exposure}}" class="form-control mb-3 text-white bg-dark" required readonly>
             </div>
 
             <script>
@@ -145,7 +145,7 @@
             </script>
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Assigned To</label>
-                <select name="assigned_to" id="" value="{{$risks->assigned_to}}" class="form-select mb-3 text-white" required>
+                <select name="assigned_to" id="" value="{{$risksExecuting->assigned_to}}" class="form-select mb-3 text-white" required>
                     <option value="Project Excecution">Project Excecution</option>
                     <option value="Project Planning">Project Planning</option>
                     <option value="Project Management Office">Project Management Office</option>
@@ -159,20 +159,15 @@
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Status</label>
-                <select name="status" id="" value="{{$risks->status}}" class="form-select mb-3 text-white" required>
-                    <option value="Planned">Planned</option>
-                    <option value="in_process">In Process</option>
+                <select name="status" id="" value="{{$risksExecuting->status}}" class="form-select mb-3 text-white" required>
+                    <option value="Open">Open</option>
                     <option value="Closed">Closed</option>
                 </select>
             </div>
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Due Date</label>
-                <input type="date" name="due_date" id="" value="{{$risks->due_date}}" class="form-control mb-3 text-white" required>
-            </div>
-            <div class="col-md-6">
-                <label for="" class="form-label text-white">Date Realitation</label>
-                <input type="date" name="date_realitation" id="" class="form-control mb-3 text-white" required>
-            </div>
+                <input type="date" name="due_date" id="" value="{{$risksExecuting->due_date}}" class="form-control mb-3 text-white" required>
+            </div>        
         </div>    
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>
             <button type="reset" class="btn btn-sm btn-outline-danger m-2">Reset</button>

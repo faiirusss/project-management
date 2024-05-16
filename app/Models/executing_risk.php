@@ -11,7 +11,6 @@ class executing_risk extends Model
         'start_date',
         'description_ofrisk',
         'submitter',
-        'name_project',
         'probability_factor',
         'impact_factor',
         'exposure',
@@ -20,6 +19,16 @@ class executing_risk extends Model
         'assigned_to',
         'status',
         'due_date',
-        'date_realitation',
+        'project_definition_id',
     ];
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function executingFinal()
+    {
+        return $this->hasMany(executing_project_definitions::class, 'risk_id', 'id');
+    }
 }

@@ -12,9 +12,8 @@ class StakeholderController extends Controller
     public function index()
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
-            $stakeholder = planning_stakeholder::all();
-            $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('planning.stakeholder.stakeholder', compact('projectDefinition', 'stakeholder'));
+            $stakeholder = planning_stakeholder::all()->sortBy('project_definition_id');
+            return view('planning.stakeholder.stakeholder', compact('stakeholder'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }
@@ -29,7 +28,6 @@ class StakeholderController extends Controller
     public function store(Request $request)
     {
         planning_stakeholder::create([
-            'name_project' => $request->name_project,
             'stakeholder' => $request->stakeholder,
             'role' => $request->role,
             'power' => $request->power,
@@ -40,9 +38,10 @@ class StakeholderController extends Controller
             'control' => $request->control,
             'close' => $request->close,
             'engagement_level' => $request->engagement_level,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/stakeholder');
     }
 
 
@@ -50,7 +49,7 @@ class StakeholderController extends Controller
     {
         $stakeholder = planning_stakeholder::find($id);
         $stakeholder->delete();
-        return redirect('/planning');
+        return redirect('/stakeholder');
     }
 
     public function show($id)
@@ -64,7 +63,6 @@ class StakeholderController extends Controller
     {
         $stakeholder = planning_stakeholder::find($id);
         $stakeholder->update([
-            'name_project' => $request->name_project,
             'stakeholder' => $request->stakeholder,
             'role' => $request->role,
             'power' => $request->power,
@@ -75,8 +73,9 @@ class StakeholderController extends Controller
             'control' => $request->control,
             'close' => $request->close,
             'engagement_level' => $request->engagement_level,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/stakeholder');
     }
 }

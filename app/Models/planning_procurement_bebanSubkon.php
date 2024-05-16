@@ -9,7 +9,7 @@ class planning_procurement_bebanSubkon extends Model
 {
     protected $fillable = [
         'procurement_subkon',
-        'name_project',
+        'project_definition_id',
         'vendor_subkon',
         'description_service_subkon',
         'volume_subkon',
@@ -34,5 +34,15 @@ class planning_procurement_bebanSubkon extends Model
                 $query->where('name_project', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->hasOne(planning_project_definitions::class);
     }
 }

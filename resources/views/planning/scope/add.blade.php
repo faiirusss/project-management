@@ -49,15 +49,17 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
+            </a>             
         </div>
     </center>
 </nav>
-<div class="container-fluid pt-4 px-4">
+
+<div class="container-fluid pt-4 px-4 mb-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-10">
             <div class="bg-secondary rounded h-100 p-4">
-                <h2 class="mb-4">Scope</h2>
+                <h2 class="mb-5">Scope</h2>
+
                 <form action="/scope/save" method="post">
                     @csrf
                     <div class="row mb-2">
@@ -65,7 +67,9 @@
                             <label for="nameProject" class="form-label text-white">Name Project</label>
                             <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                                 @foreach($projectDefinition as $project)
-                                <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                                @if ($project->status == 'open' || $project->status == 'Open')
+                                    <option value="{{ $project->id }}">{{ $project->name_project }}</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>

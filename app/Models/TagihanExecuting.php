@@ -15,4 +15,14 @@ class TagihanExecuting extends Model
         'curr',
         'nilai_tagihan',
     ];
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function executingFinal()
+    {
+        return $this->hasOne(Executing_ProjectDefinition::class);
+    }
 }

@@ -53,39 +53,40 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-10">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Cost Contract to Value</h2>
-                <form action="/procurement/{{ $procurement->id }}/update" method="post">
+                <form action="/costContractValue/{{ $costContractValue->id }}/update" method="post">
                     @csrf
                     <div class="row mb-2">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="nameProject" class="form-label text-white">Name Project</label>
                             <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                                 @foreach($projectDefinition as $project)
-                                <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                                <option value="{{ $project->id}}" {{ $project->id == $costContractValue->projectDefinition['id'] ? 'selected' : '' }}>{{$project->name_project}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Value</label>
-                            <input type="text" name="value" id="" value="{{$procurement->value}}" class="form-control mb-3 text-white"  required>
+                            <input type="text" name="value" id="" value="{{$costContractValue->value}}" class="form-control mb-3 text-white"  required>
                         </div>   
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Contract Value</label>
                             <select name="contract_value" id="" class="form-select mb-3 text-white" required>
-                                <option value="Beban Bahan">Beban Bahan</option>
-                                <option value="Gross Profit Margin">Gross Profit Margin</option>
-                                <option value="Kegiatan di Lokasi Proyek">Kegiatan di Lokasi Proyek</option>
-                                <option value="Beban Personalia">Beban Personalia</option>
-                                <option value="Beban Subkon">Beban Subkon</option>
-                                <option value="Beban Ekspedisi">Beban Ekspedisi</option>
-                                <option value="Beban Swakelola">Beban Swakelola</option>
-                                <option value="Biaya Jaminan Bank">Biaya Jaminan Bank</option>
-                                <option value="Beban Aftersales">Beban Aftersales</option>
-                                <option value="Other">Other</option> 
+                                <option value="Beban Bahan" {{ $costContractValue->contract_value == 'Beban Bahan' ? 'selected' : '' }}>Beban Bahan</option>
+                                <option value="Gross Profit Margin" {{ $costContractValue->contract_value == 'Gross Profit Margin' ? 'selected' : '' }}>Gross Profit Margin</option>
+                                <option value="Kegiatan di Lokasi Proyek" {{ $costContractValue->contract_value == 'Kegiatan di Lokasi Proyek' ? 'selected' : '' }}>Kegiatan di Lokasi Proyek</option>
+                                <option value="Beban Personalia"{{ $costContractValue->contract_value == 'Beban Personalia' ? 'selected' : '' }}>Beban Personalia</option>
+                                <option value="Beban Subkon" {{ $costContractValue->contract_value == 'Beban Subkon' ? 'selected' : '' }}>Beban Subkon</option>
+                                <option value="Beban Ekspedisi"{{ $costContractValue->contract_value == 'Beban Ekspedisi' ? 'selected' : '' }}>Beban Ekspedisi</option>
+                                <option value="Beban Swakelola"{{ $costContractValue->contract_value == 'Beban Swakelola' ? 'selected' : '' }}>Beban Swakelola</option>
+                                <option value="Biaya Jaminan Bank" {{ $costContractValue->contract_value == 'Biaya Jaminan Bank' ? 'selected' : '' }}>Biaya Jaminan Bank</option>
+                                <option value="Beban Aftersales" {{ $costContractValue->contract_value == 'Beban Aftersales' ? 'selected' : '' }}>Beban Aftersales</option>
+                                <option value="Other" {{ $costContractValue->contract_value == 'Other' ? 'selected' : '' }}>Other</option> 
                             </select>
                         </div>
                     </div> 

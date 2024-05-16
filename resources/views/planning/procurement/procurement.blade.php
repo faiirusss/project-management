@@ -1,6 +1,16 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+<style>
+    .table-responsive table {
+        overflow-x: scroll;
+    }
+
+    .table-striped td, .table-striped th {
+        white-space: nowrap;
+    }
+</style>
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -49,16 +59,18 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
+            </a>             
         </div>
     </center>
 </nav>
+
+{{-- cost contract to value --}}
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
                 <h2 class="mb-4">Cost Contract to Value </h2>
-                <a href="/procurement/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <a href="/costContractValue/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
                 <br>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" >
@@ -71,14 +83,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($procurement as $r)
+                            @foreach ($costContractValue as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->value}}</small></td>
                                 <td><small>{{$r->contract_value}}</small></td>
                                 <td>
-                                    <a href="/procurement/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
-                                    <a href="/procurement/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
+                                    <a href="/costContractValue/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
+                                    <a href="/costContractValue/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
                                 </td>
                             </tr>
                             @endforeach
@@ -89,6 +101,8 @@
         </div>
     </div>
 </div>
+
+{{-- beban bahan --}}
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -109,12 +123,13 @@
                                 <th><small>Total</small></th>
                                 <th><small>Start to Order</small></th>
                                 <th><small>Finish to Order</small></th>
+                                <th><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($bebanbarang as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->procurement}}</small></td>
                                 <td><small>{{$r->vendor}}</small></td>
                                 <td><small>{{$r->description_service}}</small></td>
@@ -136,6 +151,8 @@
         </div>
     </div>
 </div>
+
+{{-- beban subkon --}}
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -156,12 +173,13 @@
                                 <th><small>Total</small></th>
                                 <th><small>Start to Order</small></th>
                                 <th><small>Finish to Order</small></th>
+                                <th><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($bebansubkon as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->procurement_subkon}}</small></td>
                                 <td><small>{{$r->vendor_subkon}}</small></td>
                                 <td><small>{{$r->description_service_subkon}}</small></td>
@@ -183,6 +201,7 @@
         </div>
     </div>
 </div>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
@@ -199,19 +218,17 @@
                                 <th><small>Value (%)</small></th>
                                 <th><small>Value (Rp)</small></th>
                                 <th><small>Month (Plan)</small></th>
-                                <th><small>Radios</small></th>
                                 <th><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($termPlan as $r)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
+                                <td><small>{{$r->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$r->term_type}}</small></td>
                                 <td><small>{{$r->value_term}}</small></td>
                                 <td><small>{{$r->value_rp_term}}</small></td>
                                 <td><small>{{$r->month_plan}}</small></td>
-                                <td><small>{{$r->option_available}}</small></td>
                                 <td>
                                     <a href="/termplan/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
                                     <a href="/termplan/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
@@ -246,7 +263,7 @@
                         <tbody>
                             @foreach ($guarantee as $l)
                             <tr class="text-white">
-                                <td><small>{{$l->name_project}}</small></td>
+                                <td><small>{{$l->projectDefinition['name_project']}}</small></td>
                                 <td><small>{{$l->deskripsi}}</small></td>
                                 <td><small>{{$l->persen}}</small></td>
                                 <td><small>{{$l->radio}}</small></td>

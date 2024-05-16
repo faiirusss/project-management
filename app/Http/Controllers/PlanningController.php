@@ -2,43 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BebanBarang;
-use App\Models\BebanSubkon;
-use App\Models\Guarantee;
 use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_procurement_bebanBahan;
 use App\Models\planning_procurement_bebanSubkon;
-use App\Models\planning_procurement_costContractToValue;
+use App\Models\planning_procurement_contracts;
 use App\Models\planning_procurement_guarantee;
-use App\Models\planning_procurement_termOfPaymentPlan;
+use App\Models\planning_procurement_termplans;
+use App\Models\planning_project_definitions;
 use App\Models\planning_quality;
 use App\Models\planning_risk;
 use App\Models\planning_scope;
 use App\Models\planning_stakeholder;
-use App\Models\Procurement;
-use App\Models\Stakeholder;
-use App\Models\TermPlan;
 use Illuminate\Http\Request;
-use App\Models\Risk;
-use App\Models\quality;
 
 class PlanningController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (Auth()->User()->roles == 'superadmin' || Auth()->User()->roles == 'adminPlanning') {
-            $risks = planning_risk::all();
-            $scope = planning_scope::all();
-            $stakeholder = planning_stakeholder::all();
-            $quality = planning_quality::all();
-            $procurement = planning_procurement_costContractToValue::all();
-            $bebanbarang = planning_procurement_bebanBahan::all();
-            $bebansubkon = planning_procurement_bebanSubkon::all();
-            $termPlan = planning_procurement_termOfPaymentPlan::all();
-            $quality = planning_quality::all();
-            $guarantee = planning_procurement_guarantee::all();
+
             $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('planning.index', compact('risks', 'scope', 'stakeholder', 'quality', 'procurement', 'bebanbarang', 'bebansubkon', 'termPlan', 'quality', 'guarantee', 'projectDefinition'));
+            $projectDefinitionFilter = new Initiating_ProjectDefinition();
+
+            if (request()->get('search')) {
+                $projectDefinitionFilter = $projectDefinitionFilter->where('id', 'like', '%' . request()->get('search') . '%');
+            }
+            $projectDefinitionFilter = $projectDefinitionFilter->get();
+
+            $finalPlanning = planning_project_definitions::all();
+            return view('planning.index', compact('finalPlanning', 'request', 'projectDefinitionFilter', 'projectDefinition'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }
@@ -50,10 +42,10 @@ class PlanningController extends Controller
         $scope = planning_scope::latest()->filter($request->all())->get();
         $stakeholder = planning_stakeholder::latest()->filter($request->all())->get();
         $quality = planning_quality::latest()->filter($request->all())->get();
-        $procurement = planning_procurement_costContractToValue::latest()->filter($request->all())->get();
+        $procurement = planning_procurement_contracts::latest()->filter($request->all())->get();
         $bebanbarang = planning_procurement_bebanBahan::latest()->filter($request->all())->get();
         $bebansubkon = planning_procurement_bebanSubkon::latest()->filter($request->all())->get();
-        $termPlan = planning_procurement_termOfPaymentPlan::latest()->filter($request->all())->get();
+        $termPlan = planning_procurement_termplans::latest()->filter($request->all())->get();
         $guarantee = planning_procurement_guarantee::latest()->filter($request->all())->get();
         $projectDefinition = Initiating_ProjectDefinition::latest()->filter($request->all())->get();
         return view('planning.index')->with([

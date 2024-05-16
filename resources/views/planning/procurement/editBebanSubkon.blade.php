@@ -53,6 +53,7 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-10">
@@ -65,15 +66,15 @@
                             <label for="nameProject" class="form-label text-white">Name Project</label>
                             <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                                 @foreach($projectDefinition as $project)
-                                <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                                <option value="{{ $project->id}}" {{ $project->id == $bebansubkon->projectDefinition['id'] ? 'selected' : '' }}>{{$project->name_project}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Procurement</label>
                             <select name="procurement_subkon" id="" class="form-select mb-3 text-white" required>
-                                <option value="IMPOR">IMPOR</option>
-                                <option value="LOKAL">LOKAL</option>
+                                <option value="IMPOR" {{ $bebansubkon->procurement == 'IMPOR' ? 'selected' : '' }}>IMPOR</option>
+                                <option value="LOKAL" {{ $bebansubkon->procurement == 'LOKAL' ? 'selected' : '' }}>LOKAL</option>
                             </select>
                         </div>
                         <div class="col-md-6">
@@ -98,11 +99,11 @@
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Start to Order</label>
-                            <input type="date" name="start_toOrder_subkon" id="" value="{{$bebanbahanExecuting->start_toOrder_subkon}}" class="form-control mb-3 text-white"  required>
+                            <input type="date" name="start_toOrder_subkon" id="" value="{{$bebansubkon->start_toOrder_subkon}}" class="form-control mb-3 text-white"  required>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Finish to Order</label>
-                            <input type="date" name="finish_toOrder_subkon" id="" value="{{$bebanbahanExecuting->finish_toOrder_subkon}}" class="form-control mb-3 text-white"  required>
+                            <input type="date" name="finish_toOrder_subkon" id="" value="{{$bebansubkon->finish_toOrder_subkon}}" class="form-control mb-3 text-white"  required>
                         </div>
                     </div>
                         <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>

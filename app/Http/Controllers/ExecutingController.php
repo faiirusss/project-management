@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\executing_project_definitions;
 use App\Models\executing_quality;
+use App\Models\executing_risk;
 use App\Models\executing_schedule;
 use App\Models\executing_scope;
 use App\Models\executing_stakeholder;
@@ -14,12 +16,10 @@ class ExecutingController extends Controller
     public function index()
     {
         if (Auth()->User()->roles == 'superadmin') {
-            $executingScope = executing_scope::all();
             $executingSchedule = executing_schedule::all();
-            $executingQuality = executing_quality::all();
-            $executingStakeholder = executing_stakeholder::all();
-            $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('executing.index', compact('executingScope', 'executingSchedule', 'executingQuality', 'projectDefinition', 'executingStakeholder'));
+            $executingRisk = executing_risk::all();
+            $executingProjectDefinition = executing_project_definitions::all()->sortDesc();
+            return view('executing.index', compact('executingRisk', 'executingSchedule', 'executingProjectDefinition'));
         } elseif (Auth()->User()->roles == 'adminExecuting') {
             return view('executing.index');
         } else {

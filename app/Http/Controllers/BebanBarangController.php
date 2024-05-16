@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\executing_cost_bebanBahan;
 use App\Models\executing_procurement_bebanBahan;
 use App\Models\Initiating_ProjectDefinition;
 use App\Models\planning_procurement_bebanBahan;
@@ -30,7 +29,6 @@ class BebanBarangController extends Controller
     public function store(Request $request)
     {
         planning_procurement_bebanBahan::create([
-            'name_project' => $request->name_project,
             'procurement' => $request->procurement,
             'vendor' => $request->vendor,
             'description_service' => $request->description_service,
@@ -39,22 +37,23 @@ class BebanBarangController extends Controller
             'total' => $request->total,
             'start_toOrder' => $request->start_toOrder,
             'finish_toOrder' => $request->finish_toOrder,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
 
-        executing_procurement_bebanBahan::create([
-            'name_project' => $request->name_project,
-            'procurement' => $request->procurement,
-            'vendor' => $request->vendor,
-            'description_service' => $request->description_service,
-            'volume' => $request->volume,
-            'units' => $request->units,
-            'total' => $request->total,
-            'start_toOrder' => $request->start_toOrder,
-            'finish_toOrder' => $request->finish_toOrder,
-            $request->except(['_token']),
-        ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        // executing_procurement_bebanBahan::create([
+        //     'name_project' => $request->name_project,
+        //     'procurement' => $request->procurement,
+        //     'vendor' => $request->vendor,
+        //     'description_service' => $request->description_service,
+        //     'volume' => $request->volume,
+        //     'units' => $request->units,
+        //     'total' => $request->total,
+        //     'start_toOrder' => $request->start_toOrder,
+        //     'finish_toOrder' => $request->finish_toOrder,
+        //     $request->except(['_token']),
+        // ]);
+        return redirect('/procurement')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -62,7 +61,7 @@ class BebanBarangController extends Controller
     {
         $bebanbarang = planning_procurement_bebanBahan::find($id);
         $bebanbarang->delete();
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 
     public function show($id)
@@ -76,7 +75,6 @@ class BebanBarangController extends Controller
     {
         $bebanbarang = planning_procurement_bebanBahan::find($id);
         $bebanbarang->update([
-            'name_project' => $request->name_project,
             'procurement' => $request->procurement,
             'vendor' => $request->vendor,
             'description_service' => $request->description_service,
@@ -85,8 +83,9 @@ class BebanBarangController extends Controller
             'total' => $request->total,
             'start_toOrder' => $request->start_toOrder,
             'finish_toOrder' => $request->finish_toOrder,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 }

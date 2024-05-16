@@ -25,15 +25,14 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        user::create([
-            'id_user'=>$request->id_user,
+        User::create([
             'name'=>$request->name,
             'username'=>$request->username,
             'password'=>bcrypt($request->password),
             'roles'=>$request->roles,
             $request->except(['_token']),
         ]);
-        return redirect ('/user');
+        return redirect ('/register');
     }
 
     public function show($id)
@@ -61,4 +60,6 @@ class UserController extends Controller
         $user->delete();
         return redirect('/user');
     }
+
+    
 }

@@ -2,32 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\planning_communication_reviewAndMeeting;
-use App\Models\reviewMeeting;
+use App\Models\Initiating_ProjectDefinition;
+use App\Models\planning_com_reviews;
 use Illuminate\Http\Request;
 
 class reviewMeetingController extends Controller
 {
     public function index()
     {
-        $reviewMeeting = planning_communication_reviewAndMeeting::all();
+        $reviewMeeting = planning_com_reviews::all();
         return view('planning.communication.index', compact('reviewMeeting'));
     }
 
     public function create()
     {
-        return view('planning.communication.reviewMeeting');
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.communication.reviewMeeting', compact('projectDefinition'));
     }
 
     public function store(Request $request)
     {
-        planning_communication_reviewAndMeeting::create([
+        planning_com_reviews::create([
             'deliverable' => $request->deliverable,
             'description' => $request->description,
             'delivery_method' => $request->delivery_method,
             'frequency' => $request->frequency,
             'owner' => $request->owner,
             'audience' => $request->audience,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
         return redirect('/communication');
@@ -35,21 +37,21 @@ class reviewMeetingController extends Controller
 
     public function destroy($id)
     {
-        $reviewMeeting = planning_communication_reviewAndMeeting::find($id);
+        $reviewMeeting = planning_com_reviews::find($id);
         $reviewMeeting->delete();
         return redirect('/communication');
     }
     public function show($id)
     {
-        $reviewMeeting = planning_communication_reviewAndMeeting::find($id);
-
-        return view('planning.communication.editReviewMeeting', compact('reviewMeeting'));
+        $reviewMeeting = planning_com_reviews::find($id);
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.communication.editReviewMeeting', compact('reviewMeeting', 'projectDefinition'));
     }
 
     public function update(Request $request, $id)
     {
 
-        $reviewMeeting = planning_communication_reviewAndMeeting::find($id);
+        $reviewMeeting = planning_com_reviews::find($id);
         $reviewMeeting->update([
             'deliverable' => $request->deliverable,
             'description' => $request->description,
@@ -57,6 +59,7 @@ class reviewMeetingController extends Controller
             'frequency' => $request->frequency,
             'owner' => $request->owner,
             'audience' => $request->audience,
+            'project_definition_id' => $request->name_project,
         ]);
         return redirect('/communication');
     }

@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Dashboard')
 @section('content')
+
 <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px;">
@@ -53,17 +54,18 @@
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-10">
             <div class="bg-secondary rounded h-100 p-4">
-                <h2 class="mb-4">Scope</h2>
+                <h2 class="mb-4">Scope</h2>                
                 <form action="/scopeExecuting/{{ $scope->id }}/update" method="post">
                     @csrf
                     <div class="row mb-2">                        
                         <div class="col-md-6">
                             <label for="name_project" class="form-label text-white">Name Project</label>
-                            <input type="text" name="name_project" id="" value="{{$scope->name_project}}" class="form-control bg-dark text-white mb-3">
+                            <input type="text" name="name_project" id="" value="{{$scope->projectDefinition['name_project']}}" class="form-control bg-dark text-white mb-3" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label text-white">Technical Requirements</label>
@@ -91,7 +93,7 @@
                         </div>
                     </div>
                         <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>
-                        <button type="reset" class="btn btn-sm btn-outline-danger m-2">Reset</button>   
+                        <a href="/scopeExecuting" class="btn btn-sm btn-outline-warning m-2">Cancel</a>
                 </form>
             </div>
         </div>

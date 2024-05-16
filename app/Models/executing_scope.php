@@ -10,13 +10,13 @@ class executing_scope extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name_project',
         'technical_requirements',
         'perfomance_requirements',
         'bussines_requirements',
         'regulatory_requirements',
         'user_requirements',
         'system_requirements',
+        'project_definition_id'
     ];
 
     public function sluggable(): array
@@ -35,5 +35,15 @@ class executing_scope extends Model
                 $query->where('name_project', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function executingFinal()
+    {
+        return $this->hasMany(executing_project_definitions::class, 'scope_id', 'id');
     }
 }

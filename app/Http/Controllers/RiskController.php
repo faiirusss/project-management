@@ -4,19 +4,27 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Initiating_ProjectDefinition;
+use App\Models\planning_project_definitions;
 use App\Models\planning_risk;
 use Illuminate\Http\Request;
-use App\Models\Risk;
-use App\Models\ProjectDefinition;
 
 class RiskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (Auth()->user()->roles == 'superadmin' || Auth()->user()->roles == 'adminPlanning') {
-            $risks = planning_risk::all();
+
+            $risks = new planning_risk();
+
+            if ($request->search) {
+                $risks = $risks->where('project_definition_id', 'LIKE', '%' . $request->search . '%');
+            }
+
+            $risks = $risks->get();
+
             $projectDefinition = Initiating_ProjectDefinition::all();
-            return view('planning.risk.risk', compact('projectDefinition', 'risks'));
+
+            return view('planning.risk.risk', compact('risks', 'projectDefinition', 'request'));
         } else {
             return redirect('/login')->with('error', 'Username dan Password yang Anda Masukan salah');
         }
@@ -24,8 +32,9 @@ class RiskController extends Controller
 
     public function create()
     {
+        $finalPlanning = planning_project_definitions::all();
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.risk.add', compact('projectDefinition'));
+        return view('planning.risk.add', compact('projectDefinition', 'finalPlanning'));
     }
 
     public function store(Request $request)
@@ -34,7 +43,6 @@ class RiskController extends Controller
             'start_date' => $request->start_date,
             'description_ofrisk' => $request->description_ofrisk,
             'submitter' => $request->submitter,
-            'name_project' => $request->name_project,
             'probability_factor' => $request->probability_factor,
             'impact_factor' => $request->impact_factor,
             'exposure' => $request->exposure,
@@ -42,11 +50,11 @@ class RiskController extends Controller
             'Risk_reponse_plan' => $request->Risk_reponse_plan,
             'impact_description' => $request->impact_description,
             'assigned_to' => $request->assigned_to,
-            'status' => $request->status,
             'due_date' => $request->due_date,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/risk')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -54,14 +62,15 @@ class RiskController extends Controller
     {
         $risks = planning_risk::find($id);
         $risks->delete();
-        return redirect('/planning');
+        return redirect('/risk');
     }
 
     public function show($id)
     {
         $risks = planning_risk::find($id);
         $projectDefinition = Initiating_ProjectDefinition::all();
-        return view('planning.risk.edit', compact('risks', 'projectDefinition'));
+        $finalPlanning = planning_project_definitions::all();
+        return view('planning.risk.edit', compact('risks', 'projectDefinition', 'finalPlanning'));
     }
 
     public function update(Request $request, $id)
@@ -71,7 +80,6 @@ class RiskController extends Controller
             'start_date' => $request->start_date,
             'description_ofrisk' => $request->description_ofrisk,
             'submitter' => $request->submitter,
-            'name_project' => $request->name_project,
             'probability_factor' => $request->probability_factor,
             'impact_factor' => $request->impact_factor,
             'exposure' => $request->exposure,
@@ -79,10 +87,10 @@ class RiskController extends Controller
             'Risk_reponse_plan' => $request->Risk_reponse_plan,
             'impact_description' => $request->impact_description,
             'assigned_to' => $request->assigned_to,
-            'status' => $request->status,
             'due_date' => $request->due_date,
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/risk');
     }
 }

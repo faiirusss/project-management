@@ -63,6 +63,7 @@
                                 <label for="floatingPassword" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             </div>
+                            <p>don't have account? <a href="/register" class="">register now</a></p>
                             <button type="submit" class="btn btn-primary py-1 w-25 mb-1">Log In</button>
                         </form>
                         <br>

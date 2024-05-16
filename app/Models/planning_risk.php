@@ -11,15 +11,14 @@ class planning_risk extends Model
         'start_date',
         'description_ofrisk',
         'submitter',
-        'name_project',
         'probability_factor',
         'impact_factor',
         'exposure',
         'Risk_reponse_type',
         'Risk_reponse_plan',
         'assigned_to',
-        'status',
         'due_date',
+        'project_definition_id'
     ];
 
     public function sluggable(): array
@@ -38,5 +37,15 @@ class planning_risk extends Model
                 $query->where('name_project', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->belongsTo(planning_project_definitions::class);
     }
 }

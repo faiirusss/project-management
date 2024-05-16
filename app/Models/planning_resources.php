@@ -9,9 +9,19 @@ class planning_resources extends Model
 {
     protected $fillable = [
         'name',
-        'name_project',
         'position',
         'duration',
         'status',
+        'project_definition_id',
     ];
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->hasOne(planning_project_definitions::class);
+    }
 }

@@ -10,12 +10,13 @@ class executing_schedule extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name_project',
         'task',
         'start_date',
         'finish_date',
         'description_task',
         'assign_to',
+        'status_task',
+        'project_definition_id'
     ];
 
     public function sluggable(): array
@@ -34,5 +35,15 @@ class executing_schedule extends Model
                 $query->where('name_project', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function executingFinal()
+    {
+        return $this->hasMany(executing_project_definitions::class, 'schedule_id', 'id');
     }
 }

@@ -35,7 +35,7 @@
         <div class="row mb-3">
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Name Project</label>
-                <input type="text" name="name_project" id="" class="form-control mb-3 text-white" required>
+                <input type="text" name="name_project" id="" class="form-control mb-3 bg-dark text-white" required>
             </div>
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Code Project</label>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Contract Value</label>
-                <input type="text" name="contract_value" id="" class="form-control mb-3 text-white" required>
+                <input type="number" name="contract_value" id="" class="form-control mb-3 text-white" required>
             </div>
         </div>
         <div class="row mb-3">
@@ -77,8 +77,8 @@
             <div class="col-md-4">
                 <label for="" class="form-label text-white">Status</label>
                 <select name="status" class="form-select mb-3 text-white" name="status" aria-label=".form-select-sm example">
-                    <option value="open">Open</option>
-                    <option value="close">Closed</option>
+                    <option value="Open">Open</option>
+                    <option value="Close">Closed</option>
                 </select>
             </div>
             <div class="col-md-4">

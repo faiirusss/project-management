@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\executing_communication_presentations;
+use App\Models\executing_com_presentations;
 use Illuminate\Http\Request;
 
 class PresentationExecutingController extends Controller
 {
     public function index()
     {
-        $presentationExecuting = executing_communication_presentations::all();
+        $presentationExecuting = executing_com_presentations::all();
         return view('executing.communicationExecuting.index', compact('presentationExecuting'));
     }
 
@@ -21,7 +21,7 @@ class PresentationExecutingController extends Controller
 
     public function store(Request $request)
     {
-        executing_communication_presentations::create([
+        executing_com_presentations::create([
             'deliverable' => $request->deliverable,
             'description' => $request->description,
             'delivery_method' => $request->delivery_method,
@@ -36,13 +36,13 @@ class PresentationExecutingController extends Controller
 
     public function destroy($id)
     {
-        $presentationsExecuting = executing_communication_presentations::find($id);
+        $presentationsExecuting = executing_com_presentations::find($id);
         $presentationsExecuting->delete();
         return redirect('/communicationExecuting');
     }
     public function show($id)
     {
-        $presentationExecuting = executing_communication_presentations::find($id);
+        $presentationExecuting = executing_com_presentations::find($id);
 
         return view('executing.communicationExecuting.editPresentation', compact('presentationExecuting'));
     }
@@ -51,7 +51,7 @@ class PresentationExecutingController extends Controller
     public function update(Request $request, $id)
     {
 
-        $presentationsExecuting = executing_communication_presentations::find($id);
+        $presentationsExecuting = executing_com_presentations::find($id);
         $presentationsExecuting->update([
             'deliverable' => $request->deliverable,
             'description' => $request->description,

@@ -27,14 +27,13 @@ class GuaranteeController extends Controller
     public function store(Request $request)
     {
         planning_procurement_guarantee::create([
-            'name_project' => $request->name_project,
             'deskripsi' => $request->deskripsi,
             'persen' => $request->persen,
             'radio' => $request->radio,
-
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
-        return redirect('/planning')->with('success', 'Risk has been added successfully.');
+        return redirect('/procurement')->with('success', 'Risk has been added successfully.');
     }
 
 
@@ -42,26 +41,26 @@ class GuaranteeController extends Controller
     {
         $guarantee = planning_procurement_guarantee::find($id);
         $guarantee->delete();
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 
     public function show($id)
     {
         $guarantee = planning_procurement_guarantee::find($id);
-        return view('planning.procurement.editGuarantee', compact('guarantee'));
+        $projectDefinition = Initiating_ProjectDefinition::all();
+        return view('planning.procurement.editGuarantee', compact('guarantee', 'projectDefinition'));
     }
 
     public function update(Request $request, $id)
     {
         $guarantee = planning_procurement_guarantee::find($id);
         $guarantee->update([
-            'name_project' => $request->name_project,
             'deskripsi' => $request->deskripsi,
             'persen' => $request->persen,
             'radio' => $request->radio,
-
+            'project_definition_id' => $request->name_project,
             $request->except(['_token']),
         ]);
-        return redirect('/planning');
+        return redirect('/procurement');
     }
 }

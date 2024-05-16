@@ -21,7 +21,7 @@
     </a>
     <center>
     <div class="navbar-nav align-items-center ms-auto">
-            <a href="/scopeExecuting" class="nav-link">
+            <a href="/executing" class="nav-link">
                 <i class="fa fa-home"></i>
                 <span class="d-none d-lg-inline-flex"></span>
             </a>
@@ -77,7 +77,7 @@
                             <div class="col me-2">
                                 <select class="form-control" name="search" id="search">
                                 <option value="">Select Project</option>
-                                @foreach ($projectDefinition as $item)
+                                @foreach ($executingProjectDefinition as $item)
                                     <option value="{{ $item->name_project }}">{{ $item->name_project }}</option>
                                 @endforeach
                             </select>
@@ -92,40 +92,41 @@
         </div>
     </div>
 </div>
-<div class="container-fluid pt-4 px-4">
+
+{{-- info project planning --}}
+<div class="container-fluid pt-4 px-4 mb-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
-                <h2 class="mb-4">Scope</h2>
-                <a href="/scopeExecuting/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <h2 class="mb-4">Data Project Executing</h2>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <br>
-                <div class="table-responsive">
+                <div class="">
                     <table class="table table-striped table-hover" >
                         <thead>
                             <tr class="text-white">
-                                <th><small>Project Name</small></th>
-                                <th><small>Technical Requirements</small></th>
-                                <th><small>Perfomance Requirements</small></th>
-                                <th><small>Bussines Requirements</small></th>
-                                <th><small>Regulatory Requirements</small></th>
-                                <th><small>User Requirements</small></th>
-                                <th><small>System Requirements</small></th>
-                                <th><small>Action</small></th>
+                                <td>No</td>
+                                <th>Project Name</th>
+                                <th>Status</th>
+                                <th>Updated at</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($executingScope as $r)
+                            @foreach ($executingProjectDefinition as $row)
                             <tr class="text-white">
-                                <td><small>{{$r->name_project}}</small></td>
-                                <td><small>{{$r->technical_requirements}}</small></td>
-                                <td><small>{{$r->perfomance_requirements}}</small></td>
-                                <td><small>{{$r->bussines_requirements}}</small></td>
-                                <td><small>{{$r->regulatory_requirements}}</small></td>
-                                <td><small>{{$r->user_requirements}}</small></td>
-                                <td><small>{{$r->system_requirements}}</small></td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $row->projectDefinition['name_project'] }}</td>
+                                <td>{{ $row->status }}</td>
+                                <td>{{ \Carbon\Carbon::parse($row->updated_at)->diffForHumans() }}</td>
                                 <td>
-                                    <a href="/scopeExecuting/{{$r->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
-                                    <a href="/scopeExecuting/{{$r->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
+                                    <a href="/finalExecuting/{{$row->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>      
+                                    <a href="/finalExecuting/{{$row->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
                                 </td>
                             </tr>
                             @endforeach
@@ -137,7 +138,8 @@
     </div>
 </div>
 
-<div class="container-fluid pt-4 px-4">
+{{-- schedule --}}
+{{-- <div class="container-fluid pt-4 px-4 mb-4  ">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -154,33 +156,150 @@
                                 <th valign="top"><small>Finish Date</small></th>
                                 <th valign="top"><small>Description</small></th>
                                 <th valign="top"><small>Assign to</small></th>
-                                <th valign="top"><small>Action</small></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($executingSchedule as $u)
+                            @foreach ($projectDefinition as $row)  
+                            
                             <tr class="text-white">
-                                <td><small>{{$u->name_project}}</small></td>
-                                <td><small>{{$u->task}}</small></td>
-                                <td><small>{{$u->start_date}}</small></td>
-                                <td><small>{{$u->finish_date}}</small></td>
-                                <td><small>{{$u->description_task}}</small></td>
-                                <td><small>{{$u->assign_to}}</small></td>
-                                <td><small>
-                                    <a href="/scheduleExecuting/{{$u->id}}/edit" class="btn btn-sm btn-outline-info m-2"><i class="fa fa-pen me-2"></i>Edit</a>   
-                                    <a href="/scheduleExecuting/{{$u->id}}/delete" class="btn btn-sm btn-outline-danger m-2" onclick="return confirm('are you sure to delete this?')"><i class="fa fa-trash me-2"></i>Delete</a>   
-                                </small></td>
+                                @if ($row->status == 'close' || $row->status == 'Close')
+                                <td>
+                                    <small>{{$row->name_project}}</small>
+                                </td>
+                                <td>
+                                    @foreach ($row->executingSchedule as $item)
+                                        {{ $item['task'] }}<br>
+                                    @endforeach
+                                </td><td>                                    
+                                    @foreach ($row->executingSchedule as $item)
+                                        {{ $item['start_date'] }}<br>
+                                    @endforeach
+                                </td>                            
+                                <td>                                    
+                                    @foreach ($row->executingSchedule as $item)
+                                        {{ $item['finish_date'] }}<br>
+                                    @endforeach
+                                </td>                            
+                                <td>                                    
+                                    @foreach ($row->executingSchedule as $item)
+                                        {{ $item['description_task'] }}<br>
+                                    @endforeach
+                                </td>                            
+                                <td>                                    
+                                    @foreach ($row->executingSchedule as $item)
+                                        {{ $item['assign_to'] }}<br>
+                                    @endforeach
+                                </td>           
+                                @endif()
                             </tr>
                             @endforeach
-                        </tbody>
+                        </tbody>  
                     </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-<div class="container-fluid pt-4 px-4">
+{{-- risk --}}
+{{-- <div class="container-fluid pt-4 px-4">
+    <div class="row g-10">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h2 class="mb-4">Risk</h2>
+                <a href="/scopeExecuting/add" class="btn btn-sm btn-outline-success m-2"><i class="fa fa-plus me-2"></i>Add Data</a><br>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" >
+                        <thead>
+                            <tr class="text-white">
+                                <th><small>Project Name</small></th>
+                                <th><small>Start Date</small></th>
+                                <th><small>Description of Risk</small></th>
+                                <th><small>Submitter</small></th>
+                                <th><small>Probability Factor</small></th>
+                                <th><small>Impact Factor</small></th>
+                                <th><small>Exposure</small></th>
+                                <th><small>Risk response type</small></th>
+                                <th><small>Risk response plan</small></th>
+                                <th><small>Assigned to</small></th>
+                                <th><small>Status</small></th>
+                                <th><small>Due Date</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($projectDefinition as $row) 
+                            <tr class="text-white">
+                                @if ($row->status == 'close' || $row->status == 'Close')
+                                <td>
+                                    <small>{{$row->name_project}}</small>
+                                </td>
+                                <td>
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['start_date'] }}<br>
+                                    @endforeach
+                                </td><td>                                    
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['description_ofrisk'] }}<br>
+                                    @endforeach
+                                </td>                            
+                                <td>                                    
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['submitter'] }}<br>
+                                    @endforeach
+                                </td>                            
+                                <td>                                    
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['probability_factor'] }}<br>
+                                    @endforeach
+                                </td>                            
+                                <td>                                    
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['impact_factor'] }}<br>
+                                    @endforeach
+                                </td>           
+                                <td>                                    
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['exposure'] }}<br>
+                                    @endforeach
+                                </td>           
+                                <td>                                    
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['Risk_reponse_type'] }}<br>
+                                    @endforeach
+                                </td>           
+                                <td>                                    
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['Risk_reponse_plan'] }}<br>
+                                    @endforeach
+                                </td>           
+                                <td>                                    
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['assigned_to'] }}<br>
+                                    @endforeach
+                                </td>           
+                                <td>                                    
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['status'] }}<br>
+                                    @endforeach
+                                </td>           
+                                <td>                                    
+                                    @foreach ($row->executingRisk as $item)
+                                        {{ $item['due_date'] }}<br>
+                                    @endforeach
+                                </td>           
+                                @endif()
+                            </tr>
+                            @endforeach
+                        </tbody>                    
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -215,9 +334,8 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="container-fluid pt-4 px-4">
+</div> --}}
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-10">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-secondary rounded h-100 p-4">
@@ -268,6 +386,6 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 @endsection

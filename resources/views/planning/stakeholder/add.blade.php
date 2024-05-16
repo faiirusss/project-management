@@ -49,10 +49,11 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
+            </a>             
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
 <div class="row g-4">
 <div class="col-sm-12 col-xl-10">
@@ -65,23 +66,26 @@
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
                     @foreach($projectDefinition as $project)
-                    <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
+                    @if ($project->status == 'open' || $project->status == 'Open')
+                        <option value="{{ $project->id }}">{{ $project->name_project }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Stakeholder</label>
-                <input type="text" name="stakeholder" id="" class="form-control mb-3 text-white"  required>
+                <label for="stakeholder" class="form-label text-white">Stakeholder</label>
+                <input type="text" name="stakeholder" id="stakeholder" class="form-control mb-3 text-white"  required>
             </div>
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Role</label>
-                <input type="role" name="role" id="" class="form-control mb-3 text-white"  required>
+                <label for="role" class="form-label text-white">Role</label>
+                <input type="role" name="role" id="role" class="form-control mb-3 text-white"  required>
             </div>
         </div>
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Power</label>
                 <select name="power" id="Risk_reponse_type" class="form-select mb-3 text-white" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
@@ -90,6 +94,7 @@
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Interest</label>
                 <select name="interest" id="Risk_reponse_type" class="form-select mb-3 text-white" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
@@ -102,6 +107,7 @@
                 <div class="col-md-2">
                     <label for="" class="form-label text-white">Initiation</label>
                     <select name="initiation" id="" class="form-select mb-3 text-white" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                         <option value="Responsible">Responsible</option>
                         <option value="Consulted">Consulted</option>
                         <option value="Accountable">Accountable</option>
@@ -111,6 +117,7 @@
                 <div class="col-md-2">
                     <label for="" class="form-label text-white">Planning</label>
                     <select name="planning" id="" class="form-select mb-3 text-white" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                         <option value="Responsible">Responsible</option>
                         <option value="Consulted">Consulted</option>
                         <option value="Accountable">Accountable</option>
@@ -129,6 +136,7 @@
                 <div class="col-md-2">
                     <label for="" class="form-label text-white">Control</label>
                     <select name="control" id="" class="form-select mb-3 text-white" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                         <option value="Responsible">Responsible</option>
                         <option value="Consulted">Consulted</option>
                         <option value="Accountable">Accountable</option>
@@ -138,6 +146,7 @@
                 <div class="col-md-2">
                     <label for="" class="form-label text-white">Close</label>
                     <select name="close" id="" class="form-select mb-3 text-white" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                         <option value="Responsible">Responsible</option>
                         <option value="Consulted">Consulted</option>
                         <option value="Accountable">Accountable</option>
@@ -149,6 +158,7 @@
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Engagement Level</label>
                 <select name="engagement_level" id="" class="form-select mb-3 text-white" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>

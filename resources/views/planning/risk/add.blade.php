@@ -49,10 +49,11 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
+            </a>             
         </div>
     </center>
 </nav>
+
 <div class="container-fluid pt-4 px-4">
 <div class="row g-4">
 <div class="col-sm-12 col-xl-10">
@@ -61,18 +62,26 @@
         <form action="/risk/save" method="post">
             @csrf
         <div class="row mb-2">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label for="nameProject" class="form-label text-white">Name Project</label>
                 <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
-                    @foreach($projectDefinition as $project)
-                    <option value="{{ $project-> name_project}}">{{$project->name_project}}</option>
-                    @endforeach
+                    @if ($finalPlanning->isNotEmpty())
+                        @php
+                            $openProjects = $finalPlanning->where('status', 'Open');
+                        @endphp
+                        @if ($openProjects->isNotEmpty())
+                            @foreach($openProjects as $project)
+                                <option value="{{ $project->id }}">{{ $project->projectDefinition['name_project'] }}</option>
+                            @endforeach
+                        @else
+                            <option value="">Project not available</option>
+                        @endif
+                    @else
+                        <option value="">Empty Project</option>
+                    @endif
                 </select>
             </div>
-            <div class="col-md-6">
-                <label for="" class="form-label text-white">Entry Date</label>
-                <input type="date" name="start_date" id="" class="form-control mb-3 text-white"  required>
-            </div>
+
         </div>   
         <div class="row mb-2">
             <div class="col-md-6">
@@ -80,8 +89,9 @@
                 <input type="text" name="description_ofrisk" id="" class="form-control mb-3 text-white" required>
             </div> 
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Submitter</label>
+                <label for="submitter" class="form-label text-white">Submitter</label>
                 <select name="submitter" id="" class="form-select mb-3 text-white" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                     <option value="Project Excecution">Project Excecution</option>
                     <option value="Project Planning">Project Planning</option>
                     <option value="Project Management Office">Project Management Office</option>
@@ -94,8 +104,9 @@
         </div>
         <div class="row mb-2">
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Risk Response Type</label>
+                <label for="Risk_reponse_type" class="form-label text-white">Risk Response Type</label>
                 <select name="Risk_reponse_type" id="Risk_reponse_type" class="form-select mb-3 text-white" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                     <option value="Accept">Accept</option>
                     <option value="Mitigate">Mitigate</option>
                     <option value="Transfer">Transfer</option>
@@ -103,14 +114,15 @@
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Risk Reponse Plan</label>
-                <input type="" name="Risk_reponse_plan" id="" class="form-control mb-3 text-white" required>
+                <label for="Risk_reponse_plan" class="form-label text-white">Risk Reponse Plan</label>
+                <input type="text" name="Risk_reponse_plan" id="" class="form-control mb-3 text-white" required>
             </div>
         </div>
         <div class="row mb-2">
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Probability Factor</label>
+                <label for="probability_factor" class="form-label text-white">Probability Factor</label>
                 <select name="probability_factor" id="probability" class="form-select mb-3 text-white" onchange="calculateResult()" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                     <option value="1">Very Low - 1</option>
                     <option value="2">Low - 2</option>
                     <option value="3">Moderate - 3</option>
@@ -119,8 +131,9 @@
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Impact Factor</label>
+                <label for="impact_factor" class="form-label text-white">Impact Factor</label>
                 <select name="impact_factor" id="impact" class="form-select mb-3 text-white" onchange="calculateResult()" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                     <option value="1">Very Low - 1</option>
                     <option value="2">Low - 2</option>
                     <option value="3">Moderate - 3</option>
@@ -132,7 +145,7 @@
         <div class="row mb-2">
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Exposure</label>
-                <input type="text" name="exposure" id="result" class="form-control mb-3" required readonly>
+                <input type="text" name="exposure" id="result" class="form-control mb-3 text-white bg-dark" required readonly>
             </div>
 
             <script>
@@ -146,6 +159,7 @@
             <div class="col-md-6">
                 <label for="" class="form-label text-white">Assigned To</label>
                 <select name="assigned_to" id="" class="form-select mb-3 text-white" required>
+                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
                     <option value="Project Excecution">Project Excecution</option>
                     <option value="Project Planning">Project Planning</option>
                     <option value="Project Management Office">Project Management Office</option>
@@ -158,15 +172,11 @@
         </div>
         <div class="row mb-2">
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Status</label>
-                <select name="status" id="" class="form-select mb-3 text-white" required>
-                    <option value="Planned">Planned</option>
-                    <option value="in_process">In Process</option>
-                    <option value="Closed">Closed</option>
-                </select>
+                <label for="start_date" class="form-label text-white">Entry Date</label>
+                <input type="date" name="start_date" id="" class="form-control mb-3 text-white"  required>
             </div>
             <div class="col-md-6">
-                <label for="" class="form-label text-white">Due Date</label>
+                <label for="due_date" class="form-label text-white">Due Date</label>
                 <input type="date" name="due_date" id="" class="form-control mb-3 text-white" required>
             </div>
         </div>    

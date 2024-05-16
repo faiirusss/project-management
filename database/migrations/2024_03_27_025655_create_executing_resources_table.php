@@ -19,8 +19,10 @@ class CreateExecutingResourcesTable extends Migration
             $table->string('position');
             $table->string('duration');
             $table->string('status');
-            $table->date('date_realitation');
+            $table->unsignedBigInteger('project_definition_id');
             $table->timestamps();
+
+            $table->foreign('project_definition_id')->references('id')->on('initiating__project_definitions');
         });
     }
 

@@ -49,7 +49,7 @@
             <a href="/stakeholder" class="nav-link {{ \Request::is('stakeholder*','stakeholder') ? 'active':''}}" >
                 <i class="fas fa-users-cog me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Stakeholder</span>
-            </a> 
+            </a>             
         </div>
     </center>
 </nav>
@@ -61,28 +61,43 @@
         <form action="/schedule/{{ $schedule->id }}/update" method="post">
             @csrf
             <div class="row mb-2">
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Task</label>
-                    <input type="text" name="task" id="" value="{{$schedule->task}}" class="form-control mb-3 text-white"  required>
-                </div>
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Start Date</label>
-                    <input type="date" name="start_date" id="" value="{{$schedule->start_date}}" class="form-control mb-3 text-white"  required>
-                </div>
-                <div class="col-md-4">
-                    <label for="" class="form-label text-white">Finish Date</label>
-                    <input type="date" name="finish_date" id="" value="{{$schedule->finish_date}}" class="form-control mb-3 text-white"  required>
-                </div> 
-            </div>     
-            <div class="row mb-2">
                 <div class="col-md-8">
-                    <label for="" class="form-label text-white">Description Task</label>
-                    <input type="text" name="description_task" id="" value="{{$schedule->description_task}}" class="form-control mb-3 text-white"  required>
-                </div> 
+                    <label for="nameProject" class="form-label text-white">Name Project</label>
+                    <select name="name_project" id="nameProject" class="form-select mb-3 text-white" required>
+                        @if ($finalPlanning->isNotEmpty())
+                            @php
+                                $openProjects = $finalPlanning->where('status', 'Open');
+                            @endphp
+                            @if ($openProjects->isNotEmpty())
+                                @foreach($openProjects as $project)
+                                    <option value="{{ $project->id}}" {{ $project->id == $schedule->projectDefinition['id'] ? 'selected' : '' }}>{{$project->projectDefinition['name_project']}}</option>
+                                @endforeach
+                            @else
+                                <option value="">Project not available</option>
+                            @endif
+                        @else
+                            <option value="">Empty Project</option>
+                        @endif
+                    </select>
+                </div>
                 <div class="col-md-4">
                     <label for="" class="form-label text-white">Assign to</label>
                     <input type="text" name="assign_to" id="" value="{{$schedule->assign_to}}" class="form-control mb-3 text-white"  required>
+                </div>
+                <div class="col-md-12">
+                    <label for="" class="form-label text-white">Description Task</label>
+                    <input type="text" name="description_task" id="" value="{{$schedule->description_task}}" class="form-control mb-3 text-white"  required>
                 </div> 
+            </div>     
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <label for="" class="form-label text-white">Start Date</label>
+                    <input type="date" name="start_date" id="" value="{{$schedule->start_date}}" class="form-control mb-3 text-white"  required>
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label text-white">Finish Date</label>
+                    <input type="date" name="finish_date" id="" value="{{$schedule->finish_date}}" class="form-control mb-3 text-white"  required>
+                </div>                 
             </div>    
             <button type="submit" class="btn btn-sm btn-outline-success m-2" >Save</button>
             <button type="reset" class="btn btn-sm btn-outline-danger m-2">Reset</button> 

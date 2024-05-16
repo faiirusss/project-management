@@ -9,7 +9,7 @@ class planning_procurement_bebanBahan extends Model
 {
     protected $fillable = [
         'procurement',
-        'name_project',
+        'project_definition_id',
         'vendor',
         'description_service',
         'volume',
@@ -35,5 +35,15 @@ class planning_procurement_bebanBahan extends Model
                 $query->where('name_project', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function projectDefinition()
+    {
+        return $this->belongsTo(Initiating_ProjectDefinition::class);
+    }
+
+    public function planningFinal()
+    {
+        return $this->hasOne(planning_project_definitions::class);
     }
 }
