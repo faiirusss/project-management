@@ -63,6 +63,7 @@ use App\Http\Controllers\ExecutingCaseFlowController;
 use App\Http\Controllers\ExecutinglistAssumsitionController;
 use App\Http\Controllers\ExecutingProjectIncomeStatementController;
 use App\Http\Controllers\ExecutinglistIncomeStatementController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,9 @@ use App\Http\Controllers\ExecutinglistIncomeStatementController;
 Route::get('/', [LoginController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/PostLogin', [LoginController::class, 'login']);
+
+Route::get('/register', [RegisterController::class, 'register']);
+Route::post('/register/save', [RegisterController::class, 'store']);
 
 // setting -> USER MANAGEMENT
 Route::get('/user', [UserController::class, 'index']);

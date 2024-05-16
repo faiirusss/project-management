@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Log In</title>
+    <title>Register</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -51,20 +51,37 @@
                             <a href="" class="">
                                 <img src="{{asset('assets/img/len.png')}}" style="width: 70px; height: 40px; margin-right: 10px;">
                             </a>
-                            <h4>Log In</h4>
+                            <h4>Register</h4>
                         </div>
-                        <form action="/PostLogin" method="post">
+                        <form action="/register/save" method="post">
                             {{ csrf_field() }}
                             <div class="mb-3">
-                                <label for="floatingPassword" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="username">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="name">
                             </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="username">
+                            </div>                            
                             <div class="mb-3">
                                 <label for="floatingPassword" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             </div>
-                            <p>don't have account? <a href="/register" class="">register now</a></p>
-                            <button type="submit" class="btn btn-primary py-1 w-25 mb-1">Log In</button>
+                            <div class="mb-3">
+                                <label for="Roles" class="form-label">Roles</label>
+                                <select name="roles" id="roles" class="form-select mb-3" required>
+                                    <option selected="true" disabled="disabled" hidden>Choose One</option>  
+                                    <option value="superadmin">Superadmin</option>
+                                    <option value="pm">Project Manager</option>
+                                    <option value="admin1">Admin Initiating</option>
+                                    <option value="admin3">Admin Planning</option>
+                                    <option value="admin2">Admin Executing</option>
+                                    <option value="admin">Admin Control</option>
+                                    <option value="guest">Guest</option>
+                                </select>
+                            </div>
+                            <p>have account? <a href="/login" class="">login</a></p>
+                            <button type="submit" class="btn btn-primary py-1 w-25 mb-1">Register</button>
                         </form>
                         <br>
                         @if(session('error'))

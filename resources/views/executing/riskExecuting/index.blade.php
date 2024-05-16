@@ -100,7 +100,7 @@
                                     <option value="">Select Project</option>
                                     @foreach ($projectDefinition as $item)
                                         <option value="{{ $item->id }}">{{ $item->name_project }}</option>
-                                    @endforeach
+                                    @endforeach`
                                 </select>
                             </div>
                             <div class="col-auto">
